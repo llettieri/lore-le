@@ -1,0 +1,20 @@
+name: Build docker image
+
+on:
+  push:
+    branches: [ "master" ]
+    tags: 
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Configuring docker repo
+      run: docker login -u ${{secrets.USER}} -p ${{secrets.PASSWORD}} docker.nexus.themcbrothers.net
+    - name: Build the Docker image
+      run: docker build . --tag docker.nexus.themcbrothers.net/lore-le:latest
+    - name: Push to registry
+      run: docker push docker.nexus.themcbrothers.net/lore-le:latest
