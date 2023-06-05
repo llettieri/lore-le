@@ -1,57 +1,34 @@
 'use client';
 
-import { useImage } from '@/app/hooks/useImage';
 import Button from '@/components/Button';
 import Carousel from '@/components/Carousel';
 import Gallery from '@/components/Gallery';
-import Image from 'next/image';
 import React, { useState } from 'react';
 
 type View = 'carousel' | 'gallery';
 
 export default function GalleryPage(): React.ReactElement {
-    const { images } = useImage();
-    const [toggleView, setToggleView] = useState<View>('carousel');
-
+    const [view, setView] = useState<View>('carousel');
     return (
         <div
             className={`${
-                toggleView === 'carousel' &&
-                'h-full flex flex-col justify-center'
+                view === 'carousel' && 'h-full flex flex-col justify-center'
             }`}
         >
-            <div className="top-0 flex flex-row gap-5 justify-center mb-5">
+            <div className="flex flex-row gap-5 justify-center mb-5">
                 <Button
-                    onClick={(): void => setToggleView('carousel')}
+                    onClick={(): void => setView('carousel')}
                     label="Carousel"
-                    active={toggleView === 'carousel'}
+                    active={view === 'carousel'}
                 />
                 <Button
                     className="flex-1"
-                    onClick={(): void => setToggleView('gallery')}
+                    onClick={(): void => setView('gallery')}
                     label="Gallery"
-                    active={toggleView === 'gallery'}
+                    active={view === 'gallery'}
                 />
             </div>
-            {toggleView === 'carousel' ? (
-                <Carousel loop>
-                    {images().map((i, index) => (
-                        <div
-                            className="relative h-[32rem] flex-[0_0_100%]"
-                            key={index}
-                        >
-                            <Image
-                                src={i.src}
-                                alt={i.alt}
-                                fill
-                                className="object-cover"
-                            />
-                        </div>
-                    ))}
-                </Carousel>
-            ) : (
-                <Gallery />
-            )}
+            {view === 'carousel' ? <Carousel /> : <Gallery />}
         </div>
     );
 }

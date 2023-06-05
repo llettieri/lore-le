@@ -3,19 +3,39 @@ interface Photo {
     alt: string;
 }
 
-export const useImage = () => {
-    const images = (): Photo[] => {
-        const images: Photo[] = [];
+interface ImageHook {
+    getWideImages: () => Photo[];
+    getPortraitImages: () => Photo[];
+}
 
-        for (let i = 1; i < 26; i++) {
-            images.push({
-                src: `https://lore-le.ch/media/photos/${i}.JPG`,
+const BASE_IMAGE_URL = 'https://lore-le.ch/media/photos/';
+
+export const useImage = (): ImageHook => {
+    const getWideImages = (): Photo[] => {
+        const wideImages: Photo[] = [];
+
+        for (let i = 1; i < 5; i++) {
+            wideImages.push({
+                src: `${BASE_IMAGE_URL}wide/nyc-${i}.png`,
                 alt: i.toString(),
             });
         }
 
-        return images;
+        return wideImages;
     };
 
-    return { images };
+    const getPortraitImages = (): Photo[] => {
+        const wideImages: Photo[] = [];
+
+        for (let i = 1; i < 20; i++) {
+            wideImages.push({
+                src: `${BASE_IMAGE_URL}portrait/nyc-${i}.png`,
+                alt: i.toString(),
+            });
+        }
+
+        return wideImages;
+    };
+
+    return { getWideImages, getPortraitImages };
 };
