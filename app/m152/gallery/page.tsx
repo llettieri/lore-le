@@ -1,33 +1,57 @@
+'use client';
+
+import { useImage } from '@/app/hooks/useImage';
+import Button from '@/components/Button';
+import Carousel from '@/components/Carousel';
+import Gallery from '@/components/Gallery';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 
-interface Photo {
-    src: string;
-    alt: string;
-}
-
-const images: Photo[] = [];
+type View = 'carousel' | 'gallery';
 
 export default function GalleryPage(): React.ReactElement {
-    for (let i = 1; i < 26; i++) {
-        images.push({
-            src: `https://lore-le.ch/media/photos/${i}.JPG`,
-            alt: i.toString(),
-        });
-    }
+    const { images } = useImage();
+    const [toggleView, setToggleView] = useState<View>('carousel');
 
     return (
-        <div className="flex flex-row gap-5 justify-center flex-wrap">
-            {images.map((i) => (
-                <Image
-                    className="rounded-md transition ease-in-out hover:scale-110 hover:transition-transform hover:duration-200 hover:drop-shadow-2xl "
-                    key={Math.random()}
-                    src={i.src}
-                    alt={i.alt}
-                    width={400}
-                    height={200}
+        <div
+            className={`${
+                toggleView === 'carousel' &&
+                'h-full flex flex-col justify-center'
+            }`}
+        >
+            <div className="top-0 flex flex-row gap-5 justify-center mb-5">
+                <Button
+                    onClick={(): void => setToggleView('carousel')}
+                    label="Carousel"
+                    active={toggleView === 'carousel'}
                 />
-            ))}
+                <Button
+                    className="flex-1"
+                    onClick={(): void => setToggleView('gallery')}
+                    label="Gallery"
+                    active={toggleView === 'gallery'}
+                />
+            </div>
+            {toggleView === 'carousel' ? (
+                <Carousel loop>
+                    {images().map((i, index) => (
+                        <div
+                            className="relative h-[32rem] flex-[0_0_100%]"
+                            key={index}
+                        >
+                            <Image
+                                src={i.src}
+                                alt={i.alt}
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
+                    ))}
+                </Carousel>
+            ) : (
+                <Gallery />
+            )}
         </div>
     );
 }
