@@ -66,6 +66,7 @@ export function NavBar(): React.ReactElement {
                     alt="Lore-Le Logo"
                     width={200}
                     height={40}
+                    style={{ height: 'auto', width: 'auto' }}
                 />
             </Link>
         </nav>
