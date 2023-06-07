@@ -18,9 +18,10 @@ interface ButtonProps {
 function NextButton({ onClick, enabled }: ButtonProps): React.ReactElement {
     return (
         <button
-            className="w-32 h-32 text-white"
+            className="w-32 h-32 text-white pointer-events-auto"
             onClick={onClick}
             disabled={!enabled}
+            title="Next"
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 32 32">
                 <path
@@ -35,9 +36,10 @@ function NextButton({ onClick, enabled }: ButtonProps): React.ReactElement {
 function PrevButton({ onClick, enabled }: ButtonProps): React.ReactElement {
     return (
         <button
-            className="w-32 h-32 text-white"
+            className="w-32 h-32 text-white pointer-events-auto"
             onClick={onClick}
             disabled={!enabled}
+            title="Previous"
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-3 -5 32 32">
                 <path
@@ -55,14 +57,20 @@ export default function Carousel(): React.ReactElement {
     ]);
     const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
     const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
+    const [yTranslation, setYTranslation] = useState(0);
     const { getWideImages } = useImage();
-
     const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
     const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
     const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
         setPrevBtnEnabled(emblaApi.canScrollPrev);
         setNextBtnEnabled(emblaApi.canScrollNext);
     }, []);
+    const translationCallback = useCallback(
+        () =>
+            setYTranslation((emblaApi?.rootNode()?.clientHeight ?? 0) / 2 + 64),
+        [emblaApi],
+    );
 
     useEffect(() => {
         if (!emblaApi) {
@@ -70,9 +78,14 @@ export default function Carousel(): React.ReactElement {
         }
 
         onSelect(emblaApi);
+
+        emblaApi.on('reInit', translationCallback);
+        emblaApi.on('resize', translationCallback);
         emblaApi.on('reInit', onSelect);
         emblaApi.on('select', onSelect);
-    });
+
+        emblaApi.emit('reInit');
+    }, [emblaApi, onSelect, translationCallback]);
 
     return (
         <div>
@@ -92,15 +105,21 @@ export default function Carousel(): React.ReactElement {
                                 alt={i.alt}
                                 fill
                                 className="object-cover"
+                                sizes="100vw"
                             />
                         </div>
                     ))}
                 </div>
             </div>
-            <div className="z-10 flex justify-between mx-auto max-w-7xl translate-y-[-25rem]">
-                <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
-                <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
-            </div>
+            {yTranslation !== 0 && (
+                <div
+                    className="relative flex justify-between pointer-events-none mx-auto max-w-7xl"
+                    style={{ transform: `translateY(-${yTranslation}px)` }}
+                >
+                    <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
+                    <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+                </div>
+            )}
         </div>
     );
 }
