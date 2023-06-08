@@ -24,8 +24,8 @@ const links: LinkElement[] = [
         enabled: true,
     },
     {
-        title: 'Image Gallery',
-        href: '/m152/gallery',
+        title: 'Images',
+        href: '/m152/images',
         enabled: true,
     },
     {
