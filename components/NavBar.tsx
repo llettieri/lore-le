@@ -1,5 +1,6 @@
 'use client';
 
+import { BurgerMenuIcon } from '@/icons/BurgerMenuIcon';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -38,8 +39,8 @@ export function NavBar(): React.ReactElement {
     const enabledLinks = links.filter((l) => l.enabled);
 
     return (
-        <nav className="bg-gray-700 h-fit p-3 text-white flex items-center justify-between drop-shadow-2xl">
-            <ul className="flex gap-2">
+        <nav className="bg-gray-700 h-fit p-3 text-white flex items-center justify-between drop-shadow-2xl flex-row-reverse md:flex-row">
+            <ul className="hidden md:flex gap-2">
                 {enabledLinks.map((link, index) => (
                     <li
                         key={`${link.href}_${link.title}`}
@@ -60,6 +61,9 @@ export function NavBar(): React.ReactElement {
                     </li>
                 ))}
             </ul>
+            <div className="block md:hidden">
+                <BurgerMenuIcon width="3em" />
+            </div>
             <Link href="/">
                 <Image
                     src="/logo/logo.svg"

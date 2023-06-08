@@ -1,4 +1,6 @@
 import { useImage } from '@/app/hooks/useImage';
+import { NextArrowIcon } from '@/icons/NextArrowIcon';
+import { PreviousArrowIcon } from '@/icons/PreviousArrowIcon';
 import Autoplay, { AutoplayOptionsType } from 'embla-carousel-autoplay';
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
 import Image from 'next/image';
@@ -23,12 +25,7 @@ function NextButton({ onClick, enabled }: ButtonProps): React.ReactElement {
             disabled={!enabled}
             title="Next"
         >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 32 32">
-                <path
-                    fill="currentColor"
-                    d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"
-                />
-            </svg>
+            <NextArrowIcon />
         </button>
     );
 }
@@ -41,12 +38,7 @@ function PrevButton({ onClick, enabled }: ButtonProps): React.ReactElement {
             disabled={!enabled}
             title="Previous"
         >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-3 -5 32 32">
-                <path
-                    fill="currentColor"
-                    d="M15.293 3.293 6.586 12l8.707 8.707 1.414-1.414L9.414 12l7.293-7.293-1.414-1.414z"
-                />
-            </svg>
+            <PreviousArrowIcon />
         </button>
     );
 }
@@ -113,7 +105,7 @@ export default function Carousel(): React.ReactElement {
             </div>
             {yTranslation !== 0 && (
                 <div
-                    className="relative flex justify-between pointer-events-none mx-auto max-w-7xl"
+                    className="relative opacity-60 md:opacity-100 flex justify-between pointer-events-none mx-auto max-w-7xl"
                     style={{ transform: `translateY(-${yTranslation}px)` }}
                 >
                     <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
