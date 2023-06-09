@@ -87,7 +87,7 @@ export default function Carousel(): React.ReactElement {
                 ref={emblaRef}
                 id="embla-viewport"
             >
-                <div className="flex max-w-7xl" id="embla-container">
+                <div className="flex max-w-7xl relative" id="embla-container">
                     {getWideImages().map((i, index) => (
                         <div
                             className="relative aspect-video flex-[0_0_100%]"
