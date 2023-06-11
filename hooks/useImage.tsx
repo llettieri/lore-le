@@ -6,6 +6,12 @@ interface Photo {
 interface ImageHook {
     getWideImages: () => Photo[];
     getPortraitImages: () => Photo[];
+    getPortraitInfo: () => Promise<Record<string, PhotoDescription>>;
+}
+
+interface PhotoDescription {
+    title: string;
+    description?: string;
 }
 
 const BASE_IMAGE_URL = 'https://lore-le.ch/media/photos/';
@@ -37,5 +43,16 @@ export const useImage = (): ImageHook => {
         return wideImages;
     };
 
-    return { getWideImages, getPortraitImages };
+    const getPortraitInfo = async (): Promise<
+        Record<string, PhotoDescription>
+    > => {
+        const r = await fetch(`${BASE_IMAGE_URL}portrait/info.json`);
+        return await r.json();
+    };
+
+    return {
+        getWideImages,
+        getPortraitImages,
+        getPortraitInfo,
+    };
 };
