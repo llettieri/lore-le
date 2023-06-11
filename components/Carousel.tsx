@@ -1,11 +1,11 @@
 import { useImage } from '@/hooks/useImage';
-import { usePlatform } from '@/hooks/usePlatform';
 import { NextArrowIcon } from '@/icons/NextArrowIcon';
 import { PreviousArrowIcon } from '@/icons/PreviousArrowIcon';
 import Autoplay, { AutoplayOptionsType } from 'embla-carousel-autoplay';
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
 import Image from 'next/image';
 import React, { useCallback, useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
 const autoplayOptions: AutoplayOptionsType = {
     delay: 3000,
@@ -25,6 +25,7 @@ function NextButton({ onClick, enabled }: ButtonProps): React.ReactElement {
             onClick={onClick}
             disabled={!enabled}
             title="Next"
+            type="button"
         >
             <NextArrowIcon />
         </button>
@@ -38,6 +39,7 @@ function PrevButton({ onClick, enabled }: ButtonProps): React.ReactElement {
             onClick={onClick}
             disabled={!enabled}
             title="Previous"
+            type="button"
         >
             <PreviousArrowIcon />
         </button>
@@ -45,14 +47,14 @@ function PrevButton({ onClick, enabled }: ButtonProps): React.ReactElement {
 }
 
 export default function Carousel(): React.ReactElement {
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-        Autoplay(autoplayOptions),
-    ]);
+    const [emblaRef, emblaApi] = useEmblaCarousel(
+        { loop: true, align: 'end' },
+        [Autoplay(autoplayOptions)],
+    );
     const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
     const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
     const [yTranslation, setYTranslation] = useState(0);
     const { getWideImages } = useImage();
-    const { isMobile } = usePlatform();
     const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
     const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
@@ -63,7 +65,7 @@ export default function Carousel(): React.ReactElement {
     const translationCallback = useCallback(() => {
         const offset = isMobile ? 32 : 64;
         setYTranslation((emblaApi?.rootNode()?.clientHeight ?? 0) / 2 + offset);
-    }, [emblaApi, isMobile]);
+    }, [emblaApi]);
 
     useEffect(() => {
         if (!emblaApi) {
@@ -81,7 +83,7 @@ export default function Carousel(): React.ReactElement {
     }, [emblaApi, onSelect, translationCallback]);
 
     return (
-        <div>
+        <div className="relative">
             <div
                 className="overflow-hidden rounded-xl shadow-2xl max-w-7xl mx-auto"
                 ref={emblaRef}
@@ -97,8 +99,9 @@ export default function Carousel(): React.ReactElement {
                                 src={i.src}
                                 alt={i.alt}
                                 fill
-                                className="object-cover"
+                                className="object-cover w-auto h-auto"
                                 sizes="100vw"
+                                priority
                             />
                         </div>
                     ))}
@@ -106,8 +109,10 @@ export default function Carousel(): React.ReactElement {
             </div>
             {yTranslation !== 0 && (
                 <div
-                    className="relative flex justify-between pointer-events-none mx-auto max-w-7xl"
-                    style={{ transform: `translateY(-${yTranslation}px)` }}
+                    className="absolute left-0 right-0 flex justify-between pointer-events-none mx-auto max-w-7xl"
+                    style={{
+                        transform: `translateY(-${yTranslation}px)`,
+                    }}
                 >
                     <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
                     <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />

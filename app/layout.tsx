@@ -19,8 +19,8 @@ export default function RootLayout({
 }): React.ReactElement {
     return (
         <html lang="en">
-            <body className={inter.className}>
-                <div className="overflow-y-hidden h-screen flex flex-col">
+            <body className={`${inter.className} touch-none overflow-hidden`}>
+                <div className="overflow-hidden h-screen flex flex-col">
                     <NavBar />
                     <div className="flex flex-col flex-1 overflow-auto">
                         <main className="p-10 bg-gray-300 flex-1">

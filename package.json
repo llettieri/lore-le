@@ -1,6 +1,6 @@
 {
     "name": "lore-le",
-    "version": "0.1.0",
+    "version": "1.2.0",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -16,9 +16,10 @@
         "@types/react-dom": "18.2.4",
         "embla-carousel-autoplay": "^8.0.0-rc06",
         "embla-carousel-react": "^8.0.0-rc06",
-        "next": "13.4.4",
+        "next": "13.4.5",
         "postcss": "8.4.24",
         "react": "18.2.0",
+        "react-device-detect": "^2.2.3",
         "react-dom": "18.2.0",
         "react-photo-album": "^2.2.2",
         "sharp": "^0.32.1",

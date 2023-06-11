@@ -1,6 +1,6 @@
 'use client';
 
-import { BurgerMenuIcon } from '@/icons/BurgerMenuIcon';
+import { HamburgerMenu } from '@/components/HamburgerMenu';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -39,8 +39,10 @@ export function NavBar(): React.ReactElement {
     const enabledLinks = links.filter((l) => l.enabled);
     const [showModal, setShowModal] = useState(false);
 
+    const toggle = (): void => setShowModal(!showModal);
+
     return (
-        <nav className="bg-gray-700 h-fit min-h-[4rem] p-3 text-white flex items-center justify-between drop-shadow-2xl flex-row-reverse md:flex-row">
+        <nav className="bg-gray-700 z-10 h-fit min-h-[4rem] p-3 text-white flex items-center justify-between drop-shadow-2xl flex-row-reverse md:flex-row">
             <ul className="hidden md:flex gap-2">
                 {enabledLinks.map((link, index) => (
                     <li
@@ -63,28 +65,42 @@ export function NavBar(): React.ReactElement {
                 ))}
             </ul>
             <div className="block md:hidden">
-                <button
-                    title="Open Menu"
-                    type="button"
-                    onClick={(): void => setShowModal(!showModal)}
-                    className={`relative z-10 ${
-                        showModal ? 'text-black' : 'text-white'
+                <HamburgerMenu showModal={showModal} toggle={toggle} />
+                <div
+                    className={`bg-black absolute top-0 left-0 h-screen w-screen transition-all delay-100 ${
+                        showModal ? 'opacity-30' : 'opacity-0 hidden'
+                    }`}
+                ></div>
+                <div
+                    id="mobile-nav"
+                    className={`fixed top-0 right-0 h-screen min-w-[10rem] pt-[4rem] bg-gray-700 transition-transform delay-100 ease-in-out ${
+                        showModal
+                            ? 'translate-x-0 shadow-2xl'
+                            : 'translate-x-full'
                     }`}
                 >
-                    {showModal ? (
-                        <h1>close</h1>
-                    ) : (
-                        <BurgerMenuIcon width="3em" />
-                    )}
-                </button>
-
-                <ul
-                    className={`absolute top-0 right-0 flex flex-cols h-screen w-56 bg-amber-50 transition-transform delay-100 ease-in-out ${
-                        showModal ? 'translate-x-0' : 'translate-x-[100%]'
-                    }`}
-                >
-                    <li>test</li>
-                </ul>
+                    <ul className="flex flex-col gap-2">
+                        {enabledLinks.map((link) => (
+                            <li
+                                key={`${link.href}_${link.title}`}
+                                className="flex flex-col gap-2"
+                            >
+                                <Link
+                                    className={`hover:text-primary mx-2 transition ease-in-out hover:transition-colors ${
+                                        pathname === link.href
+                                            ? 'font-bold'
+                                            : ''
+                                    }`}
+                                    key={link.title}
+                                    href={link.href}
+                                >
+                                    {link.title}
+                                </Link>
+                                <hr />
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
             <Link href="/">
                 <Image
