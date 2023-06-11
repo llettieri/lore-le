@@ -43,6 +43,7 @@ export default function GalleryPage(): React.ReactElement {
                     active={view === 'gallery'}
                 />
             </div>
+            {/* @ts-expect-error Server Component */}
             {view === 'carousel' ? <Carousel /> : <Gallery />}
         </div>
     );
