@@ -11,7 +11,7 @@ type View = 'carousel' | 'gallery';
 export default function GalleryPage(): React.ReactElement {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const [view, setView] = useState<View>();
+    const [view, setView] = useState<View>('carousel');
 
     useEffect(() => {
         const viewParam = searchParams.get('view') as View;

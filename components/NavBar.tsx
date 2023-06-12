@@ -93,6 +93,7 @@ export function NavBar(): React.ReactElement {
                                     }`}
                                     key={link.title}
                                     href={link.href}
+                                    onClick={toggle}
                                 >
                                     {link.title}
                                 </Link>

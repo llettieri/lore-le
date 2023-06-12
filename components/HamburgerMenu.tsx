@@ -20,7 +20,7 @@ export const HamburgerMenu = ({
         >
             <span
                 className={`w-8 h-0.5 bg-white transition-transform delay-75 ease-in-out ${
-                    showModal ? 'translate-y-2 rotate-45' : ''
+                    showModal ? 'translate-y-[0.54rem] rotate-45' : ''
                 }`}
             ></span>
             <span
@@ -30,7 +30,7 @@ export const HamburgerMenu = ({
             ></span>
             <span
                 className={`w-8 h-0.5 bg-white transition-transform delay-75 ease-in-out ${
-                    showModal ? '-translate-y-2 -rotate-45' : ''
+                    showModal ? '-translate-y-[0.54rem] -rotate-45' : ''
                 }`}
             ></span>
         </button>

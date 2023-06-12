@@ -109,7 +109,7 @@ export default function Carousel(): React.ReactElement {
             </div>
             {yTranslation !== 0 && (
                 <div
-                    className="absolute left-0 right-0 flex justify-between pointer-events-none mx-auto max-w-7xl"
+                    className="absolute left-0 right-0 flex justify-between pointer-events-none touch-none mx-auto max-w-7xl"
                     style={{
                         transform: `translateY(-${yTranslation}px)`,
                     }}
