@@ -6,12 +6,12 @@ import Gallery from '@/components/Gallery';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
-type View = 'carousel' | 'gallery';
+type View = 'carousel' | 'gallery' | 'none';
 
 export default function GalleryPage(): React.ReactElement {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const [view, setView] = useState<View>('carousel');
+    const [view, setView] = useState<View>('none');
 
     useEffect(() => {
         const viewParam = searchParams.get('view') as View;
@@ -44,7 +44,8 @@ export default function GalleryPage(): React.ReactElement {
                 />
             </div>
             {/* @ts-expect-error Server Component */}
-            {view === 'carousel' ? <Carousel /> : <Gallery />}
+            {view === 'gallery' && <Gallery />}
+            {view === 'carousel' && <Carousel />}
         </div>
     );
 }

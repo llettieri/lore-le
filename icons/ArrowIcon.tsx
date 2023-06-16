@@ -1,7 +1,7 @@
 import withSVGIcon from '@/icons/withSVGIcon';
 import React from 'react';
 
-const NextArrow = (): React.ReactElement => {
+const Arrow = (): React.ReactElement => {
     return (
         <path
             fill="currentColor"
@@ -10,4 +10,4 @@ const NextArrow = (): React.ReactElement => {
     );
 };
 
-export const NextArrowIcon = withSVGIcon(NextArrow, '-3 -5 32 32');
+export const ArrowIcon = withSVGIcon(Arrow, '-3 -5 32 32');
