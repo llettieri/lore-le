@@ -1,7 +1,5 @@
 import { useImage } from '@/hooks/useImage';
-import { router } from 'next/client';
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
 export default async function Gallery(): Promise<React.ReactElement> {

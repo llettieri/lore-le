@@ -1,6 +1,6 @@
 {
     "name": "lore-le",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -8,7 +8,9 @@
         "start": "next start",
         "lint": "next lint",
         "prettier-check": "npx prettier . --check",
-        "prettier-write": "npx prettier . --write"
+        "prettier-write": "npx prettier . --write",
+        "clean-win": "rmdir /s /q .next",
+        "clean-mac": "rm -R .next"
     },
     "dependencies": {
         "@types/node": "20.2.5",
