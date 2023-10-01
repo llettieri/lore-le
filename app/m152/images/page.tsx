@@ -1,14 +1,20 @@
 'use client';
 
-import Button from '@/components/Button';
+import { Button } from '@/components/Button';
 import Carousel from '@/components/Carousel';
 import Gallery from '@/components/Gallery';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 
 type View = 'carousel' | 'gallery' | 'none';
 
-export default function GalleryPage(): React.ReactElement {
+const ViewComponent = {
+    gallery: <Gallery />,
+    carousel: <Carousel />,
+    none: null,
+};
+
+export default function GalleryPage(): ReactNode {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [view, setView] = useState<View>('none');
@@ -27,25 +33,20 @@ export default function GalleryPage(): React.ReactElement {
     return (
         <div
             className={`${
-                view === 'carousel' && 'h-full flex flex-col justify-center'
+                view === 'carousel' && 'flex h-full flex-col justify-center'
             }`}
         >
-            <div className="flex flex-row gap-5 justify-center mb-5">
+            <div className="mb-5 flex flex-row justify-center gap-5">
                 <Button
                     onClick={(): void => toggle('carousel')}
-                    label="Carousel"
-                    active={view === 'carousel'}
+                    title="Carousel"
                 />
                 <Button
-                    className="flex-1"
                     onClick={(): void => toggle('gallery')}
-                    label="Gallery"
-                    active={view === 'gallery'}
+                    title="Gallery"
                 />
             </div>
-            {/* @ts-expect-error Server Component */}
-            {view === 'gallery' && <Gallery />}
-            {view === 'carousel' && <Carousel />}
+            {ViewComponent[view]}
         </div>
     );
 }

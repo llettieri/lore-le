@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-export default function LoadingPage(): React.ReactElement {
+export default function LoadingPage(): ReactNode {
     return (
-        <div className="h-full flex flex-col items-center justify-center">
+        <div className="flex h-full flex-col items-center justify-center">
             <h1>Loading page...</h1>
             <Image
                 src="https://media.giphy.com/media/pK4av7uBK3I4M/giphy.gif"

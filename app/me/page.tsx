@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-export default function MePage(): React.ReactElement {
+export default function MePage(): ReactNode {
     return <></>;
 }
