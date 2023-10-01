@@ -1,7 +1,7 @@
 import withSVGIcon from '@/icons/withSVGIcon';
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-const Arrow = (): React.ReactElement => {
+const Arrow = (): ReactElement => {
     return (
         <path
             fill="currentColor"

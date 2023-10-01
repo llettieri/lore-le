@@ -1,27 +1,49 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import { Icon } from '@/icons/Icon';
+import { TIcons } from '@/icons/Icons';
+import Link from 'next/link';
+import React, { ReactElement } from 'react';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    label: string;
-    active: boolean;
+interface ButtonProps {
+    className?: string;
+    icon?: TIcons;
+    iconSize?: number;
+    link?: string;
+    onClick?: () => void;
+    title: string;
+    type?: 'submit' | 'reset' | 'button';
+    variant?: 'default' | 'icon';
 }
 
-export default function Button({
-    type,
-    disabled,
-    label,
+export const Button = ({
+    title,
     onClick,
-    active,
-}: ButtonProps): React.ReactElement {
+    type,
+    className,
+    link,
+    variant = 'default',
+    icon,
+    iconSize,
+}: ButtonProps): ReactElement => {
+    const variants = {
+        default: link ? (
+            <Link href={link} prefetch={true}>
+                {title}
+            </Link>
+        ) : (
+            title
+        ),
+        icon: icon && <Icon icon={icon} width={iconSize} />,
+    };
+
     return (
         <button
-            type={type}
-            disabled={disabled}
-            className={`px-5 py-2 bg-primary text-white rounded-md transition ease-in-out duration-75 hover:bg-secondary hover:transition-colors ${
-                active && 'font-bold'
-            }`}
+            className={`border-2 border-primaryTint bg-primary py-2 text-white transition-colors duration-300 ease-in-out hover:border-secondaryTint hover:bg-secondary ${
+                variant === 'icon' ? 'rounded-full px-2' : 'rounded-md px-3'
+            } ${className}`}
             onClick={onClick}
+            type={type ?? 'button'}
         >
-            {label}
+            {variants[variant]}
         </button>
     );
-}
+};

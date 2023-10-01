@@ -1,19 +1,19 @@
 import { useImage } from '@/hooks/useImage';
 import Image from 'next/image';
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-export default async function Gallery(): Promise<React.ReactElement> {
+export default async function Gallery(): Promise<ReactElement> {
     const { getPortraitImages, getPortraitInfo } = useImage();
     const info = await getPortraitInfo();
     return (
-        <div className="flex flex-row gap-5 justify-center flex-wrap">
+        <div className="flex flex-row flex-wrap justify-center gap-5">
             {getPortraitImages().map((i) => {
                 return (
                     <div
                         key={Math.random()}
-                        className="group relative h-full transition ease-in-out hover:scale-110 hover:transition-transform hover:duration-200 hover:drop-shadow-2xl hover:z-10"
+                        className="group relative h-full transition ease-in-out hover:z-10 hover:scale-110 hover:drop-shadow-2xl hover:transition-transform hover:duration-200"
                     >
-                        <h1 className="absolute top-3 p-3 bg-gray-700/[.6] text-white select-none w-full hidden group-hover:block">
+                        <h1 className="absolute top-3 hidden w-full select-none bg-mainBackground/[.6] p-3 text-white group-hover:block">
                             {info[`nyc-${i.alt}`].title}
                         </h1>
                         <a href={i.src} target="_blank">
@@ -30,7 +30,7 @@ export default async function Gallery(): Promise<React.ReactElement> {
                             />
                         </a>
                         {info[`nyc-${i.alt}`].description && (
-                            <p className="absolute bottom-3 p-3 bg-gray-600/[.6] text-white select-none text-sm w-full hidden group-hover:block">
+                            <p className="absolute bottom-3 hidden w-full select-none bg-gray-600/[.6] p-3 text-sm text-white group-hover:block">
                                 {info[`nyc-${i.alt}`].description}
                             </p>
                         )}

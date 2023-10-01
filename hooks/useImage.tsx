@@ -16,7 +16,7 @@ interface PhotoDescription {
 
 const BASE_IMAGE_URL = 'https://lore-le.ch/media/photos/';
 
-export const useImage = (): ImageHook => {
+const useImage = (): ImageHook => {
     const getWideImages = (): Photo[] => {
         const wideImages: Photo[] = [];
 
@@ -56,3 +56,5 @@ export const useImage = (): ImageHook => {
         getPortraitInfo,
     };
 };
+
+export { useImage };

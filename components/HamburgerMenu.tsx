@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 interface HamburgerMenuProps {
     showModal: boolean;
@@ -10,26 +10,26 @@ interface HamburgerMenuProps {
 export const HamburgerMenu = ({
     showModal,
     toggle,
-}: HamburgerMenuProps): React.ReactElement => {
+}: HamburgerMenuProps): ReactElement => {
     return (
         <button
-            className="relative flex z-10 flex-col h-5 justify-between items-center"
+            className="relative z-10 flex h-5 flex-col items-center justify-between"
             onClick={toggle}
             type="button"
             title="Navigation Menu"
         >
             <span
-                className={`w-8 h-0.5 bg-white transition-transform delay-75 ease-in-out ${
+                className={`h-0.5 w-8 bg-white transition-transform delay-75 ease-in-out ${
                     showModal ? 'translate-y-[0.54rem] rotate-45' : ''
                 }`}
             ></span>
             <span
-                className={`w-8 h-0.5 bg-white transition-opacity delay-75 ease-in-out ${
+                className={`h-0.5 w-8 bg-white transition-opacity delay-75 ease-in-out ${
                     showModal ? 'opacity-0' : ''
                 }`}
             ></span>
             <span
-                className={`w-8 h-0.5 bg-white transition-transform delay-75 ease-in-out ${
+                className={`h-0.5 w-8 bg-white transition-transform delay-75 ease-in-out ${
                     showModal ? '-translate-y-[0.54rem] -rotate-45' : ''
                 }`}
             ></span>

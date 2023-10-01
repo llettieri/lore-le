@@ -3,7 +3,7 @@ import { ArrowIcon } from '@/icons/ArrowIcon';
 import Autoplay, { AutoplayOptionsType } from 'embla-carousel-autoplay';
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
 import Image from 'next/image';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { ReactElement, useCallback, useEffect, useState } from 'react';
 
 const autoplayOptions: AutoplayOptionsType = {
     delay: 3000,
@@ -19,7 +19,7 @@ interface ButtonProps {
 function NextButton({ onClick, enabled }: ButtonProps): React.ReactElement {
     return (
         <button
-            className="w-16 h-16 md:w-32 md:h-32 text-white pointer-events-auto"
+            className="pointer-events-auto h-16 w-16 text-white md:h-32 md:w-32"
             onClick={onClick}
             disabled={!enabled}
             title="Next"
@@ -33,7 +33,7 @@ function NextButton({ onClick, enabled }: ButtonProps): React.ReactElement {
 function PrevButton({ onClick, enabled }: ButtonProps): React.ReactElement {
     return (
         <button
-            className="w-16 h-16 md:w-32 md:h-32 text-white pointer-events-auto"
+            className="pointer-events-auto h-16 w-16 text-white md:h-32 md:w-32"
             onClick={onClick}
             disabled={!enabled}
             title="Previous"
@@ -46,7 +46,7 @@ function PrevButton({ onClick, enabled }: ButtonProps): React.ReactElement {
     );
 }
 
-export default function Carousel(): React.ReactElement {
+export default function Carousel(): ReactElement {
     const [emblaRef, emblaApi] = useEmblaCarousel(
         { loop: true, align: 'end' },
         [Autoplay(autoplayOptions)],
@@ -78,11 +78,11 @@ export default function Carousel(): React.ReactElement {
     return (
         <div className="relative">
             <div
-                className="overflow-hidden rounded-xl shadow-2xl max-w-7xl mx-auto"
+                className="mx-auto max-w-7xl overflow-hidden rounded-xl shadow-2xl"
                 ref={emblaRef}
                 id="embla-viewport"
             >
-                <div className="flex max-w-7xl relative" id="embla-container">
+                <div className="relative flex max-w-7xl" id="embla-container">
                     {getWideImages().map((i, index) => (
                         <div
                             className="relative aspect-video flex-[0_0_100%]"
@@ -92,7 +92,7 @@ export default function Carousel(): React.ReactElement {
                                 src={i.src}
                                 alt={i.alt}
                                 fill
-                                className="object-cover w-auto h-auto"
+                                className="h-auto w-auto object-cover"
                                 sizes="100vw"
                                 placeholder="blur"
                                 blurDataURL="/placeholder.svg"
@@ -101,7 +101,7 @@ export default function Carousel(): React.ReactElement {
                     ))}
                 </div>
             </div>
-            <div className="absolute top-1/2 -translate-y-1/2 right-0 left-0 flex justify-between pointer-events-none touch-none mx-auto max-w-7xl">
+            <div className="pointer-events-none absolute left-0 right-0 top-1/2 mx-auto flex max-w-7xl -translate-y-1/2 touch-none justify-between">
                 <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
                 <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
             </div>

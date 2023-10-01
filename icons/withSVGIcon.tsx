@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react';
+import React, { ComponentType, ReactElement } from 'react';
 
 interface IconProps {
     id?: string;
@@ -11,7 +11,7 @@ export default function withSVGIcon(
     WrappedComponent: ComponentType<IconProps>,
     viewBox: string,
 ): ComponentType<IconProps> {
-    const SvgIcon = (props: IconProps): React.ReactElement => {
+    const SvgIcon = (props: IconProps): ReactElement => {
         const { id, label, width, height } = props;
 
         return (
