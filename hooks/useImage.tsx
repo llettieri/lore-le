@@ -1,3 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
+
 interface Photo {
     src: string;
     alt: string;
@@ -6,7 +8,7 @@ interface Photo {
 interface ImageHook {
     getWideImages: () => Photo[];
     getPortraitImages: () => Photo[];
-    getPortraitInfo: () => Promise<Record<string, PhotoDescription>>;
+    portraitInfo?: Record<string, PhotoDescription>;
 }
 
 interface PhotoDescription {
@@ -43,17 +45,16 @@ const useImage = (): ImageHook => {
         return wideImages;
     };
 
-    const getPortraitInfo = async (): Promise<
-        Record<string, PhotoDescription>
-    > => {
-        const r = await fetch(`${BASE_IMAGE_URL}portrait/info.json`);
-        return await r.json();
-    };
+    const { data: portraitInfo } = useQuery<Record<string, PhotoDescription>>({
+        queryKey: ['portrait-info'],
+        queryFn: () =>
+            fetch(`${BASE_IMAGE_URL}portrait/info.json`).then((r) => r.json()),
+    });
 
     return {
         getWideImages,
         getPortraitImages,
-        getPortraitInfo,
+        portraitInfo,
     };
 };
 

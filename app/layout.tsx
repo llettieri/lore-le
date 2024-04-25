@@ -2,6 +2,7 @@ import './globals.css';
 
 import { Footer } from '@/components/Footer';
 import { NavBar } from '@/components/NavBar';
+import { Providers } from '@/components/Providers';
 import { Inter } from 'next/font/google';
 import React, { ReactNode } from 'react';
 
@@ -20,15 +21,17 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${inter.className} touch-none overflow-hidden`}>
-                <div className="flex h-screen flex-col overflow-hidden">
-                    <NavBar />
-                    <div className="flex flex-1 flex-col overflow-auto">
-                        <main className="flex-1 bg-mainBackground p-10">
-                            {children}
-                        </main>
-                        <Footer />
+                <Providers>
+                    <div className="flex h-screen flex-col overflow-hidden">
+                        <NavBar />
+                        <div className="flex flex-1 flex-col overflow-auto">
+                            <main className="flex-1 bg-mainBackground p-10">
+                                {children}
+                            </main>
+                            <Footer />
+                        </div>
                     </div>
-                </div>
+                </Providers>
             </body>
         </html>
     );
