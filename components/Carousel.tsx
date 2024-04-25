@@ -1,7 +1,10 @@
+'use client';
+
 import { useImage } from '@/hooks/useImage';
 import { ArrowIcon } from '@/icons/ArrowIcon';
+import { EmblaCarouselType } from 'embla-carousel';
 import Autoplay, { AutoplayOptionsType } from 'embla-carousel-autoplay';
-import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
+import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 import React, { ReactElement, useCallback, useEffect, useState } from 'react';
 
@@ -82,7 +85,7 @@ export default function Carousel(): ReactElement {
                 ref={emblaRef}
                 id="embla-viewport"
             >
-                <div className="relative flex max-w-7xl" id="embla-container">
+                <div className="flex max-w-7xl" id="embla-container">
                     {getWideImages().map((i, index) => (
                         <div
                             className="relative aspect-video flex-[0_0_100%]"
@@ -93,8 +96,6 @@ export default function Carousel(): ReactElement {
                                 alt={i.alt}
                                 fill
                                 className="h-auto w-auto object-cover"
-                                sizes="100vw"
-                                placeholder="blur"
                                 blurDataURL="/placeholder.svg"
                             />
                         </div>

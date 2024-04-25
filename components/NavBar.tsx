@@ -20,13 +20,13 @@ const links: LinkElement[] = [
     },
     {
         title: 'Drone Video',
-        href: '/m152/video',
-        enabled: true,
+        href: '/m152/drone-video',
+        enabled: false,
     },
     {
         title: 'Images',
-        href: '/m152/images',
-        enabled: true,
+        href: '/m152/nyc-images',
+        enabled: false,
     },
     {
         title: 'About me',
@@ -45,8 +45,8 @@ export function NavBar(): ReactElement {
     return (
         <nav className="z-10 bg-navbar drop-shadow-2xl">
             <div className="container mx-auto flex flex-row justify-between p-4 tracking-widest text-white md:max-w-7xl">
-                <ul className="hidden gap-2 md:flex ">
-                    {enabledLinks.map((link, index) => (
+                <ul className="hidden gap-6 md:flex ">
+                    {enabledLinks.map((link) => (
                         <li
                             key={`${link.href}_${link.title}`}
                             className="flex gap-2 text-xl"
@@ -60,9 +60,6 @@ export function NavBar(): ReactElement {
                             >
                                 {link.title}
                             </Link>
-                            {index !== enabledLinks.length - 1 && (
-                                <span key={Math.random()}>|</span>
-                            )}
                         </li>
                     ))}
                 </ul>
@@ -73,6 +70,7 @@ export function NavBar(): ReactElement {
                         width={200}
                         height={40}
                         style={{ height: 'auto', width: 'auto' }}
+                        priority={true}
                     />
                 </Link>
 
