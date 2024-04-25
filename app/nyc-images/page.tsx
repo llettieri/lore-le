@@ -3,7 +3,7 @@
 import { Button } from '@/components/Button';
 import Carousel from '@/components/Carousel';
 import Gallery from '@/components/Gallery';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { ReactNode, useEffect, useState } from 'react';
 
 type View = 'carousel' | 'gallery' | 'none';
@@ -15,20 +15,24 @@ const ViewComponent = {
 };
 
 export default function GalleryPage(): ReactNode {
+    const path = usePathname();
     const searchParams = useSearchParams();
     const router = useRouter();
+
     const [view, setView] = useState<View>('none');
+
+    const changeView = (view: View): void =>
+        router.replace(`${path}?view=${view}`);
 
     useEffect(() => {
         const viewParam = searchParams.get('view') as View;
+
         if (!viewParam) {
-            router.push('images?view=carousel');
+            router.replace(`${path}?view=carousel`, {});
         } else {
             setView(viewParam);
         }
-    }, [router, searchParams]);
-
-    const toggle = (view: View): void => router.replace(`images?view=${view}`);
+    }, [path, router, searchParams]);
 
     return (
         <div
@@ -38,11 +42,11 @@ export default function GalleryPage(): ReactNode {
         >
             <div className="mb-5 flex flex-row justify-center gap-5">
                 <Button
-                    onClick={(): void => toggle('carousel')}
+                    onClick={(): void => changeView('carousel')}
                     title="Carousel"
                 />
                 <Button
-                    onClick={(): void => toggle('gallery')}
+                    onClick={(): void => changeView('gallery')}
                     title="Gallery"
                 />
             </div>

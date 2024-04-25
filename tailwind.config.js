@@ -9,12 +9,12 @@ module.exports = {
         extend: {
             colors: {
                 primary: '#17a7eb',
-                primaryTint: '#26BAFF',
-                secondary: '#2917EB',
-                secondaryTint: '#3826FF',
+                primaryTint: '#2bb4f8',
+                secondary: '#0F5591',
+                secondaryTint: '#1476CC',
                 secondaryText: '#2917EB',
-                mainBackground: '#333333',
-                navbar: '#444444',
+                mainBackground: '#041B26',
+                navbar: '#052433',
             }
         }
     },
