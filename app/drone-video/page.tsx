@@ -1,11 +1,17 @@
 import React, { ReactNode } from 'react';
 
-export default function M152Page(): ReactNode {
+export const metadata = {
+    title: 'Drone | Lorenzo Lettieri',
+    description: 'Look at this beautiful view recorded with my personal drone!',
+    keywords: ['lore-le', 'personal', 'drone', 'landscape', 'view', 'video'],
+};
+
+export default function DroneVideo(): ReactNode {
     return (
-        <div className="flex h-full items-center justify-center">
+        <div className="flex items-center sm:h-full sm:justify-center">
             <video
                 src="https://lore-le.ch/media/Video-M152.mp4"
-                className="mx-20 my-16 w-4/5 max-w-7xl rounded-3xl"
+                className="w-full max-w-7xl sm:w-4/5 sm:rounded-3xl md:mx-20 md:my-16"
                 controls
                 autoPlay
             />

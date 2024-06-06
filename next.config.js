@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: ['media.giphy.com', 'lore-le.ch']
-    },
     output: 'standalone',
+    images: {
+        remotePatterns: [{hostname: 'media.giphy.com'}, {hostname: 'lore-le.ch'}]
+    },
 };
 
 module.exports = nextConfig;
