@@ -1,9 +1,9 @@
 'use client';
 
 import { HamburgerMenu } from '@/components/HamburgerMenu';
+import { usePath } from '@/hooks/usePath';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import React, { ReactElement, useState } from 'react';
 
 interface LinkElement {
@@ -19,24 +19,19 @@ const links: LinkElement[] = [
         enabled: true,
     },
     {
-        title: 'Drone Video',
-        href: '/m152/drone-video',
-        enabled: false,
-    },
-    {
         title: 'Images',
-        href: '/m152/nyc-images',
-        enabled: false,
+        href: '/nyc-images',
+        enabled: true,
     },
     {
-        title: 'About me',
-        href: '/me',
+        title: 'Drone Video',
+        href: '/drone-video',
         enabled: true,
     },
 ];
 
 export function NavBar(): ReactElement {
-    const pathname = usePathname();
+    const { isActive } = usePath();
     const enabledLinks = links.filter((l) => l.enabled);
     const [showModal, setShowModal] = useState(false);
 
@@ -53,7 +48,7 @@ export function NavBar(): ReactElement {
                         >
                             <Link
                                 className={`transition ease-in-out hover:text-primary hover:transition-colors ${
-                                    pathname === link.href ? 'font-bold' : ''
+                                    isActive(link.href) ? 'font-bold' : ''
                                 }`}
                                 key={link.title}
                                 href={link.href}
@@ -78,7 +73,7 @@ export function NavBar(): ReactElement {
                     <HamburgerMenu showModal={showModal} toggle={toggle} />
                     <div
                         className={`absolute left-0 top-0 h-screen w-screen bg-black transition-opacity delay-100 ${
-                            showModal ? 'opacity-30' : 'opacity-0'
+                            showModal ? 'opacity-30' : 'hidden opacity-0'
                         }`}
                     />
                     <div
@@ -97,7 +92,7 @@ export function NavBar(): ReactElement {
                                 >
                                     <Link
                                         className={`mx-2 transition ease-in-out hover:text-primary hover:transition-colors ${
-                                            pathname === link.href
+                                            isActive(link.href)
                                                 ? 'font-bold'
                                                 : ''
                                         }`}

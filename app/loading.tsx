@@ -10,6 +10,8 @@ export default function LoadingPage(): ReactNode {
                 alt="loading"
                 width={500}
                 height={200}
+                className="h-auto"
+                unoptimized
             />
         </div>
     );

@@ -1,19 +1,20 @@
 'use client';
 
+import LoadingPage from '@/app/loading';
 import { useImage } from '@/hooks/useImage';
 import Image from 'next/image';
 import React, { ReactElement } from 'react';
 
 export default function Gallery(): ReactElement {
-    const { getPortraitImages, portraitInfo } = useImage();
+    const { portraitImages, portraitInfo } = useImage();
 
     if (!portraitInfo) {
-        return <></>;
+        return <LoadingPage />;
     }
 
     return (
         <div className="flex flex-row flex-wrap justify-center gap-5">
-            {getPortraitImages().map((i) => {
+            {portraitImages.map((i) => {
                 return (
                     <div
                         key={Math.random()}
