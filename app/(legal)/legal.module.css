@@ -1,0 +1,8 @@
+.legal {
+    @apply max-w-3xl p-4 text-left;
+    @apply text-white;
+}
+
+.legal ul {
+    @apply list-outside list-disc pl-5;
+}
