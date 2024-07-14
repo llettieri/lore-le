@@ -13,25 +13,22 @@
         "clean-mac": "rm -R .next"
     },
     "dependencies": {
-        "@tanstack/react-query": "^5.32.0",
-        "dayjs": "^1.11.10",
-        "embla-carousel-autoplay": "^8",
-        "embla-carousel-react": "^8",
+        "flowbite-react": "^0.10",
         "next": "^14",
         "react": "^18",
-        "react-device-detect": "^2",
         "react-dom": "^18",
-        "react-photo-album": "^2",
         "sharp": "^0.33"
     },
     "devDependencies": {
         "@next/eslint-plugin-next": "^14",
+        "@south-paw/react-obfuscate-ts": "^2",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
         "@typescript-eslint/eslint-plugin": "^7",
         "@typescript-eslint/parser": "^7",
         "autoprefixer": "^10",
+        "dayjs": "^1",
         "eslint": "^8",
         "eslint-config-next": "14",
         "eslint-config-prettier": "^9",
