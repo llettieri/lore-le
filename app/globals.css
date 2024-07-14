@@ -1,3 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    @apply text-white;
+
+    font-family: Nunito, sans-serif;
+}
+
+h1 {
+    @apply text-5xl;
+    @apply mb-8;
+    @apply text-primary;
+
+    font-weight: 900;
+}
+
+h2 {
+    @apply text-3xl;
+    @apply mb-6;
+    @apply text-primary;
+
+    font-weight: 900;
+}
+
+h3 {
+    @apply text-xl;
+    @apply mb-4;
+    @apply text-primaryTint;
+
+    font-weight: 900;
+}
+
+h4 {
+    @apply text-lg;
+    @apply mb-4;
+    @apply text-primaryTint;
+
+    font-weight: 900;
+}
+
+button {
+    font-weight: 700;
+}

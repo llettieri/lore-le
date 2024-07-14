@@ -1,8 +1,12 @@
-'use client';
-
-import { Button } from '@/components/Button';
-import { useRouter } from 'next/navigation';
+import { ImagesSubNav } from '@/components/ImagesSubNav';
 import React, { ReactNode } from 'react';
+
+export const metadata = {
+    title: 'NYC Images | Lorenzo Lettieri',
+    description:
+        'Take a look at these fantastic pictures of the big apple! All the pics were shot by myself.',
+    keywords: ['lore-le', 'personal', 'pictures', 'nyc', 'winter', 'big-apple'],
+};
 
 interface NycImagesLayoutProps {
     children: ReactNode;
@@ -11,18 +15,12 @@ interface NycImagesLayoutProps {
 export default function NycImagesLayout({
     children,
 }: NycImagesLayoutProps): ReactNode {
-    const { push } = useRouter();
-
     return (
-        <>
-            <div className="mb-5 flex flex-row justify-center gap-5">
-                <Button
-                    onClick={(): void => push('carousel')}
-                    title="Carousel"
-                />
-                <Button onClick={(): void => push('gallery')} title="Gallery" />
+        <div className="flex h-full flex-col">
+            <ImagesSubNav />
+            <div className="flex flex-grow items-center justify-center">
+                {children}
             </div>
-            {children}
-        </>
+        </div>
     );
 }

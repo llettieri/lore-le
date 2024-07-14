@@ -1,5 +1,11 @@
 import React, { ReactNode } from 'react';
 
+export const metadata = {
+    title: 'Drone | Lorenzo Lettieri',
+    description: 'Look at this beautiful view recorded with my personal drone!',
+    keywords: ['lore-le', 'personal', 'drone', 'landscape', 'view', 'video'],
+};
+
 export default function DroneVideo(): ReactNode {
     return (
         <div className="flex items-center sm:h-full sm:justify-center">

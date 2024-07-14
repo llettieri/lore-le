@@ -128,7 +128,6 @@ export default function PrivacyPolicyPage(): ReactNode {
                     3.4 In which cases can we share your data with third
                     parties?
                 </h3>
-                <br />
                 <h4>a. Principle</h4>
                 <p>
                     We may need to rely on the services of third parties or
@@ -237,7 +236,6 @@ export default function PrivacyPolicyPage(): ReactNode {
                 </p>
                 <br />
                 <h3>3.7 What rights do you have?</h3>
-                <br />
                 <h4>a. Right to information</h4>
                 <p>
                     You can request information about the data we have stored
@@ -275,7 +273,6 @@ export default function PrivacyPolicyPage(): ReactNode {
                 </p>
                 <br />
                 <h4>b. Deletion and correction</h4>
-                <br />
                 <p>
                     You have the option of requesting the deletion or correction
                     of your data at any time. We may reject the request if
@@ -349,36 +346,9 @@ export default function PrivacyPolicyPage(): ReactNode {
                     storage of the log files is mandatory for the operation of
                     the website, you therefore have no possibility to object.
                 </p>
-                <br /> <br />
                 <br />
-                <h3>4.2 Adobe Audience Manager</h3>
-                <p>
-                    Our website uses the Adobe Audience Manager service, a
-                    product of Adobe Systems Software Ireland Limited, 4-6
-                    Riverwalk, Citywest Business Campus, Dublin 24, Republic of
-                    Ireland. Adobe Audience Manager is a data management
-                    platform (DMP) that helps us improve our online advertising
-                    by providing us with more detailed information about our
-                    users interests and allowing us to use that data in our
-                    marketing campaigns.
-                    <br />
-                    <br />
-                    When you visit our website, certain information about your
-                    browsing behavior is collected and sent to Adobe Audience
-                    Manager. This information may include, but is not limited
-                    to, page views, links visited, and time spent on each page.
-                    This information may then be used by us to create targeted
-                    advertising campaigns tailored to your interests.
-                    <br />
-                    <br />
-                    Adobe Audience Manager uses technologies such as cookies and
-                    pixels to collect data. You can prevent Adobe Audience
-                    Manager from collecting and using your data by setting the
-                    appropriate preferences in your browser.
-                </p>
-                <br />
-                <br />
-                <h3>BrainBox Generators</h3> BrainBox Generators is a service of{' '}
+                <h3>BrainBox Generators</h3>
+                BrainBox Generators is a service of{' '}
                 <a
                     className="text-inherit underline"
                     href="https://brainbox.swiss/"

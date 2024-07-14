@@ -1,10 +1,15 @@
+import { Spinner } from 'flowbite-react';
 import Image from 'next/image';
 import React, { ReactNode } from 'react';
 
 export default function LoadingPage(): ReactNode {
     return (
         <div className="flex h-full flex-col items-center justify-center">
-            <h1>Loading page...</h1>
+            <Spinner
+                aria-label="Loading page"
+                className="mb-8 text-primary"
+                size="lg"
+            />
             <Image
                 src="https://media.giphy.com/media/pK4av7uBK3I4M/giphy.gif"
                 alt="loading"

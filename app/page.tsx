@@ -7,10 +7,10 @@ export default function Home(): ReactNode {
 
     return (
         <div className="flex h-full flex-col items-center justify-center gap-3 text-white">
-            <h1>
+            <p>
                 Hello, this site is under construction. Please be patient ...
                 (maybe a few years).
-            </h1>
+            </p>
             <Image
                 className="h-auto rounded-xl"
                 src={gifUrl}
