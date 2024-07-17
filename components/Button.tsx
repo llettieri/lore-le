@@ -1,6 +1,6 @@
 import { CustomFlowbiteTheme, Button as FBButton } from 'flowbite-react';
 import Link from 'next/link';
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 
 const buttonTheme: CustomFlowbiteTheme['button'] = {
     base: 'transition-colors duration-200 ease-in-out rounded-md',
@@ -16,7 +16,7 @@ interface ButtonProps {
     onClick?: () => void;
 }
 
-export const Button = ({ title, onClick, link }: ButtonProps): ReactElement => {
+export const Button = ({ title, onClick, link }: ButtonProps): ReactNode => {
     return (
         <FBButton theme={buttonTheme} color="primary" onClick={onClick}>
             {link ? (

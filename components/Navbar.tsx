@@ -79,7 +79,7 @@ const navbarTheme: FlowbiteTheme['navbar'] = {
     brand: { base: '' },
 };
 
-export function Navbar(): ReactElement {
+export const Navbar = (): ReactElement => {
     const enabledLinks = links.filter((l) => l.enabled);
 
     return (
@@ -97,4 +97,4 @@ export function Navbar(): ReactElement {
             <NavbarToggle />
         </FBNavbar>
     );
-}
+};

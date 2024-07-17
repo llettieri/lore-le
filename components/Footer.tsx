@@ -1,21 +1,21 @@
 import dayjs from 'dayjs';
 import { Footer as FBFooter, FooterCopyright } from 'flowbite-react';
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 
-export function Footer(): ReactElement {
+export const Footer = (): ReactNode => {
     const currentYear = dayjs().year();
 
     return (
         <FBFooter container className="flex-shrink-0 rounded-none bg-navbar">
-            <FBFooter.LinkGroup className="text-lg text-white">
+            <FBFooter.LinkGroup className="justify-center text-lg text-white sm:justify-start">
                 <FBFooter.Link href="/imprint">Imprint</FBFooter.Link>
                 <FBFooter.Link href="/privacy">Privacy Policy</FBFooter.Link>
             </FBFooter.LinkGroup>
             <FooterCopyright
-                className="text-lg text-white"
+                className="text-end text-lg text-gray-400 *:text-gray-400 md:text-white *:md:text-white"
                 by="Lorenzo Lettieri"
                 year={currentYear}
             />
         </FBFooter>
     );
-}
+};
