@@ -1,7 +1,8 @@
+import { IMGIX_URL } from '@/lib/imgix';
 import {
     getPortraitImages,
     getPortraitImagesInfo,
-} from '@/services/ImageService';
+} from '@/services/image-service';
 import Image from 'next/image';
 import React, { ReactNode } from 'react';
 
@@ -20,7 +21,7 @@ export default async function Gallery(): Promise<ReactNode> {
                         <h3 className="absolute top-3 hidden w-full select-none bg-mainBackground/[.6] p-3 text-white group-hover:block">
                             {info[`nyc-${i.alt}`].title}
                         </h3>
-                        <a href={i.src} target="_blank">
+                        <a href={`${IMGIX_URL}${i.src}?h=800`} target="_blank">
                             <Image
                                 className="aspect-auto h-auto w-auto rounded-md"
                                 src={i.src}
