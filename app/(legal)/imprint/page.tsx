@@ -1,4 +1,4 @@
-import { ObfuscateSensibleText } from '@/components/ObfuscateSensibleText';
+import { ObfuscateSensibleText } from '@/components/obfuscate-sensible-text';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 

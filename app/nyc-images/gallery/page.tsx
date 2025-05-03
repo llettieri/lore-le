@@ -1,7 +1,8 @@
+import { IMGIX_URL } from '@/lib/image-loader/imgix';
 import {
     getPortraitImages,
     getPortraitImagesInfo,
-} from '@/services/ImageService';
+} from '@/services/image-service';
 import Image from 'next/image';
 import React, { ReactNode } from 'react';
 
@@ -17,12 +18,12 @@ export default async function Gallery(): Promise<ReactNode> {
                         key={Math.random()}
                         className="group relative h-full transition ease-in-out hover:z-10 hover:scale-110 hover:drop-shadow-2xl hover:transition-transform hover:duration-200"
                     >
-                        <h3 className="absolute top-3 hidden w-full select-none bg-mainBackground/[.6] p-3 text-white group-hover:block">
+                        <h3 className="bg-main-background/[.6] absolute top-3 hidden w-full select-none p-3 text-white group-hover:block">
                             {info[`nyc-${i.alt}`].title}
                         </h3>
-                        <a href={i.src} target="_blank">
+                        <a href={`${IMGIX_URL}${i.src}?h=800`} target="_blank">
                             <Image
-                                className="aspect-auto h-auto w-auto rounded-md"
+                                className="rounded-md object-contain"
                                 src={i.src}
                                 alt={i.alt}
                                 width={300}
@@ -33,7 +34,7 @@ export default async function Gallery(): Promise<ReactNode> {
                             />
                         </a>
                         {info[`nyc-${i.alt}`].description && (
-                            <p className="absolute bottom-3 hidden w-full select-none bg-mainBackground/[.6] p-3 text-sm group-hover:block">
+                            <p className="bg-main-background/[.6] absolute bottom-3 hidden w-full select-none p-3 text-sm group-hover:block">
                                 {info[`nyc-${i.alt}`].description}
                             </p>
                         )}

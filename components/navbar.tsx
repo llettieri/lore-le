@@ -1,13 +1,16 @@
 'use client';
 
+import { tw } from '@/lib/helpers';
+import { nextLoader } from '@/lib/image-loader/nextjs';
 import {
     Navbar as FBNavbar,
-    FlowbiteTheme,
     NavbarBrand,
     NavbarCollapse,
     NavbarLink,
     NavbarToggle,
 } from 'flowbite-react';
+import { CustomFlowbiteTheme } from 'flowbite-react/types';
+import Image from 'next/image';
 import React, { ReactElement } from 'react';
 
 interface LinkElement {
@@ -34,56 +37,47 @@ const links: LinkElement[] = [
     },
 ];
 
-const navbarTheme: FlowbiteTheme['navbar'] = {
+const navbarTheme: CustomFlowbiteTheme['navbar'] = {
     root: {
-        base: 'bg-navbar p-4 drop-shadow-2xl',
+        base: tw`bg-navbar p-4 drop-shadow-2xl`,
         inner: {
-            base: 'mx-auto flex flex-wrap-reverse items-center justify-between max-w-7xl',
+            base: tw`mx-auto flex max-w-7xl flex-wrap-reverse items-center justify-between`,
             fluid: {
-                on: '',
-                off: 'container',
+                on: tw``,
+                off: tw`container`,
             },
         },
         rounded: {
-            on: '',
-            off: '',
+            on: tw``,
+            off: tw``,
         },
         bordered: {
-            on: '',
-            off: '',
-        },
-    },
-    collapse: {
-        base: 'w-full md:block md:w-auto',
-        list: 'mt-4 flex flex-col md:mt-0 md:flex-row md:space-x-8 md:text-sm md:font-medium',
-        hidden: {
-            on: 'hidden',
-            off: '',
+            on: tw``,
+            off: tw``,
         },
     },
     link: {
-        base: 'transition ease-in-out text-xl block py-2 pl-3 pr-4 md:p-0',
+        base: tw`block py-2 pl-3 pr-4 text-xl transition ease-in-out md:p-0`,
         active: {
-            on: '',
-            off: 'text-white hover:text-primary hover:bg-mainBackground md:hover:bg-transparent',
+            on: tw``,
+            off: tw`hover:text-primary hover:bg-main-background text-white md:hover:bg-transparent`,
         },
         disabled: {
-            on: '',
-            off: '',
+            on: tw``,
+            off: tw``,
         },
     },
-    toggle: {
-        base: 'inline-flex items-center rounded-lg text-md text-white focus:outline-none md:hidden',
-        icon: 'h-8 w-8 shrink-0',
-    },
-    brand: { base: '' },
 };
 
 export const Navbar = (): ReactElement => {
     const enabledLinks = links.filter((l) => l.enabled);
 
     return (
-        <FBNavbar fluid theme={navbarTheme}>
+        <FBNavbar
+            fluid
+            theme={navbarTheme}
+            applyTheme={{ root: 'replace', link: 'replace' }}
+        >
             <NavbarCollapse>
                 {enabledLinks.map((link) => (
                     <NavbarLink key={link.title} href={link.href}>
@@ -92,7 +86,13 @@ export const Navbar = (): ReactElement => {
                 ))}
             </NavbarCollapse>
             <NavbarBrand href="/">
-                <img src="/logo/logo.svg" alt="Lore-Le Logo" />
+                <Image
+                    width={100}
+                    height={20}
+                    src="/logo/logo.svg"
+                    alt="Lore-Le Logo"
+                    loader={nextLoader}
+                />
             </NavbarBrand>
             <NavbarToggle />
         </FBNavbar>

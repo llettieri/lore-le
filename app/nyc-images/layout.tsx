@@ -1,4 +1,4 @@
-import { ImagesSubNav } from '@/components/ImagesSubNav';
+import { ImagesSubNav } from '@/components/images-sub-nav';
 import React, { ReactNode } from 'react';
 
 export const metadata = {

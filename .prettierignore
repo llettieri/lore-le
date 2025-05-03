@@ -17,6 +17,5 @@ next-env.d.ts
 .env*
 
 # config
-*.config*
-.prettierrc.js
-.eslintrc.js
+*.config.*
+.github
