@@ -1,8 +1,4 @@
-interface ImgixLoaderProps {
-    src: string;
-    width: number;
-    quality: string;
-}
+import { ImageLoaderProps } from 'next/image';
 
 export const IMGIX_URL = 'https://lore-le.imgix.net/';
 
@@ -10,7 +6,7 @@ export default function imgixLoader({
     src,
     width,
     quality,
-}: ImgixLoaderProps): string {
+}: ImageLoaderProps): string {
     const url = new URL(`${IMGIX_URL}${src}`);
     const params = url.searchParams;
 
