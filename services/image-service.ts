@@ -1,4 +1,4 @@
-import { Photo, PhotoDescription } from '@/models/Photo';
+import { Photo, PhotoDescription } from '@/models/photo';
 
 const BASE_IMAGE_URL = 'https://lore-le.ch/media/photos';
 

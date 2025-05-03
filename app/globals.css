@@ -1,47 +1,80 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap')
+layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-* {
-    @apply text-white;
+@plugin 'flowbite-react/plugin/tailwindcss';
+@source '../.flowbite-react/class-list.json';
 
-    font-family: Nunito, sans-serif;
+@theme {
+    --color-primary: #17a7eb;
+    --color-primary-tint: #2bb4f8;
+    --color-secondary: #0f5591;
+    --color-secondary-tint: #1476cc;
+    --color-secondary-text: #2917eb;
+    --color-main-background: #041b26;
+    --color-navbar: #052433;
 }
 
-h1 {
-    @apply text-5xl;
-    @apply mb-8;
-    @apply text-primary;
+@custom-variant light (&:where(.dark, .dark *));
 
-    font-weight: 900;
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentcolor);
+    }
+
+    * {
+        @apply text-white;
+
+        font-family: Nunito, sans-serif;
+    }
+
+    h1 {
+        @apply text-5xl;
+        @apply mb-8;
+        @apply text-primary;
+
+        font-weight: 900;
+    }
+
+    h2 {
+        @apply text-3xl;
+        @apply mb-6;
+        @apply text-primary;
+
+        font-weight: 900;
+    }
+
+    h3 {
+        @apply text-xl;
+        @apply mb-4;
+        @apply text-primary-tint;
+
+        font-weight: 900;
+    }
+
+    h4 {
+        @apply text-lg;
+        @apply mb-4;
+        @apply text-primary-tint;
+
+        font-weight: 900;
+    }
+
+    button {
+        font-weight: 700;
+    }
 }
 
-h2 {
-    @apply text-3xl;
-    @apply mb-6;
-    @apply text-primary;
+@utility no-scrollbar {
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
-    font-weight: 900;
-}
-
-h3 {
-    @apply text-xl;
-    @apply mb-4;
-    @apply text-primaryTint;
-
-    font-weight: 900;
-}
-
-h4 {
-    @apply text-lg;
-    @apply mb-4;
-    @apply text-primaryTint;
-
-    font-weight: 900;
-}
-
-button {
-    font-weight: 700;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }

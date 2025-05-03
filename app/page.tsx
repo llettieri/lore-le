@@ -12,10 +12,10 @@ export default function Home(): ReactNode {
                 (maybe a few years).
             </p>
             <Image
-                className="h-auto rounded-xl"
+                className="rounded-xl"
                 src={gifUrl}
                 width={800}
-                height={500}
+                height={300}
                 alt="Waiting..."
                 unoptimized
             />

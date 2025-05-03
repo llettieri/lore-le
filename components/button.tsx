@@ -1,12 +1,13 @@
-import { CustomFlowbiteTheme, Button as FBButton } from 'flowbite-react';
+import { tw } from '@/lib/helpers';
+import { Button as FBButton } from 'flowbite-react';
+import { CustomFlowbiteTheme } from 'flowbite-react/types';
 import Link from 'next/link';
 import React, { ReactNode } from 'react';
 
 const buttonTheme: CustomFlowbiteTheme['button'] = {
-    base: 'transition-colors duration-200 ease-in-out rounded-md',
+    base: tw`cursor-pointer rounded-md transition-colors duration-200 ease-in-out`,
     color: {
-        primary:
-            'bg-primary border-primaryTint border-2 text-white hover:border-secondaryTint hover:bg-secondary',
+        primary: tw`bg-primary border-primary-tint hover:border-secondary-tint hover:bg-secondary border-2 text-white`,
     },
 };
 
@@ -18,7 +19,12 @@ interface ButtonProps {
 
 export const Button = ({ title, onClick, link }: ButtonProps): ReactNode => {
     return (
-        <FBButton theme={buttonTheme} color="primary" onClick={onClick}>
+        <FBButton
+            theme={buttonTheme}
+            color="primary"
+            onClick={onClick}
+            applyTheme="replace"
+        >
             {link ? (
                 <Link href={link} prefetch={true}>
                     {title}

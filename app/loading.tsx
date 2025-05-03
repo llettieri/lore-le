@@ -7,7 +7,7 @@ export default function LoadingPage(): ReactNode {
         <div className="flex h-full flex-col items-center justify-center">
             <Spinner
                 aria-label="Loading page"
-                className="mb-8 text-primary"
+                className="text-primary mb-8"
                 size="lg"
             />
             <Image
@@ -15,7 +15,7 @@ export default function LoadingPage(): ReactNode {
                 alt="loading"
                 width={500}
                 height={200}
-                className="h-auto"
+                className="h-auto w-auto"
                 unoptimized
             />
         </div>
