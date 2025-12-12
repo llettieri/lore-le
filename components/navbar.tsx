@@ -57,7 +57,7 @@ const navbarTheme: CustomFlowbiteTheme['navbar'] = {
         },
     },
     link: {
-        base: tw`block py-2 pl-3 pr-4 text-xl transition ease-in-out md:p-0`,
+        base: tw`block py-2 pr-4 pl-3 text-xl transition ease-in-out md:p-0`,
         active: {
             on: tw``,
             off: tw`hover:text-primary hover:bg-main-background text-white md:hover:bg-transparent`,
