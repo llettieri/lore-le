@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import React, { ReactNode } from 'react';
+import { UnoptimizedImage } from '@/components/image';
 
 export default function Home(): ReactNode {
     const gifUrl =
@@ -11,13 +11,12 @@ export default function Home(): ReactNode {
                 Hello, this site is under construction. Please be patient ...
                 (maybe a few years).
             </p>
-            <Image
+            <UnoptimizedImage
                 className="rounded-xl"
                 src={gifUrl}
                 width={800}
                 height={300}
                 alt="Waiting..."
-                unoptimized
             />
         </div>
     );

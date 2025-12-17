@@ -1,3 +1,5 @@
+import nextTypescript from 'eslint-config-next/typescript';
+import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
 import prettier from 'eslint-plugin-prettier';
 import tsParser from '@typescript-eslint/parser';
 import path from 'node:path';
@@ -13,16 +15,16 @@ const compat = new FlatCompat({
     allConfig: js.configs.all,
 });
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default [
+    ...nextTypescript,
     {
         ignores: ['**/manifest.ts', '**/.github'],
     },
-    ...compat.extends(
-        'next/core-web-vitals',
-        'plugin:@typescript-eslint/recommended',
-        'plugin:prettier/recommended',
-        'prettier',
-    ),
+    ...nextCoreWebVitals,
+    ...compat.extends('plugin:@typescript-eslint/recommended'),
+    ...compat.extends('plugin:prettier/recommended'),
+    ...compat.extends('prettier'),
     {
         plugins: {
             prettier,

@@ -1,6 +1,6 @@
-import { ObfuscateSensibleText } from '@/components/obfuscate-sensible-text';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
+import { ObfuscateSensibleText } from '@/components/obfuscate-sensible-text';
 
 export const metadata: Metadata = {
     title: 'Privacy policy | Lorenzo Lettieri',
@@ -51,7 +51,10 @@ export default function PrivacyPolicyPage(): ReactNode {
                     <br />
                     Lorenzo Lettieri
                     <br />
-                    <ObfuscateSensibleText email="me@lore-le.ch" />
+                    <ObfuscateSensibleText
+                        content="me@lore-le.ch"
+                        type="email"
+                    />
                 </p>
                 <br />
                 <h2>3. General principles</h2>
@@ -239,7 +242,7 @@ export default function PrivacyPolicyPage(): ReactNode {
                     You can request information about the data we have stored
                     about you at any time. We ask you to send your request for
                     information together with proof of identity to{' '}
-                    <ObfuscateSensibleText email="me@lore-le.ch" />.
+                    <ObfuscateSensibleText content="me@lore-le.ch" type="tel" />
                     <br />
                     <br />
                     You also have the right to receive your data in a common

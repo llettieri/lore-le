@@ -1,6 +1,6 @@
 import { ImageLoader, ImageLoaderProps } from 'next/image';
 
-export const nextLoader: ImageLoader = ({
-    src,
-    width,
-}: ImageLoaderProps): string => `${src}?w=${width}`;
+const nextLoader: ImageLoader = ({ src, width }: ImageLoaderProps): string =>
+    `${src}?w=${width}`;
+
+export default nextLoader;

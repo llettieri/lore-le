@@ -2,8 +2,8 @@ import { tw } from '@/lib/helpers';
 import { getWideImages } from '@/services/image-service';
 import { Carousel } from 'flowbite-react';
 import { CustomFlowbiteTheme } from 'flowbite-react/types';
-import Image from 'next/image';
 import React, { ReactNode } from 'react';
+import { ImgixImage } from '@/components/image';
 
 const carouselTheme: CustomFlowbiteTheme['carousel'] = {
     scrollContainer: {
@@ -24,9 +24,9 @@ export default function CarouselPage(): ReactNode {
     const images = getWideImages();
 
     return (
-        <Carousel className="max-h-[50rem] max-w-[90rem]" theme={carouselTheme}>
+        <Carousel className="max-h-200 max-w-360" theme={carouselTheme}>
             {images.map((image) => (
-                <Image
+                <ImgixImage
                     key={image.src}
                     src={image.src}
                     alt={image.alt}

@@ -1,7 +1,8 @@
 import { ImagesSubNav } from '@/components/images-sub-nav';
 import React, { ReactNode } from 'react';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'NYC Images | Lorenzo Lettieri',
     description:
         'Take a look at these fantastic pictures of the big apple! All the pics were shot by myself.',

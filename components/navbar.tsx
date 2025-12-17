@@ -1,7 +1,6 @@
 'use client';
 
 import { tw } from '@/lib/helpers';
-import { nextLoader } from '@/lib/image-loader/nextjs';
 import {
     Navbar as FBNavbar,
     NavbarBrand,
@@ -12,6 +11,7 @@ import {
 import { CustomFlowbiteTheme } from 'flowbite-react/types';
 import Image from 'next/image';
 import React, { ReactElement } from 'react';
+import nextLoader from '@/lib/image-loader/nextjs';
 
 interface LinkElement {
     href: string;

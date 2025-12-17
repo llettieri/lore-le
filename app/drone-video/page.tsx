@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'Drone | Lorenzo Lettieri',
     description: 'Look at this beautiful view recorded with my personal drone!',
     keywords: ['lore-le', 'personal', 'drone', 'landscape', 'view', 'video'],

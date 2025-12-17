@@ -1,6 +1,6 @@
-import { ObfuscateSensibleText } from '@/components/obfuscate-sensible-text';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
+import { ObfuscateSensibleText } from '@/components/obfuscate-sensible-text';
 
 export const metadata: Metadata = {
     title: 'Imprint | Lorenzo Lettieri',
@@ -24,7 +24,7 @@ export default function ImprintPage(): ReactNode {
                 Switzerland
                 <br />
                 <strong>Email</strong>:{' '}
-                <ObfuscateSensibleText email="me@lore-le.ch" />
+                <ObfuscateSensibleText content="me@lore-le.ch" type="email" />
                 <br />
                 <br />
                 <strong>Disclaimer</strong>

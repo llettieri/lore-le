@@ -2,8 +2,8 @@
 layer(base);
 
 @import 'tailwindcss';
+@import 'flowbite-react/plugin/tailwindcss';
 
-@plugin 'flowbite-react/plugin/tailwindcss';
 @source '../.flowbite-react/class-list.json';
 
 @theme {
@@ -67,6 +67,13 @@ layer(base);
 
     button {
         font-weight: 700;
+    }
+}
+
+@layer utilities {
+    .obfuscated {
+        unicode-bidi: bidi-override;
+        direction: rtl;
     }
 }
 

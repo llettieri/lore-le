@@ -13,7 +13,7 @@ export const Footer = (): ReactNode => {
     return (
         <FBFooter
             container
-            className="bg-navbar dark:bg-navbar flex-shrink-0 rounded-none"
+            className="bg-navbar dark:bg-navbar shrink-0 rounded-none"
         >
             <FooterLinkGroup className="justify-center text-lg text-white sm:justify-start">
                 <FooterLink href="/imprint">Imprint</FooterLink>

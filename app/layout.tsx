@@ -20,7 +20,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className="touch-none overflow-hidden">
-                <ThemeConfig dark={false} />
+                <ThemeConfig mode="light" />
                 <div className="flex h-screen flex-col overflow-hidden">
                     <Navbar />
                     <div className="flex flex-1 flex-col overflow-auto">

@@ -1,16 +1,33 @@
 'use client';
 
-import { Obfuscate } from '@south-paw/react-obfuscate-ts';
-import React, { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 interface ObfuscateTextProps {
-    email?: string;
-    tel?: string;
+    content: string;
+    type: 'tel' | 'email';
 }
 
 export const ObfuscateSensibleText = ({
-    email,
-    tel,
+    content,
+    type,
 }: ObfuscateTextProps): ReactNode => {
-    return <Obfuscate email={email} tel={tel} className="underline" />;
+    const [href, setHref] = useState('#');
+    const prefix = type == 'email' ? 'mailto:' : 'tel:';
+
+    useEffect(() => {
+        // Decode at runtime (scrapers miss this)
+        setHref(`${prefix}${content}`);
+    }, [content, prefix]);
+
+    const obfuscatedText = content.split('').reverse().join('');
+
+    return (
+        <a
+            href={href}
+            className="obfuscated underline"
+            aria-label="focus to reveal"
+        >
+            {obfuscatedText}
+        </a>
+    );
 };
