@@ -1,0 +1,17 @@
+name: Pre-Release Deployment
+
+permissions:
+  contents: write
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'
+
+jobs:
+  build-and-deploy:
+    uses: ./.github/workflows/build-and-deploy.yml
+    with:
+      environment: "Staging"
+      pre-release: true
+    secrets: inherit

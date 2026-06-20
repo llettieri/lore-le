@@ -16,6 +16,7 @@ export const ObfuscateSensibleText = ({
 
     useEffect(() => {
         // Decode at runtime (scrapers miss this)
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setHref(`${prefix}${content}`);
     }, [content, prefix]);
 

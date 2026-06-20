@@ -1,42 +1,21 @@
-import nextTypescript from 'eslint-config-next/typescript';
-import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
-import prettier from 'eslint-plugin-prettier';
-import tsParser from '@typescript-eslint/parser';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
+import prettier from 'eslint-config-prettier/flat';
+import { defineConfig, globalIgnores } from 'eslint/config';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all,
-});
-
-// eslint-disable-next-line import/no-anonymous-default-export
-export default [
-    ...nextTypescript,
+const eslintConfig = defineConfig([
+    ...nextVitals,
+    ...nextTs,
+    prettier,
     {
-        ignores: ['**/manifest.ts', '**/.github'],
-    },
-    ...nextCoreWebVitals,
-    ...compat.extends('plugin:@typescript-eslint/recommended'),
-    ...compat.extends('plugin:prettier/recommended'),
-    ...compat.extends('prettier'),
-    {
-        plugins: {
-            prettier,
-        },
-
-        languageOptions: {
-            parser: tsParser,
-            ecmaVersion: 'latest',
-            sourceType: 'module',
-        },
-
         rules: {
+            '@typescript-eslint/explicit-function-return-type': ['warn'],
+            '@typescript-eslint/method-signature-style': ['error'],
+            '@typescript-eslint/no-unused-vars': 'error',
+            camelcase: ['warn'],
+            indent: ['error', 4],
+            'no-console': ['warn'],
+            'no-duplicate-imports': ['error'],
             'no-empty': ['error'],
             'no-empty-character-class': ['error'],
             'no-empty-pattern': ['error'],
@@ -65,30 +44,31 @@ export default [
             'no-shadow-restricted-names': ['error'],
             'no-sparse-arrays': ['error'],
             'no-this-before-super': ['error'],
-            'no-undef': ['error'],
             'no-unexpected-multiline': ['error'],
             'no-unreachable': ['error'],
             'no-unsafe-finally': ['error'],
             'no-unsafe-negation': ['error'],
             'no-unsafe-optional-chaining': ['error'],
             'no-unused-labels': ['error'],
-            'no-unused-vars': ['error'],
             'no-useless-backreference': ['error'],
             'no-useless-catch': ['error'],
             'no-useless-escape': ['error'],
             'no-with': ['error'],
+            quotes: ['error', 'single'],
+            'require-await': ['warn'],
             'require-yield': ['error'],
+            semi: ['error'],
             'use-isnan': ['error'],
             'valid-typeof': ['error'],
-            quotes: ['error', 'single'],
-            semi: ['error'],
-            indent: ['error', 4],
-            'require-await': ['warn'],
-            'no-console': ['warn'],
-            'no-duplicate-imports': ['error'],
-            camelcase: ['warn'],
-            '@typescript-eslint/explicit-function-return-type': ['warn'],
-            '@typescript-eslint/method-signature-style': ['error'],
         },
     },
-];
+    globalIgnores([
+        '.next/**',
+        'out/**',
+        'build/**',
+        'next-env.d.ts',
+        'public/service-worker.js',
+    ]),
+]);
+
+export default eslintConfig;
