@@ -5,13 +5,14 @@ FROM node:24-slim AS builder
 WORKDIR /app
 
 # Copying files and build
-COPY package*.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable && corepack prepare pnpm@10.33.0 --activate
+RUN pnpm install --frozen-lockfile
 COPY . .
-RUN npm run build
+RUN pnpm run build
 
 # Production Stage
-FROM node:22-slim AS runner
+FROM node:24-slim AS runner
 
 # Setting workdir
 WORKDIR /app
