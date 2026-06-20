@@ -6,6 +6,8 @@ import {
 import React, { ReactNode } from 'react';
 import { ImgixImage } from '@/components/image';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Gallery(): Promise<ReactNode> {
     const images = getPortraitImages();
     const info = await getPortraitImagesInfo();
