@@ -15,25 +15,25 @@
     "dependencies": {
         "dayjs": "^1.11.21",
         "flowbite-react": "^0.12.17",
-        "next": "^16.2.9",
-        "react": "^19.2.7",
-        "react-dom": "^19.2.7",
-        "sharp": "^0.35.2"
+        "next": "^16.2.12",
+        "react": "^19.2.8",
+        "react-dom": "^19.2.8",
+        "sharp": "^0.35.3"
     },
     "devDependencies": {
-        "@tailwindcss/postcss": "^4.3.1",
-        "@types/node": "^24.13.2",
+        "@tailwindcss/postcss": "^4.3.3",
+        "@types/node": "^24.13.3",
         "@types/react": "^19.2.17",
         "@types/react-dom": "^19.2.3",
-        "eslint": "^9.39.4",
-        "eslint-config-next": "^16.2.9",
+        "eslint": "^9.39.5",
+        "eslint-config-next": "^16.2.12",
         "eslint-config-prettier": "^10.1.8",
         "import-sort-style-module": "^6.0.0",
         "jiti": "^2.7.0",
-        "prettier": "^3.8.4",
+        "prettier": "^3.9.6",
         "prettier-plugin-import-sort": "^0.0.7",
-        "prettier-plugin-tailwindcss": "^0.8.0",
-        "tailwindcss": "^4.3.1",
+        "prettier-plugin-tailwindcss": "^0.8.1",
+        "tailwindcss": "^4.3.3",
         "typescript": "^5.9.3"
     },
     "importSort": {
