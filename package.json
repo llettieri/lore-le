@@ -15,25 +15,25 @@
     "dependencies": {
         "dayjs": "^1.11.21",
         "flowbite-react": "^0.12.17",
-        "next": "^16.2.9",
-        "react": "^19.2.7",
-        "react-dom": "^19.2.7",
-        "sharp": "^0.35.2"
+        "next": "^16.2.12",
+        "react": "^19.2.8",
+        "react-dom": "^19.2.8",
+        "sharp": "^0.35.3"
     },
     "devDependencies": {
-        "@tailwindcss/postcss": "^4.3.1",
-        "@types/node": "^24.13.2",
+        "@tailwindcss/postcss": "^4.3.3",
+        "@types/node": "^24.13.3",
         "@types/react": "^19.2.17",
         "@types/react-dom": "^19.2.3",
-        "eslint": "^9.39.4",
-        "eslint-config-next": "^16.2.9",
+        "eslint": "^9.39.5",
+        "eslint-config-next": "^16.2.12",
         "eslint-config-prettier": "^10.1.8",
         "import-sort-style-module": "^6.0.0",
         "jiti": "^2.7.0",
-        "prettier": "^3.8.4",
+        "prettier": "^3.9.6",
         "prettier-plugin-import-sort": "^0.0.7",
-        "prettier-plugin-tailwindcss": "^0.8.0",
-        "tailwindcss": "^4.3.1",
+        "prettier-plugin-tailwindcss": "^0.8.1",
+        "tailwindcss": "^4.3.3",
         "typescript": "^5.9.3"
     },
     "importSort": {
@@ -42,10 +42,5 @@
             "parser": "typescript"
         }
     },
-    "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
-    "pnpm": {
-        "onlyBuiltDependencies": [
-            "unrs-resolver"
-        ]
-    }
+    "packageManager": "pnpm@11.17.0+sha512.cca3cea332ad254bb84145f966d19f4879615210346fc92c79a047f23a0d7b3cca3c3792f0076ba1f1831d277efbcf0a9119b31a9a60eca7fb3d6231f331ef72"
 }
