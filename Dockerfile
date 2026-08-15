@@ -5,8 +5,8 @@ FROM node:24-slim AS builder
 WORKDIR /app
 
 # Copying files and build
-COPY package.json pnpm-lock.yaml ./
-RUN corepack enable && corepack prepare pnpm@10.33.0 --activate
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN corepack enable
 RUN pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm run build
