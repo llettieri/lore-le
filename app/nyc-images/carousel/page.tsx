@@ -14,7 +14,7 @@ import {
 import { cn } from '@/lib/utils';
 
 const controlClassName =
-    'border-2 border-primary-tint bg-primary text-white transition-colors duration-200 ease-in-out hover:border-secondary-tint hover:bg-secondary';
+    'h-10 w-10 border-2 border-primary-tint bg-primary text-white shadow-md transition-colors duration-200 ease-in-out hover:border-secondary-tint hover:bg-secondary';
 
 export default function CarouselPage(): React.ReactNode {
     const images = getWideImages();
@@ -38,7 +38,7 @@ export default function CarouselPage(): React.ReactNode {
             opts={{ loop: true }}
             className="mx-auto w-full max-w-360"
         >
-            <CarouselContent className="aspect-3/1 max-h-200">
+            <CarouselContent className="aspect-9/5">
                 {images.map((image) => (
                     <CarouselItem key={image.src} className="h-full">
                         <ImgixImage
@@ -46,15 +46,17 @@ export default function CarouselPage(): React.ReactNode {
                             alt={image.alt}
                             width={1200}
                             height={400}
-                            className="h-full w-full object-cover"
+                            className="h-full w-full rounded-2xl object-cover"
                         />
                     </CarouselItem>
                 ))}
             </CarouselContent>
             <CarouselPrevious
+                variant="default"
                 className={cn('inset-y-0 left-4 my-auto', controlClassName)}
             />
             <CarouselNext
+                variant="default"
                 className={cn('inset-y-0 right-4 my-auto', controlClassName)}
             />
             <div className="mt-4 flex justify-center gap-2">
