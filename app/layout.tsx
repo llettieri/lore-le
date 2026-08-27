@@ -6,9 +6,17 @@ import { Metadata } from 'next';
 import React, { ReactNode } from 'react';
 
 export const metadata: Metadata = {
-    title: 'Lorenzo Lettieri',
-    description: 'You wanna learn more about me? You are at the right place!',
-    keywords: ['lore-le', 'personal', 'developer', 'software'],
+    metadataBase: new URL('https://lore-le.ch'),
+    title: 'Lorenzo Lettieri — Software Engineer',
+    description:
+        'Software Engineer at Sunrise GmbH. Four-year apprenticeship, now building frontend, backend and cloud infrastructure.',
+    keywords: ['lore-le', 'personal', 'developer', 'software', 'engineer'],
+    openGraph: {
+        title: 'Lorenzo Lettieri — Software Engineer',
+        description:
+            'Software Engineer at Sunrise GmbH. Four-year apprenticeship, now building frontend, backend and cloud infrastructure.',
+        images: ['/logo/logo_white_large.png'],
+    },
 };
 
 export default function RootLayout({
@@ -18,7 +26,7 @@ export default function RootLayout({
 }): ReactNode {
     return (
         <html lang="en" className="dark">
-            <body className="touch-none overflow-hidden">
+            <body className="overflow-hidden">
                 <div className="flex h-screen flex-col overflow-hidden">
                     <Navbar />
                     <div className="flex flex-1 flex-col overflow-auto">

@@ -134,3 +134,25 @@ layer(base);
     --ring: #17a7eb;
     --radius: 0.75rem;
 }
+
+/**
+ * Required by components/toolbox-marquee.tsx — the row is duplicated once,
+ * so translating -50% loops seamlessly at any number of tools.
+ */
+@keyframes marquee-left {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes marquee-right {
+    from {
+        transform: translateX(-50%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}

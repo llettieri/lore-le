@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "next build",
+        "build": "tsx scripts/validate-content.ts && next build",
         "start": "next start",
         "lint": "eslint --fix",
         "prettier-check": "prettier . --check",
@@ -40,6 +40,7 @@
         "prettier-plugin-import-sort": "^0.0.7",
         "prettier-plugin-tailwindcss": "^0.8.1",
         "tailwindcss": "^4.3.3",
+        "tsx": "^4.23.12",
         "typescript": "^5.9.3"
     },
     "importSort": {
