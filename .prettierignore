@@ -22,3 +22,6 @@ next-env.d.ts
 
 # config
 .github
+
+# handoff/reference material, not app source
+/docs

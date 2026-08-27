@@ -18,7 +18,7 @@ export default function RootLayout({
     children: ReactNode;
 }): ReactNode {
     return (
-        <html lang="en">
+        <html lang="en" className="dark">
             <body className="touch-none overflow-hidden">
                 <ThemeConfig mode="light" />
                 <div className="flex h-screen flex-col overflow-hidden">

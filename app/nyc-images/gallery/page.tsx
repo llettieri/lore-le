@@ -20,7 +20,7 @@ export default async function Gallery(): Promise<ReactNode> {
                         key={i.src}
                         className="group relative h-full transition ease-in-out hover:z-10 hover:scale-110 hover:drop-shadow-2xl hover:transition-transform hover:duration-200"
                     >
-                        <h3 className="bg-main-background/60 absolute top-3 hidden w-full p-3 text-white select-none group-hover:block">
+                        <h3 className="bg-main-background/60 absolute top-3 hidden w-full p-3 text-xl font-black text-white select-none group-hover:block">
                             {info[`nyc-${i.alt}`].title}
                         </h3>
                         <a href={`${IMGIX_URL}${i.src}?h=800`} target="_blank">

@@ -68,6 +68,7 @@ const eslintConfig = defineConfig([
         'build/**',
         'next-env.d.ts',
         'public/service-worker.js',
+        'docs/**',
     ]),
 ]);
 
