@@ -13,7 +13,7 @@ export const timeline: TimelineEntry[] = [
         kind: 'job',
         railLabel: '2020',
         railTitle: 'Apprenticeship begins',
-        title: 'Lernender Informatiker Applikationsentwicklung',
+        title: 'Application Development Apprentice',
         org: 'Sunrise GmbH · Hybrid',
         period: 'Aug 2020 – Aug 2024 · 4 yrs 1 mo',
         from: '2020-08',
@@ -38,8 +38,21 @@ export const timeline: TimelineEntry[] = [
                 from: '2021-08',
                 to: '2023-01',
                 summary:
-                    'During my apprenticeship in this team I had the opportunity to learn a lot of technologies and stacks. The main focus was on developing an enterprise application for the technicians.',
-                tools: ['typescript', 'graphql'],
+                    'During my apprenticeship in this team I had the opportunity to learn a lot of technologies and stacks. The main focus was on developing an enterprise application for the technicians, to debug our HFC-Network in Switzerland. With that I was able to learn a lot about the HFC-Network at Sunrise and also developing an actual application, which is used by other teams.\n' +
+                    '\n' +
+                    'Main points:\n' +
+                    '- Communication between teams (customers)\n' +
+                    '- Agile development\n' +
+                    '- Fullstack development (SpringBoot and Angular)\n' +
+                    '- Planing and implementation of Use-Cases',
+                tools: [
+                    'typescript',
+                    'angular',
+                    'java',
+                    'spring-boot',
+                    'graphql',
+                    'grpc',
+                ],
             },
             {
                 title: 'Web Developer — Wilmaa / YalloTV',
@@ -47,8 +60,14 @@ export const timeline: TimelineEntry[] = [
                 from: '2023-01',
                 to: '2023-10',
                 summary:
-                    'In this team I worked as a Frontend Developer, with the focus on web. My main tasks were working on the YalloTV web and sometimes also mobile application. I worked in an agile team.',
-                tools: ['react', 'react-native'],
+                    "In this team I worked as a Frontend Developer, with the focus on web. My main tasks were working on the YalloTV web and sometimes also mobile application. I worked in an agile team and therefore it was product oriented. One of the big features, in which I contributed was the new search for YalloTV. Most of the services used were on AWS, and with that I also learned a lot how AWS works and how it's used.\n" +
+                    '\n' +
+                    'Main points:\n' +
+                    '- Open communication between technology teams (Backend, Android TV, Apple TV)\n' +
+                    '- Agile development\n' +
+                    '- Web development (React.JS, React Native)\n' +
+                    '- Planing, prioritise and estimating stories',
+                tools: ['typescript', 'react', 'react-native'],
             },
             {
                 title: 'Backend Developer — Wilmaa / YalloTV',
@@ -56,8 +75,26 @@ export const timeline: TimelineEntry[] = [
                 from: '2023-10',
                 to: '2024-07',
                 summary:
-                    'After my Frontend Developer perspective, I decided to take a look at the Backend world. In my last year of apprenticeship I learned a lot about the different technologies used by the Wilmaa Backend Team.',
-                tools: ['python', 'rabbitmq'],
+                    'After my Frontend Developer perspective, I decided to take a look at the Backend world. In my last year of apprenticeship I learned a lot about the different technologies used by the Wilmaa Backend Team, and I was also able to create a first version of a new Search-Service with AWS Opensearch as a Search-Engine/DB. I was mainly involved in YalloTV tasks but I also worked on some MySports topics. In addition to that I also learned a lot more about AWS with the focus on the networking part.\n' +
+                    '\n' +
+                    'Main points:\n' +
+                    '- Open communication to the clients (Frontend Developers)\n' +
+                    '- DevOps\n' +
+                    '- Developing microservices (FastAPI)\n' +
+                    '- Network security (AWS WAF)\n' +
+                    '- Load Balancing (AWS LoadBalancer)\n' +
+                    '- Serving services for the clients',
+                tools: [
+                    'python',
+                    'fastapi',
+                    'flask',
+                    'rabbitmq',
+                    'kubernetes',
+                    'aws',
+                    'googlecloud',
+                    'mongodb',
+                    'grpc',
+                ],
             },
         ],
         highlights: [

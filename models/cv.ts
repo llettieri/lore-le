@@ -40,7 +40,13 @@ export interface Profile {
 }
 
 export type ToolKind =
-    'Language' | 'Framework' | 'API' | 'Platform' | 'Messaging' | 'Tooling';
+    | 'Language'
+    | 'Framework'
+    | 'API'
+    | 'Platform'
+    | 'Messaging'
+    | 'Tooling'
+    | 'Database';
 
 export interface Tool {
     slug: Slug; // icon lives at public/icons/<slug>.svg
