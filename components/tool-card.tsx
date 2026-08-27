@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React, { ReactElement } from 'react';
 import type { Tool } from '@/models/cv';
+import nextLoader from '@/lib/image-loader/nextjs';
 
 /**
  * The marquee tile. Icon comes from public/icons/<slug>.svg by convention,
@@ -11,6 +12,7 @@ export const ToolCard = ({ tool }: { tool: Tool }): ReactElement => (
         <span className="bg-primary/15 flex size-9 shrink-0 items-center justify-center rounded-xl">
             <Image
                 src={`/icons/${tool.slug}.svg`}
+                loader={nextLoader}
                 alt=""
                 width={20}
                 height={20}
