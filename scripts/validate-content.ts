@@ -1,14 +1,12 @@
-/**
- * Run in `pnpm build` (before next build) so bad content fails the build,
- * not the page. Catches the two mistakes you will actually make:
- * a tool slug that does not exist, and a missing icon file.
- */
+/* eslint-disable no-console */
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { cv } from '../content';
+import { cv } from '@/content';
 
 const errors: string[] = [];
 const slugs = new Set(cv.tools.map((t) => t.slug));
+
+// eslint-disable no-console
 
 for (const entry of cv.timeline) {
     const referenced = [

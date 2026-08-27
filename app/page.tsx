@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 import React, { ReactNode } from 'react';
 import {
     byKind,
@@ -11,13 +13,10 @@ import { JourneyTimeline } from '@/components/journey-timeline';
 import { ToolboxMarquee } from '@/components/toolbox-marquee';
 import type { Credential } from '@/models/cv';
 
-const formatCredentialDate = (iso: string): string => {
-    const [year, month] = iso.split('-').map(Number);
-    return new Date(year, month - 1).toLocaleDateString('en-US', {
-        month: 'short',
-        year: 'numeric',
-    });
-};
+dayjs.extend(customParseFormat);
+
+const formatCredentialDate = (iso: string): string =>
+    dayjs(iso, 'YYYY-MM').format('MMM YYYY');
 
 const featuredCardClassName = (kind: Credential['kind']): string =>
     kind === 'award'

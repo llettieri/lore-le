@@ -13,10 +13,11 @@ export const ToolCard = ({ tool }: { tool: Tool }): ReactElement => (
             <Image
                 src={`/icons/${tool.slug}.svg`}
                 loader={nextLoader}
-                alt=""
+                alt={tool.name}
                 width={20}
                 height={20}
                 aria-hidden
+                className="h-autos w-auto"
             />
         </span>
         <span>

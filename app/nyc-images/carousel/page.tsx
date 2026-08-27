@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { getWideImages } from '@/services/image-service';
 import { ImgixImage } from '@/components/image';
 import {
@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils';
 const controlClassName =
     'h-10 w-10 border-2 border-primary-tint bg-primary text-white shadow-md transition-colors duration-200 ease-in-out hover:border-secondary-tint hover:bg-secondary';
 
-export default function CarouselPage(): React.ReactNode {
+export default function CarouselPage(): ReactNode {
     const images = getWideImages();
     const [api, setApi] = useState<CarouselApi>();
     const [selected, setSelected] = useState(0);
@@ -27,6 +27,7 @@ export default function CarouselPage(): React.ReactNode {
             return;
         }
 
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSlideCount(api.scrollSnapList().length);
         setSelected(api.selectedScrollSnap());
         api.on('select', () => setSelected(api.selectedScrollSnap()));

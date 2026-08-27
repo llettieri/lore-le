@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import Link from 'next/link';
 import React, { ReactNode } from 'react';
 import { ObfuscateSensibleText } from '@/components/obfuscate-sensible-text';
@@ -6,7 +7,7 @@ const pillClassName =
     'rounded-[26px] border border-white/20 px-[22px] py-3 text-sm font-bold text-[#e2eff6] transition-colors hover:border-primary hover:text-primary';
 
 export const Footer = (): ReactNode => {
-    const currentYear = new Date().getFullYear();
+    const currentYear = dayjs().year();
 
     return (
         <footer className="shrink-0 bg-[#052433]">

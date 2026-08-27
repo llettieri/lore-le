@@ -8,6 +8,7 @@ import useEmblaCarousel, {
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+import { ReactNode } from 'react';
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -32,7 +33,7 @@ type CarouselContextProps = {
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
-function useCarousel() {
+function useCarousel(): CarouselContextProps {
     const context = React.useContext(CarouselContext);
 
     if (!context) {
@@ -50,7 +51,7 @@ function Carousel({
     className,
     children,
     ...props
-}: React.ComponentProps<'div'> & CarouselProps) {
+}: React.ComponentProps<'div'> & CarouselProps): ReactNode {
     const [carouselRef, api] = useEmblaCarousel(
         {
             ...opts,
@@ -95,11 +96,12 @@ function Carousel({
 
     React.useEffect(() => {
         if (!api) return;
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         onSelect(api);
         api.on('reInit', onSelect);
         api.on('select', onSelect);
 
-        return () => {
+        return (): void => {
             api?.off('select', onSelect);
         };
     }, [api, onSelect]);
@@ -133,7 +135,10 @@ function Carousel({
     );
 }
 
-function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
+function CarouselContent({
+    className,
+    ...props
+}: React.ComponentProps<'div'>): ReactNode {
     const { carouselRef, orientation } = useCarousel();
 
     return (
@@ -154,7 +159,10 @@ function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
     );
 }
 
-function CarouselItem({ className, ...props }: React.ComponentProps<'div'>) {
+function CarouselItem({
+    className,
+    ...props
+}: React.ComponentProps<'div'>): ReactNode {
     const { orientation } = useCarousel();
 
     return (
@@ -177,7 +185,7 @@ function CarouselPrevious({
     variant = 'outline',
     size = 'icon-sm',
     ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button>): ReactNode {
     const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
     return (
@@ -207,7 +215,7 @@ function CarouselNext({
     variant = 'outline',
     size = 'icon-sm',
     ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button>): ReactNode {
     const { orientation, scrollNext, canScrollNext } = useCarousel();
 
     return (
