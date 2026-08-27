@@ -55,6 +55,7 @@ const eslintConfig = defineConfig([
             'no-useless-escape': ['error'],
             'no-with': ['error'],
             quotes: ['error', 'single', { avoidEscape: true }],
+            'react-hooks/set-state-in-effect': ['warn'],
             'require-await': ['warn'],
             'require-yield': ['error'],
             semi: ['error'],
