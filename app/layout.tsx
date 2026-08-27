@@ -2,7 +2,6 @@ import './globals.css';
 
 import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
-import { ThemeConfig } from 'flowbite-react';
 import { Metadata } from 'next';
 import React, { ReactNode } from 'react';
 
@@ -20,7 +19,6 @@ export default function RootLayout({
     return (
         <html lang="en" className="dark">
             <body className="touch-none overflow-hidden">
-                <ThemeConfig mode="light" />
                 <div className="flex h-screen flex-col overflow-hidden">
                     <Navbar />
                     <div className="flex flex-1 flex-col overflow-auto">

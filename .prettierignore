@@ -2,9 +2,6 @@
 /node_modules
 pnpm-lock.yaml
 
-# generated
-/.flowbite-react/
-
 # testing
 /coverage
 

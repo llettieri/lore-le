@@ -2,11 +2,8 @@
 layer(base);
 
 @import 'tailwindcss';
-@import 'flowbite-react/plugin/tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-
-@source '../.flowbite-react/class-list.json';
 
 @theme {
     --color-primary: #17a7eb;
@@ -15,7 +12,6 @@ layer(base);
     --color-secondary-tint: #1476cc;
     --color-secondary-text: #2917eb;
     --color-main-background: #041b26;
-    --color-navbar: #052433;
 }
 
 @layer base {

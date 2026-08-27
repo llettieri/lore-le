@@ -1,12 +1,12 @@
 import { NextConfig } from 'next';
 import { version } from './package.json';
 import { writeFileSync } from 'node:fs';
-import withFlowbiteReact from 'flowbite-react/plugin/nextjs';
 
 writeFileSync('./public/version.json', JSON.stringify({ version }));
 
 const nextConfig: NextConfig = {
     output: 'standalone',
+    allowedDevOrigins: ['llettieri.hub'],
     images: {
         remotePatterns: [
             { hostname: 'media.giphy.com' },
@@ -18,4 +18,4 @@ const nextConfig: NextConfig = {
     },
 };
 
-export default withFlowbiteReact(nextConfig);
+export default nextConfig;

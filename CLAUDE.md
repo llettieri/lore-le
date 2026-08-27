@@ -13,21 +13,21 @@ pnpm prettier-write   # Format all files
 
 ## Architecture
 
-**Next.js 16 / React 19 personal bio site (App Router)** built with flowbite-react UI components and Tailwind CSS v4.
+**Next.js 16 / React 19 personal bio site (App Router)** built with shadcn/ui (Radix) components and Tailwind CSS v4.
 
 ### Key Directories
 
 | Path | Purpose |
 |------|---------|
 | `/app` | Next.js App Router pages and layouts |
-| `/components` | UI components (flowbite-react-based) |
-| `/lib` | Utilities (image loader, helpers) |
+| `/components` | Hand-written UI components; generated shadcn primitives live in `/components/ui` |
+| `/lib` | Utilities (image loader, `cn()` helper) |
 | `/services` | Data-fetching utilities |
 | `/models` | TypeScript types/interfaces |
 | `/public` | Static assets |
 
 ### UI
 
-- **flowbite-react** + **Tailwind CSS v4** for components and theming
+- **shadcn/ui** (Radix base) + **Tailwind CSS v4** for components and theming
 - Custom imgix image loader at `lib/image-loader/imgix.ts`
 - Path alias: `@/` maps to the repository root
