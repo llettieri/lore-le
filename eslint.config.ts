@@ -54,7 +54,8 @@ const eslintConfig = defineConfig([
             'no-useless-catch': ['error'],
             'no-useless-escape': ['error'],
             'no-with': ['error'],
-            quotes: ['error', 'single'],
+            quotes: ['error', 'single', { avoidEscape: true }],
+            'react-hooks/set-state-in-effect': ['warn'],
             'require-await': ['warn'],
             'require-yield': ['error'],
             semi: ['error'],
@@ -68,6 +69,7 @@ const eslintConfig = defineConfig([
         'build/**',
         'next-env.d.ts',
         'public/service-worker.js',
+        'docs/**',
     ]),
 ]);
 

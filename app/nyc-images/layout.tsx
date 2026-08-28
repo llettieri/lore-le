@@ -19,7 +19,7 @@ export default function NycImagesLayout({
     return (
         <div className="flex h-full flex-col">
             <ImagesSubNav />
-            <div className="flex flex-grow items-center justify-center">
+            <div className="flex grow items-center justify-center">
                 {children}
             </div>
         </div>

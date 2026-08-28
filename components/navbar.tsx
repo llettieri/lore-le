@@ -1,17 +1,21 @@
 'use client';
 
-import { tw } from '@/lib/helpers';
-import {
-    Navbar as FBNavbar,
-    NavbarBrand,
-    NavbarCollapse,
-    NavbarLink,
-    NavbarToggle,
-} from 'flowbite-react';
-import { CustomFlowbiteTheme } from 'flowbite-react/types';
+import { Menu } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React, { ReactElement } from 'react';
+import { GithubIcon, LinkedinIcon } from '@/components/icons';
 import nextLoader from '@/lib/image-loader/nextjs';
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetDescription,
+    SheetTitle,
+    SheetTrigger,
+} from '@/components/ui/sheet';
+import { cn } from '@/lib/utils';
 
 interface LinkElement {
     href: string;
@@ -21,80 +25,151 @@ interface LinkElement {
 
 const links: LinkElement[] = [
     {
-        title: 'Home',
-        href: '/',
+        title: 'About',
+        href: '/#about',
+        enabled: true,
+    },
+    {
+        title: 'Journey',
+        href: '/#journey',
+        enabled: true,
+    },
+    {
+        title: 'Toolbox',
+        href: '/#toolbox',
+        enabled: true,
+    },
+    {
+        title: 'Certifications',
+        href: '/#certifications',
         enabled: true,
     },
     {
         title: 'Images',
         href: '/nyc-images',
-        enabled: true,
+        enabled: false,
     },
     {
         title: 'Drone Video',
         href: '/drone-video',
-        enabled: true,
+        enabled: false,
     },
 ];
 
-const navbarTheme: CustomFlowbiteTheme['navbar'] = {
-    root: {
-        base: tw`bg-navbar p-4 drop-shadow-2xl`,
-        inner: {
-            base: tw`mx-auto flex max-w-7xl flex-wrap-reverse items-center justify-between`,
-            fluid: {
-                on: tw``,
-                off: tw`container`,
-            },
-        },
-        rounded: {
-            on: tw``,
-            off: tw``,
-        },
-        bordered: {
-            on: tw``,
-            off: tw``,
-        },
+interface SocialLink {
+    title: string;
+    href: string;
+    Icon: typeof GithubIcon;
+}
+
+const socialLinks: SocialLink[] = [
+    {
+        title: 'GitHub',
+        href: 'https://github.com/llettieri',
+        Icon: GithubIcon,
     },
-    link: {
-        base: tw`block py-2 pr-4 pl-3 text-xl transition ease-in-out md:p-0`,
-        active: {
-            on: tw``,
-            off: tw`hover:text-primary hover:bg-main-background text-white md:hover:bg-transparent`,
-        },
-        disabled: {
-            on: tw``,
-            off: tw``,
-        },
+    {
+        title: 'LinkedIn',
+        href: 'https://linkedin.com/in/lore-le',
+        Icon: LinkedinIcon,
     },
-};
+];
+
+const navLinkClassName = (isActive: boolean): string =>
+    cn(
+        'text-sm font-semibold transition-colors hover:text-primary',
+        isActive ? 'text-white' : 'text-nav-muted',
+    );
 
 export const Navbar = (): ReactElement => {
-    const enabledLinks = links.filter((l) => l.enabled);
+    const pathname = usePathname();
+    const enabledLinks = links.filter((link) => link.enabled);
 
     return (
-        <FBNavbar
-            fluid
-            theme={navbarTheme}
-            applyTheme={{ root: 'replace', link: 'replace' }}
-        >
-            <NavbarCollapse>
-                {enabledLinks.map((link) => (
-                    <NavbarLink key={link.title} href={link.href}>
-                        {link.title}
-                    </NavbarLink>
-                ))}
-            </NavbarCollapse>
-            <NavbarBrand href="/">
-                <Image
-                    width={100}
-                    height={20}
-                    src="/logo/logo.svg"
-                    alt="Lore-Le Logo"
-                    loader={nextLoader}
-                />
-            </NavbarBrand>
-            <NavbarToggle />
-        </FBNavbar>
+        <header className="bg-background">
+            <div className="flex items-center justify-between px-13 py-5.5">
+                <Link href="/" className="flex items-center">
+                    <Image
+                        width={100}
+                        height={22}
+                        src="/logo/logo.svg"
+                        alt="Lore-Le Logo"
+                        loader={nextLoader}
+                        className="h-5.5 w-auto"
+                    />
+                </Link>
+                <div className="hidden items-center gap-7.5 md:flex">
+                    <nav className="flex items-center gap-7.5">
+                        {enabledLinks.map((link) => (
+                            <Link
+                                key={link.title}
+                                href={link.href}
+                                aria-current={
+                                    pathname === link.href ? 'page' : undefined
+                                }
+                                className={navLinkClassName(
+                                    pathname === link.href,
+                                )}
+                            >
+                                {link.title}
+                            </Link>
+                        ))}
+                    </nav>
+                    <div className="flex items-center gap-2.25">
+                        {socialLinks.map(({ title, href, Icon }) => (
+                            <a
+                                key={title}
+                                href={href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={title}
+                                className="hover:border-primary hover:text-primary text-icon-muted flex h-8.5 w-8.5 items-center justify-center rounded-full border border-[rgba(23,167,235,0.35)] transition-colors"
+                            >
+                                <Icon className="h-4 w-4" aria-hidden="true" />
+                            </a>
+                        ))}
+                    </div>
+                </div>
+                <Sheet>
+                    <SheetTrigger asChild>
+                        <button
+                            type="button"
+                            aria-label="Open menu"
+                            className="flex h-11 w-11 items-center justify-center text-white md:hidden"
+                        >
+                            <Menu className="h-6 w-6" aria-hidden="true" />
+                        </button>
+                    </SheetTrigger>
+                    <SheetContent side="right">
+                        <SheetTitle className="sr-only">Menu</SheetTitle>
+                        <SheetDescription className="sr-only">
+                            Site navigation
+                        </SheetDescription>
+                        <nav className="flex flex-col gap-1 p-4">
+                            {enabledLinks.map((link) => (
+                                <SheetClose key={link.title} asChild>
+                                    <Link
+                                        href={link.href}
+                                        aria-current={
+                                            pathname === link.href
+                                                ? 'page'
+                                                : undefined
+                                        }
+                                        className={cn(
+                                            'flex min-h-11 items-center text-base font-semibold',
+                                            navLinkClassName(
+                                                pathname === link.href,
+                                            ),
+                                        )}
+                                    >
+                                        {link.title}
+                                    </Link>
+                                </SheetClose>
+                            ))}
+                        </nav>
+                    </SheetContent>
+                </Sheet>
+            </div>
+        </header>
     );
 };
