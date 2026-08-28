@@ -8,9 +8,10 @@ function SidebarHeader({
     role,
     portraitUrl,
     contactRows,
+    labels,
 }: Pick<
     CvPdfProps,
-    'name' | 'role' | 'portraitUrl' | 'contactRows'
+    'name' | 'role' | 'portraitUrl' | 'contactRows' | 'labels'
 >): ReactElement {
     return (
         <>
@@ -21,7 +22,9 @@ function SidebarHeader({
             <Text style={styles.name}>{name}</Text>
             <Text style={styles.role}>{role}</Text>
             <View style={styles.sidebarBlock}>
-                <Text style={styles.sectionLabel}>Personal Details</Text>
+                <Text style={styles.sectionLabel}>
+                    {labels.personalDetails}
+                </Text>
                 {contactRows.map((row) => (
                     <View key={row.label} style={styles.contactRow}>
                         <Text style={styles.contactLabel}>{row.label}</Text>
@@ -43,9 +46,12 @@ export function CvDocument(props: CvPdfProps): ReactElement {
                         role={props.role}
                         portraitUrl={props.portraitUrl}
                         contactRows={props.contactRows}
+                        labels={props.labels}
                     />
                     <View style={styles.sidebarBlock}>
-                        <Text style={styles.sectionLabel}>Education</Text>
+                        <Text style={styles.sectionLabel}>
+                            {props.labels.education}
+                        </Text>
                         {props.education.map((entry) => (
                             <View key={entry.id} style={styles.eduCard}>
                                 <Text style={styles.eduTitle}>
@@ -55,7 +61,7 @@ export function CvDocument(props: CvPdfProps): ReactElement {
                                 <Text style={styles.eduDate}>{entry.date}</Text>
                                 {entry.grade ? (
                                     <Text style={styles.grade}>
-                                        Grade: {entry.grade}
+                                        {props.labels.grade}: {entry.grade}
                                     </Text>
                                 ) : null}
                             </View>
@@ -65,14 +71,18 @@ export function CvDocument(props: CvPdfProps): ReactElement {
 
                 <View style={styles.main}>
                     <View style={[styles.mainBlock, { marginTop: 0 }]}>
-                        <Text style={styles.sectionLabelMain}>Profile</Text>
+                        <Text style={styles.sectionLabelMain}>
+                            {props.labels.profile}
+                        </Text>
                         <Text style={styles.introCard}>
                             {props.profileSummary}
                         </Text>
                     </View>
 
                     <View style={styles.mainBlock}>
-                        <Text style={styles.sectionLabelMain}>Experience</Text>
+                        <Text style={styles.sectionLabelMain}>
+                            {props.labels.experience}
+                        </Text>
                         {props.jobs.map((job) => (
                             <View key={job.id} style={styles.job}>
                                 <Text style={styles.jobTitle}>{job.title}</Text>
@@ -113,9 +123,12 @@ export function CvDocument(props: CvPdfProps): ReactElement {
                         role={props.role}
                         portraitUrl={props.portraitUrl}
                         contactRows={props.contactRows}
+                        labels={props.labels}
                     />
                     <View style={styles.sidebarBlock}>
-                        <Text style={styles.sectionLabel}>Skills</Text>
+                        <Text style={styles.sectionLabel}>
+                            {props.labels.skills}
+                        </Text>
                         <View style={styles.chips}>
                             {props.skills.map((skill) => (
                                 <Text key={skill} style={styles.chip}>
@@ -129,7 +142,7 @@ export function CvDocument(props: CvPdfProps): ReactElement {
                 <View style={styles.main}>
                     <View style={[styles.mainBlock, { marginTop: 0 }]}>
                         <Text style={styles.sectionLabelMain}>
-                            Certifications
+                            {props.labels.certifications}
                         </Text>
                         <View style={styles.certGrid}>
                             {props.certifications.map((cert) => (
@@ -147,7 +160,7 @@ export function CvDocument(props: CvPdfProps): ReactElement {
 
                     <View style={styles.mainBlock}>
                         <Text style={styles.sectionLabelMain}>
-                            Additional Recognition
+                            {props.labels.additionalRecognition}
                         </Text>
                         <View style={styles.certGrid}>
                             {props.awards.map((award) => (

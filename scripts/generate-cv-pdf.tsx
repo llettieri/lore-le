@@ -3,6 +3,8 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import {
     byKind,
+    defaultLocale,
+    locales,
     printPhaseSummary,
     printSkills,
     profile,
@@ -10,6 +12,7 @@ import {
     visibleTimeline,
 } from '@/content';
 import { CvDocument } from '@/lib/cv-pdf/document';
+import { cvPdfLabels } from '@/lib/cv-pdf/labels';
 import type {
     CertificationView,
     EducationView,
@@ -17,6 +20,7 @@ import type {
     RecognitionView,
 } from '@/lib/cv-pdf/types';
 import { IMGIX_URL } from '@/lib/image-loader/imgix';
+import type { Locale } from '@/models/cv';
 
 dayjs.extend(customParseFormat);
 
@@ -26,25 +30,39 @@ const formatDate = (iso: string): string =>
 const portraitUrl = (src: string): string =>
     `${IMGIX_URL}${src}?auto=format&fit=crop&crop=faces&w=300&h=300&q=80`;
 
-async function main(): Promise<void> {
+const outputPath = (locale: Locale): string =>
+    locale === defaultLocale ? './public/cv.pdf' : `./public/cv-${locale}.pdf`;
+
+/** dayjs ships one locale file per supported language, keyed the same as our Locale type. */
+const setDayjsLocale = async (locale: Locale): Promise<void> => {
+    if (locale !== defaultLocale) {
+        await import(`dayjs/locale/${locale}.js`);
+    }
+    dayjs.locale(locale);
+};
+
+async function generateForLocale(locale: Locale): Promise<void> {
+    await setDayjsLocale(locale);
+    const labels = cvPdfLabels(locale);
+
     const jobs: JobView[] = visibleTimeline()
         .filter((entry) => entry.kind === 'job')
         .sort((a, b) => b.from.localeCompare(a.from))
         .map((entry) => ({
             id: entry.id,
-            title: t(entry.title),
-            org: t(entry.org),
-            period: t(entry.period),
-            highlights: (entry.highlights ?? []).map((h) => t(h)),
+            title: t(entry.title, locale),
+            org: t(entry.org, locale),
+            period: t(entry.period, locale),
+            highlights: (entry.highlights ?? []).map((h) => t(h, locale)),
             phases: (entry.phases ?? []).map((phase) => ({
-                title: t(phase.title),
-                summaryShort: t(printPhaseSummary(phase)),
+                title: t(phase.title, locale),
+                summaryShort: t(printPhaseSummary(phase), locale),
             })),
         }));
 
     const education: EducationView[] = byKind('diploma').map((c) => ({
         id: c.id,
-        title: t(c.title),
+        title: t(c.title, locale),
         issuer: c.issuer,
         date: formatDate(c.date),
         grade: c.grade,
@@ -53,7 +71,7 @@ async function main(): Promise<void> {
     const certifications: CertificationView[] = byKind('certification').map(
         (c) => ({
             id: c.id,
-            title: t(c.title),
+            title: t(c.title, locale),
             issuer: c.issuer,
             date: formatDate(c.date),
         }),
@@ -61,19 +79,25 @@ async function main(): Promise<void> {
 
     const awards: RecognitionView[] = byKind('award').map((c) => ({
         id: c.id,
-        title: t(c.title),
+        title: t(c.title, locale),
         issuer: c.issuer,
     }));
 
     const linkedin = profile.links.find((link) => link.label === 'LinkedIn');
 
     const contactRows = [
-        { label: 'Location', value: profile.location },
-        ...(profile.phone ? [{ label: 'Phone', value: profile.phone }] : []),
-        { label: 'Email', value: profile.email },
-        ...(linkedin ? [{ label: 'LinkedIn', value: linkedin.handle }] : []),
-        { label: 'Languages', value: profile.languages.join(', ') },
+        { label: labels.location, value: profile.location },
+        ...(profile.phone
+            ? [{ label: labels.phone, value: profile.phone }]
+            : []),
+        { label: labels.email, value: profile.email },
+        ...(linkedin
+            ? [{ label: labels.linkedin, value: linkedin.handle }]
+            : []),
+        { label: labels.languages, value: profile.languages.join(', ') },
     ];
+
+    const path = outputPath(locale);
 
     await renderToFile(
         <CvDocument
@@ -87,22 +111,29 @@ async function main(): Promise<void> {
             portraitUrl={
                 profile.portrait ? portraitUrl(profile.portrait) : undefined
             }
-            profileSummary={t(profile.profile)}
+            profileSummary={t(profile.profile, locale)}
             education={education}
             jobs={jobs}
             skills={printSkills}
             certifications={certifications}
             awards={awards}
             contactRows={contactRows}
+            labels={labels}
         />,
-        './public/cv.pdf',
+        path,
     );
 
-    console.log('Generated public/cv.pdf');
+    console.log(`Generated ${path}`);
+}
+
+async function main(): Promise<void> {
+    for (const locale of locales) {
+        await generateForLocale(locale);
+    }
 }
 
 main().catch((error: unknown) => {
-    console.error('Failed to generate public/cv.pdf');
+    console.error('Failed to generate CV PDF(s)');
     console.error(error);
     process.exit(1);
 });
