@@ -1,8 +1,3 @@
-/**
- * Curated skill/soft-skill chips for the CV PDF's Skills sidebar.
- * Deliberately separate from toolbox.ts's `featured` flag — mixes real
- * tool names with soft-skill labels that aren't tools at all.
- */
 export const printSkills: string[] = [
     'TypeScript',
     'Python',
@@ -10,6 +5,7 @@ export const printSkills: string[] = [
     'React Native',
     'RabbitMQ',
     'Google Cloud',
+    'AWS',
     'Kubernetes',
     'Web Development',
     'Backend Development',
