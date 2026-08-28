@@ -1,3 +1,5 @@
+import type { CvPdfLabels } from './labels';
+
 export interface ContactRow {
     label: string;
     value: string;
@@ -54,4 +56,5 @@ export interface CvPdfProps {
     certifications: CertificationView[];
     awards: RecognitionView[];
     contactRows: ContactRow[];
+    labels: CvPdfLabels;
 }
