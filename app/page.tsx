@@ -85,7 +85,7 @@ export default function Home(): ReactNode {
                                     'repeating-linear-gradient(135deg, rgba(23,167,235,0.14) 0 8px, rgba(23,167,235,0.04) 8px 16px)',
                             }}
                         >
-                            <span className="text-muted-deep text-center font-mono text-[11px] leading-[1.6] font-semibold">
+                            <span className="text-muted-deep text-center text-[11px] leading-[1.6] font-semibold">
                                 portrait
                                 <br />
                                 (or nothing)
@@ -109,7 +109,7 @@ export default function Home(): ReactNode {
                     <ToolboxMarquee
                         tools={toolRow(1)}
                         direction="left"
-                        duration={34}
+                        duration={40}
                     />
                     <ToolboxMarquee
                         tools={toolRow(2)}
