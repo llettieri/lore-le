@@ -56,6 +56,13 @@ without doing a full build.
   imgix one, for remote CDN photos — a local `<Image>` without its own
   `loader` prop gets its path wrongly prefixed with the imgix remote host.
 - Dates use `dayjs`, not the built-in `Date`/`Intl` API.
+- One font family, Nunito, everywhere — no second/mono family. (A JetBrains
+  Mono import was tried and deliberately removed; don't re-add it.)
+- Any color used more than once, or that has a name in the design spec,
+  belongs in `app/globals.css`'s `@theme` block (`--color-*`) — not as a
+  raw `text-[#hex]`/`bg-[#hex]` arbitrary value. Several one-off hex
+  literals crept into the CV page before this was enforced; if you spot
+  another one, add the token and swap it rather than leaving it inline.
 - Path alias: `@/` maps to the repository root
 
 ### Content Layer
@@ -66,15 +73,21 @@ import `content/toolbox.ts` etc. directly from a page or component.
 - **Add a tool**: one entry in `content/toolbox.ts`'s `tools` array
   (`slug`, `name`, `kind`, optionally `row`/`featured`), plus an icon at
   `public/icons/<slug>.svg`. Nothing else to touch.
-  - Icon source: [Iconify](https://icon-sets.iconify.design/logos/)'s
-    `logos` set (full-color brand marks, matches the toolbox tile style) —
-    fetch via `https://api.iconify.design/logos/<name>.svg`. Prefer an
-    `-icon` suffixed variant when one exists (e.g. `nextjs-icon`,
-    `typescript-icon`) — the plain name is often a wide wordmark, not a
-    square mark. When `logos` doesn't have a suitable square icon for a
-    given tool (checked via `https://api.iconify.design/search?query=<name>`),
-    fall back to `devicon` (also full-color) rather than a monochrome set —
-    used for `react-native`, `grpc`, and `mongodb` so far.
+  - Icon source: monochrome, not full-color — `ToolCard` renders every icon
+    tinted to `--color-primary` via a CSS `mask-image` (`components/tool-card.tsx`),
+    so a full-color brand mark just looks muddy. Fetch from
+    [Iconify](https://icon-sets.iconify.design/)'s `simple-icons` set first
+    (`https://api.iconify.design/simple-icons/<name>.svg`) — it's
+    purpose-built as single-path monochrome brand marks, so it masks
+    cleanly. When a tool isn't in `simple-icons` (checked via
+    `https://api.iconify.design/search?query=<name>&prefix=simple-icons`,
+    usually a trademark gap — Java, AWS), fall back to `mdi` or
+    `fa6-brands`, both also solid/flat and stylistically consistent with
+    `simple-icons`. Avoid outline/stroke sets (e.g. `tabler`) — mixed with
+    the solid ones they read as inconsistent even after masking. If truly
+    nothing solid exists anywhere (`react-native`, `grpc` so far), a
+    full-color `devicon` source still works fine through the same mask —
+    it just won't be as crisp as a purpose-built monochrome path.
 - **Add a job or education entry**: one entry in `content/timeline.ts`.
   Short rotations within a role are nested `phases` on the parent entry,
   not separate timeline stops. `tools`/`phases[].tools` are slugs validated
