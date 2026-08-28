@@ -2,11 +2,12 @@ import './globals.css';
 
 import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
+import { SITE_URL } from '@/lib/site';
 import { Metadata } from 'next';
 import React, { ReactNode } from 'react';
 
 export const metadata: Metadata = {
-    metadataBase: new URL('https://lore-le.ch'),
+    metadataBase: new URL(SITE_URL),
     title: 'Lorenzo Lettieri — Software Engineer',
     description:
         'Software Engineer at Sunrise GmbH. Four-year apprenticeship, now building frontend, backend and cloud infrastructure.',
