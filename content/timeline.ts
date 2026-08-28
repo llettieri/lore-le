@@ -22,14 +22,7 @@ export const timeline: TimelineEntry[] = [
             'A four-year apprenticeship in application development with structured exposure to multiple technical departments. Worked in agile settings and developed a broad technical base across three internal rotations.',
         summaryShort:
             'Four-year apprenticeship in application development with structured exposure to multiple technical departments.',
-        tools: [
-            'typescript',
-            'graphql',
-            'react',
-            'react-native',
-            'python',
-            'rabbitmq',
-        ],
+        tools: [],
         /** The three rotations render nested inside this stop. */
         phases: [
             {
@@ -129,7 +122,17 @@ export const timeline: TimelineEntry[] = [
             'Continued at Sunrise after the apprenticeship in a full professional software engineering role, building on previous cross-team development experience across frontend, backend, and platform-focused work.',
         summaryShort:
             'Full professional software engineering role in a hybrid environment, across frontend, backend, and platform-focused work.',
-        tools: ['typescript', 'python', 'googlecloud', 'kubernetes'],
+        tools: [
+            'python',
+            'fastapi',
+            'flask',
+            'rabbitmq',
+            'kubernetes',
+            'aws',
+            'googlecloud',
+            'mongodb',
+            'grpc',
+        ],
         highlights: [
             'Continued at Sunrise after the apprenticeship in a full professional software engineering role.',
             'Applies knowledge gained across frontend, backend, and platform-focused work.',
@@ -140,6 +143,5 @@ export const timeline: TimelineEntry[] = [
 export const visibleTimeline = (): TimelineEntry[] =>
     timeline.filter((e) => !e.hidden);
 
-/** Site copy is long; the PDF handout uses the short form where one exists. */
 export const printSummary = (e: TimelineEntry): Localized<string> =>
     e.summaryShort ?? e.summary;

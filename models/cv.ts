@@ -1,18 +1,15 @@
 /**
  * Single source of truth for every piece of CV content.
- * Nothing in the UI hardcodes copy — components read these types only.
  */
 
-/** Kebab-case id. For tools it is ALSO the icon filename: public/icons/<slug>.svg */
+/** Kebab-case id. For tools, it is ALSO the icon filename: public/icons/<slug>.svg */
 export type Slug = string;
 
 /** Add a language here first. Everything else keeps compiling. */
 export type Locale = 'en' | 'de' | 'it';
 
 /**
- * Any user-visible string. Today every value is a plain string; when a second
- * language arrives, swap the ones you translate for { en: '…', de: '…' } and
- * resolve with t() from content/i18n.ts. Nothing else changes.
+ * Any user-visible string.
  */
 export type Localized<T> = T | Partial<Record<Locale, T>>;
 
@@ -36,7 +33,7 @@ export interface Profile {
     phone?: string;
     languages: string[];
     links: ProfileLink[];
-    portrait?: string; // /portrait.jpg — omit and the UI renders nothing
+    portrait?: string; // /portrait.jpg — omit and the UI shows a placeholder
 }
 
 export type ToolKind =

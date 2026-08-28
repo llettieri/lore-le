@@ -1,10 +1,5 @@
 import type { Tool } from '@/models/cv';
 
-/**
- * Add a tool: one entry here + drop public/icons/<slug>.svg.
- * Nothing else to touch — the marquee, the PDF skill list and the
- * per-role tool chips all read this array.
- */
 export const tools: Tool[] = [
     {
         slug: 'typescript',

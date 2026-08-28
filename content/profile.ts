@@ -26,4 +26,5 @@ export const profile: Profile = {
             icon: 'linkedin',
         },
     ],
+    portrait: 'portrait/me.png',
 };

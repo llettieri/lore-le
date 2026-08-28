@@ -1,11 +1,5 @@
 import type { Locale, Localized } from '@/models/cv';
 
-/**
- * English only today. The model already accepts per-locale values, so adding
- * a language is: push a locale here, then change the strings you want
- * translated from `'text'` to `{ en: 'text', de: 'Text' }`. Untranslated
- * strings keep working and fall back to `defaultLocale`.
- */
 export const locales = ['en'] as const satisfies readonly Locale[];
 
 export const defaultLocale: Locale = 'en';
@@ -22,6 +16,5 @@ export function t<T>(value: Localized<T>, locale: Locale = defaultLocale): T {
     return map[locale] ?? map[defaultLocale] ?? (Object.values(map)[0] as T);
 }
 
-/** Same, for string arrays (highlights, languages). */
 export const tAll = <T>(values: Localized<T>[], locale?: Locale): T[] =>
     values.map((v) => t(v, locale));

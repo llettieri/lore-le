@@ -5,7 +5,6 @@ import { tools } from './toolbox';
 import { timeline } from './timeline';
 import { credentials } from './credentials';
 
-/** The whole CV, one object. Pages import from here, never from the files above. */
 export const cv: CvContent = {
     locale: defaultLocale,
     profile,

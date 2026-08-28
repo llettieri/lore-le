@@ -12,6 +12,7 @@ import {
 import { JourneyTimeline } from '@/components/journey-timeline';
 import { ToolboxMarquee } from '@/components/toolbox-marquee';
 import type { Credential } from '@/models/cv';
+import { ImgixImage } from '@/components/image';
 
 dayjs.extend(customParseFormat);
 
@@ -64,33 +65,28 @@ export default function Home(): ReactNode {
                         <div className="flex items-center gap-3">
                             <a
                                 href={`mailto:${profile.email}`}
-                                className="hover:bg-primary-tint bg-primary text-main-background rounded-[30px] px-6.5 py-3.5 text-[15px] font-extrabold transition-colors"
+                                className="hover:bg-primary-tint bg-primary text-main-background rounded-[30px] px-6.5 py-3.5 text-center text-[15px] font-extrabold transition-colors"
                             >
                                 Get in touch
                             </a>
                             <a
                                 href="/cv.pdf"
                                 download
-                                className="hover:border-primary hover:text-primary text-pill-outline-text rounded-[30px] border border-white/20 px-6.5 py-3.5 text-[15px] font-bold transition-colors"
+                                className="hover:border-primary hover:text-primary text-pill-outline-text rounded-[30px] border border-white/20 px-6.5 py-3.5 text-center text-[15px] font-bold transition-colors"
                             >
                                 Download CV
                             </a>
                         </div>
                     </div>
-                    <div className="relative">
-                        <div
-                            className="flex aspect-square items-center justify-center rounded-full border border-[rgba(23,167,235,0.3)]"
-                            style={{
-                                background:
-                                    'repeating-linear-gradient(135deg, rgba(23,167,235,0.14) 0 8px, rgba(23,167,235,0.04) 8px 16px)',
-                            }}
-                        >
-                            <span className="text-muted-deep text-center text-[11px] leading-[1.6] font-semibold">
-                                portrait
-                                <br />
-                                (or nothing)
-                            </span>
-                        </div>
+                    <div className="relative aspect-square overflow-hidden rounded-full">
+                        {profile.portrait ? (
+                            <ImgixImage
+                                src={profile.portrait}
+                                alt={profile.name}
+                                fill
+                                className="object-cover"
+                            />
+                        ) : null}
                     </div>
                 </div>
             </section>
@@ -109,12 +105,12 @@ export default function Home(): ReactNode {
                     <ToolboxMarquee
                         tools={toolRow(1)}
                         direction="left"
-                        duration={40}
+                        duration={50}
                     />
                     <ToolboxMarquee
                         tools={toolRow(2)}
                         direction="right"
-                        duration={40}
+                        duration={45}
                     />
                 </div>
             </section>

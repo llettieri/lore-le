@@ -28,7 +28,7 @@ export default function RootLayout({
     return (
         <html lang="en" className="dark">
             <body className="overflow-hidden">
-                <div className="flex h-screen flex-col overflow-hidden">
+                <div className="flex h-dvh flex-col overflow-hidden">
                     <Navbar />
                     <div className="flex flex-1 flex-col overflow-auto">
                         <main className="bg-main-background flex-1 p-5 sm:p-10">

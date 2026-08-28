@@ -40,11 +40,8 @@ export const ToolboxMarquee = ({
             <div
                 /**
                  * Keyframes live in app/globals.css (see globals.additions.css).
-                 * The animation is expressed as a class, not an inline style, so
-                 * `motion-reduce:animate-none` can actually win — duration stays
-                 * data-driven through the --mq custom property.
                  */
-                className={`flex w-max gap-3.5 motion-reduce:animate-none ${
+                className={`flex w-max gap-3.5 ${
                     direction === 'left'
                         ? 'animate-[marquee-left_var(--mq)_linear_infinite]'
                         : 'animate-[marquee-right_var(--mq)_linear_infinite]'
