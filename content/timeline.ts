@@ -14,10 +14,10 @@ export const timeline: TimelineEntry[] = [
         railLabel: '2020',
         railTitle: 'Apprenticeship begins',
         title: 'Application Development Apprentice',
-        org: 'Sunrise GmbH · Hybrid',
-        period: 'Aug 2020 – Aug 2024 · 4 yrs 1 mo',
+        org: 'Sunrise GmbH · Zurich, Switzerland · Hybrid',
+        period: 'Aug 2020 – Jul 2024 · 4 yrs',
         from: '2020-08',
-        to: '2024-08',
+        to: '2024-07',
         summary:
             'A four-year apprenticeship in application development with structured exposure to multiple technical departments. Worked in agile settings and developed a broad technical base across three internal rotations.',
         summaryShort:
@@ -98,6 +98,7 @@ export const timeline: TimelineEntry[] = [
         ],
         highlights: [
             'Completed a four-year apprenticeship in application development with structured exposure to multiple technical departments.',
+            'Worked in agile settings and developed a broad technical base during several internal rotations.',
             'Built practical experience across enterprise platforms, web applications, and backend services.',
         ],
     },
@@ -141,6 +142,7 @@ export const timeline: TimelineEntry[] = [
         ],
         highlights: [
             'Continued at Sunrise after the apprenticeship in a full professional software engineering role.',
+            'Contributes to software engineering work in a hybrid environment while building on previous cross-team development experience',
             'Applies knowledge gained across frontend, backend, and platform-focused work.',
         ],
     },

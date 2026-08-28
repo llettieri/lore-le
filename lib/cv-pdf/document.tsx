@@ -85,6 +85,8 @@ export function CvDocument(props: CvPdfProps): ReactElement {
                         </Text>
                         {props.jobs.map((job) => (
                             <View key={job.id} style={styles.job}>
+                                <View style={styles.jobDotHalo} />
+                                <View style={styles.jobDot} />
                                 <Text style={styles.jobTitle}>{job.title}</Text>
                                 <Text style={styles.jobMeta}>
                                     {job.org} · {job.period}

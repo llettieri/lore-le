@@ -19,13 +19,15 @@ export const styles = StyleSheet.create({
         padding: 24,
     },
     portrait: {
-        width: 100,
-        height: 100,
+        width: 150,
+        height: 150,
         borderRadius: 12,
         marginBottom: 14,
+        marginRight: 'auto',
+        marginLeft: 'auto',
     },
     name: {
-        fontSize: 20,
+        fontSize: 26,
         fontFamily: 'Helvetica-Bold',
         color: '#ffffff',
     },
@@ -37,6 +39,7 @@ export const styles = StyleSheet.create({
     },
     sidebarBlock: {
         marginTop: 18,
+        display: 'flex',
     },
     mainBlock: {
         marginTop: 18,
@@ -130,10 +133,29 @@ export const styles = StyleSheet.create({
         lineHeight: 1.4,
     },
     job: {
-        marginBottom: 12,
+        position: 'relative',
+        paddingBottom: 20,
         paddingLeft: 10,
         borderLeftWidth: 1.5,
         borderLeftColor: '#dfe8f4',
+    },
+    jobDotHalo: {
+        position: 'absolute',
+        top: 0,
+        left: -8.5,
+        width: 15,
+        height: 15,
+        borderRadius: 10,
+        backgroundColor: '#eaf1ff',
+    },
+    jobDot: {
+        position: 'absolute',
+        top: 2.5,
+        left: -6,
+        width: 10,
+        height: 10,
+        borderRadius: 5,
+        backgroundColor: '#17a7eb',
     },
     jobTitle: {
         fontSize: 12,
