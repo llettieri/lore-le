@@ -4,19 +4,19 @@ import React, { ReactNode } from 'react';
 import { ObfuscateSensibleText } from '@/components/obfuscate-sensible-text';
 
 const pillClassName =
-    'rounded-[26px] border border-white/20 px-[22px] py-3 text-sm font-bold text-[#e2eff6] transition-colors hover:border-primary hover:text-primary';
+    'text-pill-outline-text rounded-[26px] border border-white/20 px-[22px] py-3 text-sm font-bold transition-colors hover:border-primary hover:text-primary';
 
 export const Footer = (): ReactNode => {
     const currentYear = dayjs().year();
 
     return (
-        <footer className="shrink-0 bg-[#052433]">
+        <footer className="bg-card shrink-0">
             <div className="flex flex-col gap-6 p-13 md:flex-row md:items-center md:justify-between">
                 <div>
                     <div className="mb-1.5 text-[26px] font-black text-white">
                         Let&apos;s talk.
                     </div>
-                    <div className="text-[15px] text-[#8fb4c7]">
+                    <div className="text-muted-foreground text-[15px]">
                         <ObfuscateSensibleText
                             type="email"
                             content="me@lore-le.ch"

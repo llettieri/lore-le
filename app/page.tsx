@@ -44,8 +44,8 @@ export default function Home(): ReactNode {
                 <div className="relative grid grid-cols-1 items-center gap-16 md:grid-cols-[1fr_300px]">
                     <div>
                         <div className="mb-7 inline-flex items-center gap-2.25 rounded-[20px] border border-[rgba(23,167,235,0.25)] bg-[rgba(23,167,235,0.12)] py-1.5 pr-3.5 pl-2.5">
-                            <span className="h-1.75 w-1.75 rounded-full bg-[#4ade80]" />
-                            <span className="text-[12.5px] font-bold text-[#bfe2f4]">
+                            <span className="bg-live-dot h-1.75 w-1.75 rounded-full" />
+                            <span className="text-pill-text text-[12.5px] font-bold">
                                 {t(profile.availableNote ?? '')}
                             </span>
                         </div>
@@ -58,7 +58,7 @@ export default function Home(): ReactNode {
                             <br />
                             {t(profile.headline)}
                         </h1>
-                        <p className="mb-8 max-w-[44ch] text-[19px] leading-[1.65] text-pretty text-[#a9cddf]">
+                        <p className="text-body-text mb-8 max-w-[44ch] text-[19px] leading-[1.65] text-pretty">
                             {t(profile.intro)}
                         </p>
                         <div className="flex items-center gap-3">
@@ -71,7 +71,7 @@ export default function Home(): ReactNode {
                             <a
                                 href="/cv.pdf"
                                 download
-                                className="hover:border-primary hover:text-primary rounded-[30px] border border-white/20 px-6.5 py-3.5 text-[15px] font-bold text-[#e2eff6] transition-colors"
+                                className="hover:border-primary hover:text-primary text-pill-outline-text rounded-[30px] border border-white/20 px-6.5 py-3.5 text-[15px] font-bold transition-colors"
                             >
                                 Download CV
                             </a>
@@ -85,12 +85,7 @@ export default function Home(): ReactNode {
                                     'repeating-linear-gradient(135deg, rgba(23,167,235,0.14) 0 8px, rgba(23,167,235,0.04) 8px 16px)',
                             }}
                         >
-                            <span
-                                className="text-center text-[11px] leading-[1.6] font-semibold text-[#7fa9bf]"
-                                style={{
-                                    fontFamily: "'JetBrains Mono', monospace",
-                                }}
-                            >
+                            <span className="text-muted-deep text-center font-mono text-[11px] leading-[1.6] font-semibold">
                                 portrait
                                 <br />
                                 (or nothing)
@@ -105,7 +100,7 @@ export default function Home(): ReactNode {
                     <p className="text-primary text-[15px] font-black tracking-[0.02em]">
                         Toolbox
                     </p>
-                    <p className="mt-1.25 text-[15px] text-[#8fb4c7]">
+                    <p className="text-muted-foreground mt-1.25 text-[15px]">
                         Languages, frameworks and platforms I&apos;ve shipped
                         with.
                     </p>
@@ -124,7 +119,10 @@ export default function Home(): ReactNode {
                 </div>
             </section>
 
-            <section id="journey" className="bg-[#031721] px-13 pt-19 pb-20">
+            <section
+                id="journey"
+                className="bg-background-alt px-13 pt-19 pb-20"
+            >
                 <div className="mb-11">
                     <p className="text-primary text-[15px] font-black tracking-[0.02em]">
                         Journey
@@ -133,7 +131,7 @@ export default function Home(): ReactNode {
                         Six years, one company,{' '}
                         <span className="font-black">three teams</span>.
                     </h2>
-                    <p className="mt-3 text-[15.5px] text-[#8fb4c7]">
+                    <p className="text-muted-foreground mt-3 text-[15.5px]">
                         Pick a stop on the line.
                     </p>
                 </div>
@@ -159,7 +157,7 @@ export default function Home(): ReactNode {
                                     <p className="text-[15px] font-extrabold">
                                         {t(c.title)}
                                     </p>
-                                    <p className="mt-1 text-[13px] font-semibold text-[#8fb4c7]">
+                                    <p className="text-muted-foreground mt-1 text-[13px] font-semibold">
                                         {c.issuer}
                                     </p>
                                 </div>
@@ -183,7 +181,7 @@ export default function Home(): ReactNode {
                                     <span className="text-sm font-bold">
                                         {t(c.title)}
                                     </span>
-                                    <span className="text-[12.5px] font-semibold whitespace-nowrap text-[#6f9bb2]">
+                                    <span className="text-meta text-[12.5px] font-semibold whitespace-nowrap">
                                         {c.issuer} ·{' '}
                                         {formatCredentialDate(c.date)}
                                     </span>

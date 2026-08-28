@@ -78,7 +78,7 @@ const socialLinks: SocialLink[] = [
 const navLinkClassName = (isActive: boolean): string =>
     cn(
         'text-sm font-semibold transition-colors hover:text-primary',
-        isActive ? 'text-white' : 'text-[#a8c8d8]',
+        isActive ? 'text-white' : 'text-nav-muted',
     );
 
 export const Navbar = (): ReactElement => {
@@ -123,7 +123,7 @@ export const Navbar = (): ReactElement => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={title}
-                                className="hover:border-primary hover:text-primary flex h-8.5 w-8.5 items-center justify-center rounded-full border border-[rgba(23,167,235,0.35)] text-[#cfe6f2] transition-colors"
+                                className="hover:border-primary hover:text-primary text-icon-muted flex h-8.5 w-8.5 items-center justify-center rounded-full border border-[rgba(23,167,235,0.35)] transition-colors"
                             >
                                 <Icon className="h-4 w-4" aria-hidden="true" />
                             </a>

@@ -14,6 +14,16 @@ layer(base);
     --color-secondary-tint: #1476cc;
     --color-secondary-text: #2917eb;
     --color-main-background: #041b26;
+    --color-background-alt: #031721;
+    --color-body-text: #a9cddf;
+    --color-muted-deep: #7fa9bf;
+    --color-meta: #6f9bb2;
+    --color-live-dot: #4ade80;
+    --color-nav-muted: #a8c8d8;
+    --color-icon-muted: #cfe6f2;
+    --color-pill-text: #bfe2f4;
+    --color-pill-outline-text: #e2eff6;
+    --font-mono: 'JetBrains Mono', monospace;
 }
 
 @layer base {
