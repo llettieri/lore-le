@@ -15,6 +15,7 @@ export const cv: CvContent = {
 
 export { profile, tools, timeline, credentials };
 export { toolBySlug, toolRow } from './toolbox';
-export { visibleTimeline, printSummary } from './timeline';
+export { visibleTimeline, printSummary, printPhaseSummary } from './timeline';
 export { byKind } from './credentials';
 export { locales, defaultLocale, t, tAll } from './i18n';
+export { printSkills } from './print-skills';
