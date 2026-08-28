@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { renderToFile } from '@react-pdf/renderer';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
