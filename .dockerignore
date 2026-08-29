@@ -1,0 +1,16 @@
+node_modules
+.next
+.git
+.gitignore
+
+# misc
+.DS_Store
+*.pem
+.idea
+.superpowers
+
+# env
+.env*.local
+
+# vercel
+.vercel

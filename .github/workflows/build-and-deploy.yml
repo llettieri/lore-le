@@ -55,8 +55,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{env.REPO}}/docker-images/${{env.NAME}}:latest
             ${{env.REPO}}/docker-images/${{env.NAME}}:${{github.ref_name}}
+            ${{ format('{0}/docker-images/{1}:{2}', env.REPO, env.NAME, inputs.pre-release && 'beta' || 'latest') }}
 
   deploy:
     runs-on: ubuntu-latest
