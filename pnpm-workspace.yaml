@@ -3,5 +3,5 @@ allowBuilds:
     sharp: true
     unrs-resolver: true
 minimumReleaseAge: 10080
-overrides:
-    '@swc/helpers': '0.5.15' # TODO: remove as soon as problem is fixed
+patchedDependencies:
+    '@react-pdf/hyphenate@0.1.0': patches/@react-pdf__hyphenate@0.1.0.patch
