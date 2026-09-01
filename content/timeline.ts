@@ -1,4 +1,4 @@
-import type { Localized, TimelineEntry } from '@/models/cv';
+import type { Localized, TimelineEntry, TimelinePhase } from '@/models/cv';
 
 /**
  * Chronological, oldest first. Add a stop: one entry.
@@ -14,14 +14,14 @@ export const timeline: TimelineEntry[] = [
         railLabel: '2020',
         railTitle: 'Apprenticeship begins',
         title: 'Application Development Apprentice',
-        org: 'Sunrise GmbH · Hybrid',
-        period: 'Aug 2020 – Aug 2024 · 4 yrs 1 mo',
+        org: 'Sunrise GmbH · Zurich, Switzerland · Hybrid',
+        period: 'Aug 2020 – Jul 2024 · 4 yrs',
         from: '2020-08',
-        to: '2024-08',
+        to: '2024-07',
         summary:
             'A four-year apprenticeship in application development with structured exposure to multiple technical departments. Worked in agile settings and developed a broad technical base across three internal rotations.',
         summaryShort:
-            'Four-year apprenticeship in application development with structured exposure to multiple technical departments.',
+            'A four-year apprenticeship in application development with structured exposure to multiple technical departments. Worked in agile settings and developed a broad technical base across three internal rotations.',
         tools: [],
         /** The three rotations render nested inside this stop. */
         phases: [
@@ -38,6 +38,8 @@ export const timeline: TimelineEntry[] = [
                     '- Agile development\n' +
                     '- Fullstack development (SpringBoot and Angular)\n' +
                     '- Planing and implementation of Use-Cases',
+                summaryShort:
+                    'During my apprenticeship in this team I had the opportunity to learn a lot of technologies and stacks. The main focus was on developing an enterprise application for the technicians, to debug our HFC-Network in Switzerland. With that I was able to learn a lot about the HFC-Network at Sunrise and also developing an actual application, which is used by other teams.\n',
                 tools: [
                     'typescript',
                     'angular',
@@ -60,6 +62,8 @@ export const timeline: TimelineEntry[] = [
                     '- Agile development\n' +
                     '- Web development (React.JS, React Native)\n' +
                     '- Planing, prioritise and estimating stories',
+                summaryShort:
+                    "In this team I worked as a Frontend Developer, with the focus on web. My main tasks were working on the YalloTV web and sometimes also mobile application. I worked in an agile team and therefore it was product oriented. One of the big features, in which I contributed was the new search for YalloTV. Most of the services used were on AWS, and with that I also learned a lot how AWS works and how it's used.\n",
                 tools: ['typescript', 'react', 'react-native'],
             },
             {
@@ -77,6 +81,8 @@ export const timeline: TimelineEntry[] = [
                     '- Network security (AWS WAF)\n' +
                     '- Load Balancing (AWS LoadBalancer)\n' +
                     '- Serving services for the clients',
+                summaryShort:
+                    'I expanded from frontend into backend work, with exposure to Python and event-driven communications. Contributed to the yallo TV platform and also some MySports features. Additionally deep dived in various AWS and GCP services.',
                 tools: [
                     'python',
                     'fastapi',
@@ -92,6 +98,7 @@ export const timeline: TimelineEntry[] = [
         ],
         highlights: [
             'Completed a four-year apprenticeship in application development with structured exposure to multiple technical departments.',
+            'Worked in agile settings and developed a broad technical base during several internal rotations.',
             'Built practical experience across enterprise platforms, web applications, and backend services.',
         ],
     },
@@ -119,9 +126,9 @@ export const timeline: TimelineEntry[] = [
         period: 'Aug 2024 – Present',
         from: '2024-08',
         summary:
-            'Continued at Sunrise after the apprenticeship in a full professional software engineering role, building on previous cross-team development experience across frontend, backend, and platform-focused work.',
+            'Continued at Sunrise after the apprenticeship in a full professional software engineering role, building on previous cross-team development experience with the focus on backend and platform-focused work.',
         summaryShort:
-            'Full professional software engineering role in a hybrid environment, across frontend, backend, and platform-focused work.',
+            'Full professional software engineering role in a hybrid environment with the focus on backend and platform-focused work.',
         tools: [
             'python',
             'fastapi',
@@ -135,6 +142,7 @@ export const timeline: TimelineEntry[] = [
         ],
         highlights: [
             'Continued at Sunrise after the apprenticeship in a full professional software engineering role.',
+            'Contributes to software engineering work in a hybrid environment while building on previous cross-team development experience',
             'Applies knowledge gained across frontend, backend, and platform-focused work.',
         ],
     },
@@ -145,3 +153,6 @@ export const visibleTimeline = (): TimelineEntry[] =>
 
 export const printSummary = (e: TimelineEntry): Localized<string> =>
     e.summaryShort ?? e.summary;
+
+export const printPhaseSummary = (p: TimelinePhase): Localized<string> =>
+    p.summaryShort ?? p.summary;

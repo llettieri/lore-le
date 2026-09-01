@@ -30,13 +30,13 @@ const links: LinkElement[] = [
         enabled: true,
     },
     {
-        title: 'Journey',
-        href: '/#journey',
+        title: 'Toolbox',
+        href: '/#toolbox',
         enabled: true,
     },
     {
-        title: 'Toolbox',
-        href: '/#toolbox',
+        title: 'Journey',
+        href: '/#journey',
         enabled: true,
     },
     {

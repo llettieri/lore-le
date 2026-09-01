@@ -9,6 +9,8 @@ around for continuity.
 - 🖥 **Live CV**: hero, a self-scrolling toolbox marquee, a clickable career
   timeline (with nested rotations for the apprenticeship years), and
   certifications/awards — all on one deep-linkable page
+- 📄 **Downloadable CV PDF**: a real, static `cv.pdf` generated at build
+  time from the same typed content, not a page a visitor prints themselves
 - 📇 **Typed content layer**: adding a tool, a job or a certification is a
   one-entry change in `content/`, never a component edit
 - ✅ **Build-time content validation**: a bad tool slug or a missing icon
@@ -26,6 +28,7 @@ around for continuity.
 | React 19                 | `dayjs` for dates       | Tailwind CSS v4     |
 | shadcn/ui (Radix)        | imgix image CDN         | ESLint / Prettier   |
 |                           |                         | pnpm                |
+|                           |                         | `@react-pdf/renderer` (CV PDF) |
 
 ## 🎯 Scope
 
@@ -44,9 +47,13 @@ than general-purpose:
 - Styling is dark-only by design (`className="dark"` on `<html>`,
   `@custom-variant dark` tied to that class rather than the visitor's OS
   preference) — there's no light theme to maintain.
-- A printable PDF version of the CV and translations (German/Italian) are
-  designed for in the content model (`Localized<T>`, `summaryShort`) but not
-  built yet — additive later, not a rewrite.
+- The "Download CV" button serves a real generated PDF (`public/cv.pdf`),
+  built at `pnpm build`/`pnpm dev` time from the same content the site
+  reads — not a page a visitor prints themselves. Translations
+  (German/Italian) are designed for in the content model (`Localized<T>`,
+  `summaryShort`) and the PDF generator already loops over configured
+  locales, but no translated content exists yet — additive later, not a
+  rewrite.
 
 ## 🚀 Quick Start
 
@@ -92,6 +99,11 @@ holds the actual values; `app/page.tsx` composes the page from
 - **Validation**: `scripts/validate-content.ts` runs before every
   `pnpm build` and fails the build if a timeline entry references a tool
   slug that doesn't exist, or a tool has no matching icon file.
+- **CV PDF**: `scripts/generate-cv-pdf.tsx` runs before every `pnpm dev`
+  and `pnpm build`, rendering `public/cv.pdf` from the same content via
+  `@react-pdf/renderer` — a separate rendering path from the site (its own
+  styling, Helvetica instead of the site's Nunito) since react-pdf has no
+  CSS or DOM.
 
 ## 📁 Project Structure
 
@@ -101,9 +113,9 @@ The most important directories:
 ├── app/            # Next.js App Router pages and layouts
 ├── components/     # Hand-written UI; generated shadcn primitives in components/ui/
 ├── content/        # The CV's actual content — profile, toolbox, timeline, credentials
-├── lib/            # Utilities (image loaders, cn() helper)
+├── lib/            # Utilities (image loaders, cn() helper); lib/cv-pdf/ is the CV PDF's own rendering layer
 ├── models/         # TypeScript types for the content layer (models/cv.ts)
-├── public/         # Static assets, including public/icons/<slug>.svg
-├── scripts/        # Build-time scripts (content validation)
+├── public/         # Static assets, including public/icons/<slug>.svg and the generated cv.pdf
+├── scripts/        # Build-time scripts (content validation, CV PDF generation)
 └── services/       # Data-fetching utilities (image services)
 ```

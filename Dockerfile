@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Copying files and build
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY patches/ ./patches/
 RUN corepack enable && corepack prepare --activate
 RUN pnpm install --frozen-lockfile
 COPY . .

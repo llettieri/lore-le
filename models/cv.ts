@@ -67,6 +67,8 @@ export interface TimelinePhase {
     from: string; // ISO 'YYYY-MM'
     to?: string;
     summary: Localized<string>;
+    /** Short copy, for the PDF handout. Falls back to `summary` if absent. */
+    summaryShort?: Localized<string>;
     tools?: Slug[];
 }
 
