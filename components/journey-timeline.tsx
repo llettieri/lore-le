@@ -59,7 +59,7 @@ export const JourneyTimeline = ({
                 </ol>
             </div>
 
-            <div className="border-primary/20 from-primary/10 rounded-3xl border bg-linear-160 to-transparent p-10">
+            <div className="border-primary/20 from-primary/10 mx-auto max-w-7xl rounded-3xl border bg-linear-160 to-transparent p-10">
                 <div className="grid grid-cols-1 gap-13 md:grid-cols-[1fr_260px]">
                     <div>
                         <p className="text-primary mb-2.5 text-[13px] font-bold">

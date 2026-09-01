@@ -95,7 +95,7 @@ export const Navbar = (): ReactElement => {
                         src="/logo/logo.svg"
                         alt="Lore-Le Logo"
                         loader={nextLoader}
-                        className="h-5.5 w-auto"
+                        className="h-auto min-h-5.5 w-auto"
                     />
                 </Link>
                 <div className="hidden items-center gap-7.5 md:flex">

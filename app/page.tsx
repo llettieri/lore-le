@@ -50,7 +50,7 @@ export default function Home(): ReactNode {
                                 {t(profile.availableNote ?? '')}
                             </span>
                         </div>
-                        <h1 className="mb-5 text-[68px] leading-[1.02] font-extralight tracking-[-0.03em] text-white">
+                        <h1 className="mb-5 text-[68px] leading-[1.02] tracking-[-0.03em] text-white">
                             Hi, I&apos;m{' '}
                             <span className="text-primary font-black">
                                 Lorenzo
@@ -83,8 +83,10 @@ export default function Home(): ReactNode {
                             <ImgixImage
                                 src={profile.portrait}
                                 alt={profile.name}
-                                fill
                                 className="object-cover"
+                                loading="eager"
+                                fill
+                                sizes="(min-width: 768px) 300px, 100vw"
                             />
                         ) : null}
                     </div>
@@ -97,7 +99,7 @@ export default function Home(): ReactNode {
                         Toolbox
                     </p>
                     <p className="text-muted-foreground mt-1.25 text-[15px]">
-                        Languages, frameworks and platforms I&apos;ve shipped
+                        Languages, frameworks and platforms I&apos;ve worked
                         with.
                     </p>
                 </div>
@@ -128,22 +130,21 @@ export default function Home(): ReactNode {
                         <span className="font-black">three teams</span>.
                     </h2>
                     <p className="text-muted-foreground mt-3 text-[15.5px]">
-                        Pick a stop on the line.
+                        Checkout my journey by picking a stop on the line!
                     </p>
                 </div>
                 <JourneyTimeline entries={timeline} />
             </section>
 
             <section id="certifications" className="px-13 pt-19 pb-21">
+                <p className="text-primary text-[15px] font-black tracking-[0.02em]">
+                    Certifications &amp; awards
+                </p>
+                <h2 className="mt-2 mb-8 text-[42px] leading-tight font-extralight tracking-tight text-white">
+                    Certified, and <span className="font-black">ranked</span>.
+                </h2>
                 <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
                     <div>
-                        <p className="text-primary text-[15px] font-black tracking-[0.02em]">
-                            Certifications &amp; awards
-                        </p>
-                        <h2 className="mt-2 mb-8 text-[42px] leading-tight font-extralight tracking-tight text-white">
-                            Certified, and{' '}
-                            <span className="font-black">ranked</span>.
-                        </h2>
                         <div className="flex flex-col gap-3">
                             {featuredCredentials.map((c) => (
                                 <div
