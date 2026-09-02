@@ -8,10 +8,7 @@ const nextConfig: NextConfig = {
     output: 'standalone',
     allowedDevOrigins: ['llettieri.hub'],
     images: {
-        remotePatterns: [
-            { hostname: 'media.giphy.com' },
-            { hostname: 'lore-le.imgix.net' },
-        ],
+        remotePatterns: [{ hostname: 'lore-le.imgix.net' }],
         localPatterns: [{ pathname: '/logo/**' }],
         loader: 'custom',
         loaderFile: 'lib/image-loader/imgix.ts',
