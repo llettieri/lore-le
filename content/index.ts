@@ -4,13 +4,15 @@ import { profile } from './profile';
 import { tools } from './toolbox';
 import { timeline } from './timeline';
 import { credentials } from './credentials';
+import { baseValues } from './base-values';
 
 export const cv: CvContent = {
+    baseValues,
+    credentials,
     locale: defaultLocale,
     profile,
-    tools,
     timeline,
-    credentials,
+    tools,
 };
 
 export { profile, tools, timeline, credentials };

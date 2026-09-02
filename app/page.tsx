@@ -10,19 +10,15 @@ import {
     visibleTimeline,
 } from '@/content';
 import { JourneyTimeline } from '@/components/journey-timeline';
-import { ToolboxMarquee } from '@/components/toolbox-marquee';
-import type { Credential } from '@/models/cv';
+import { ToolboxCarousel } from '@/components/toolbox-carousel';
 import { ImgixImage } from '@/components/image';
+import { RichText } from '@/components/rich-text';
+import { baseValues } from '@/content/base-values';
 
 dayjs.extend(customParseFormat);
 
 const formatCredentialDate = (iso: string): string =>
     dayjs(iso, 'YYYY-MM').format('MMM YYYY');
-
-const featuredCardClassName = (kind: Credential['kind']): string =>
-    kind === 'award'
-        ? 'border-primary/20 bg-primary/[0.08] rounded-[14px] border p-5'
-        : 'rounded-[14px] border border-white/[0.09] bg-white/[0.03] p-5';
 
 export default function Home(): ReactNode {
     const timeline = visibleTimeline();
@@ -50,14 +46,10 @@ export default function Home(): ReactNode {
                                 {t(profile.availableNote ?? '')}
                             </span>
                         </div>
-                        <h1 className="mb-5 text-[68px] leading-[1.02] tracking-[-0.03em] text-white">
-                            Hi, I&apos;m{' '}
-                            <span className="text-primary font-black">
-                                Lorenzo
-                            </span>
-                            .
+                        <h1 className="mb-5 text-[68px] leading-[1.02] tracking-[-0.03em] whitespace-pre-line text-white">
+                            <RichText text={t(baseValues.welcomeText)} />
                             <br />
-                            {t(profile.headline)}
+                            <RichText text={t(profile.catchPhrase)} />
                         </h1>
                         <p className="text-body-text mb-8 max-w-[44ch] text-[19px] leading-[1.65] text-pretty">
                             {t(profile.intro)}
@@ -67,14 +59,14 @@ export default function Home(): ReactNode {
                                 href={`mailto:${profile.email}`}
                                 className="hover:bg-primary-tint bg-primary text-main-background rounded-[30px] px-6.5 py-3.5 text-center text-[15px] font-extrabold transition-colors"
                             >
-                                Get in touch
+                                {t(baseValues.getInTouchButtonLabel)}
                             </a>
                             <a
                                 href="/cv.pdf"
                                 download
                                 className="hover:border-primary hover:text-primary text-pill-outline-text rounded-[30px] border border-white/20 px-6.5 py-3.5 text-center text-[15px] font-bold transition-colors"
                             >
-                                Download CV
+                                {t(baseValues.downloadButtonLabel)}
                             </a>
                         </div>
                     </div>
@@ -96,24 +88,15 @@ export default function Home(): ReactNode {
             <section id="toolbox" className="pb-13">
                 <div className="px-13 pb-6.5">
                     <p className="text-primary text-[15px] font-black tracking-[0.02em]">
-                        Toolbox
+                        {t(baseValues.toolboxTitle)}
                     </p>
                     <p className="text-muted-foreground mt-1.25 text-[15px]">
-                        Languages, frameworks and platforms I&apos;ve worked
-                        with.
+                        {t(baseValues.toolboxDescription)}
                     </p>
                 </div>
                 <div className="flex flex-col gap-3.5">
-                    <ToolboxMarquee
-                        tools={toolRow(1)}
-                        direction="left"
-                        duration={50}
-                    />
-                    <ToolboxMarquee
-                        tools={toolRow(2)}
-                        direction="right"
-                        duration={45}
-                    />
+                    <ToolboxCarousel tools={toolRow(1)} direction="left" />
+                    <ToolboxCarousel tools={toolRow(2)} direction="right" />
                 </div>
             </section>
 
@@ -123,14 +106,16 @@ export default function Home(): ReactNode {
             >
                 <div className="mb-11">
                     <p className="text-primary text-[15px] font-black tracking-[0.02em]">
-                        Journey
+                        {t(baseValues.journeyTitle)}
                     </p>
                     <h2 className="mt-2 text-[42px] leading-tight font-extralight tracking-tight text-white">
-                        Six years, one company,{' '}
-                        <span className="font-black">three teams</span>.
+                        <RichText
+                            text={t(baseValues.journeySubtitle)}
+                            variant="bold"
+                        />
                     </h2>
                     <p className="text-muted-foreground mt-3 text-[15.5px]">
-                        Checkout my journey by picking a stop on the line!
+                        {t(baseValues.journeyDescription)}
                     </p>
                 </div>
                 <JourneyTimeline entries={timeline} />
@@ -138,10 +123,13 @@ export default function Home(): ReactNode {
 
             <section id="certifications" className="px-13 pt-19 pb-21">
                 <p className="text-primary text-[15px] font-black tracking-[0.02em]">
-                    Certifications &amp; awards
+                    {t(baseValues.certificationsTitle)}
                 </p>
                 <h2 className="mt-2 mb-8 text-[42px] leading-tight font-extralight tracking-tight text-white">
-                    Certified, and <span className="font-black">ranked</span>.
+                    <RichText
+                        text={t(baseValues.certificationsDescription)}
+                        variant="bold"
+                    />
                 </h2>
                 <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
                     <div>
@@ -149,7 +137,7 @@ export default function Home(): ReactNode {
                             {featuredCredentials.map((c) => (
                                 <div
                                     key={c.id}
-                                    className={featuredCardClassName(c.kind)}
+                                    className="border-primary/20 bg-primary/8 rounded-[14px] border p-5"
                                 >
                                     <p className="text-[15px] font-extrabold">
                                         {t(c.title)}
@@ -162,18 +150,15 @@ export default function Home(): ReactNode {
                         </div>
                     </div>
                     <div>
-                        <p className="mb-3 text-[11px] font-bold tracking-widest text-white/50">
-                            {certifications.length} CERTIFICATIONS
+                        <p className="mb-3 text-[15px] font-bold tracking-widest text-white/50">
+                            {certifications.length}{' '}
+                            {t(baseValues.certificationsTerm)}
                         </p>
                         <ul>
-                            {certifications.map((c, i) => (
+                            {certifications.map((c) => (
                                 <li
                                     key={c.id}
-                                    className={`flex items-center justify-between py-3.5 ${
-                                        i < certifications.length - 1
-                                            ? 'border-b border-white/8'
-                                            : ''
-                                    }`}
+                                    className="flex items-center justify-between py-3.5"
                                 >
                                     <span className="text-sm font-bold">
                                         {t(c.title)}

@@ -57,9 +57,9 @@ export const tools: Tool[] = [
         slug: 'grpc',
         name: 'gRPC',
         kind: 'API',
-        row: 1,
+        row: 2,
     },
-    { slug: 'graphql', name: 'GraphQL', kind: 'API', row: 1, featured: true },
+    { slug: 'graphql', name: 'GraphQL', kind: 'API', row: 2, featured: true },
     {
         slug: 'googlecloud',
         name: 'Google Cloud',
@@ -89,6 +89,7 @@ export const tools: Tool[] = [
         featured: true,
     },
     { slug: 'mongodb', name: 'MongoDB', kind: 'Database', row: 2 },
+    { slug: 'redis', name: 'Redis', kind: 'Database', row: 2 },
     { slug: 'docker', name: 'Docker', kind: 'Tooling', row: 2 },
     { slug: 'git', name: 'Git', kind: 'Tooling', row: 2 },
 ];

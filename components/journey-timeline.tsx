@@ -4,6 +4,7 @@ import React, { ReactElement, useState } from 'react';
 import type { TimelineEntry } from '@/models/cv';
 import { t } from '@/content/i18n';
 import { toolBySlug } from '@/content/toolbox';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 /**
  * Horizontal rail + summary panel. Reads the array it is given, so the
@@ -14,52 +15,56 @@ export const JourneyTimeline = ({
 }: {
     entries: TimelineEntry[];
 }): ReactElement => {
-    const [active, setActive] = useState(entries.length - 1);
-    const entry = entries[active];
-    const progress = (active / Math.max(entries.length - 1, 1)) * 100;
+    const [activeId, setActiveId] = useState(entries[entries.length - 1].id);
+    const activeIndex = entries.findIndex((e) => e.id === activeId);
+    const entry = entries[activeIndex];
+    const progress = (activeIndex / Math.max(entries.length - 1, 1)) * 100;
 
     return (
-        <div>
+        <Tabs value={activeId} onValueChange={setActiveId} className="gap-0">
             <div className="relative mb-11">
                 <div className="bg-primary/20 absolute inset-x-0 top-3.5 h-0.5" />
                 <div
                     className="bg-primary absolute top-3.5 left-0 h-0.5 transition-[width] duration-400"
                     style={{ width: `${progress}%` }}
                 />
-                <ol className="relative flex justify-between">
+                <TabsList
+                    variant="line"
+                    className="relative h-auto w-full items-start justify-between gap-0 rounded-none p-0 group-data-horizontal/tabs:h-auto"
+                >
                     {entries.map((e, i) => {
-                        const past = i <= active;
+                        const past = i <= activeIndex;
                         return (
-                            <li key={e.id} className="w-37.5">
-                                <button
-                                    type="button"
-                                    aria-current={i === active}
-                                    onClick={(): void => setActive(i)}
-                                    className="flex w-full cursor-pointer flex-col items-center gap-3.5 text-center"
+                            <TabsTrigger
+                                key={e.id}
+                                value={e.id}
+                                className="h-auto w-37.5 flex-none flex-col gap-3.5 rounded-none border-none p-0 text-center after:hidden"
+                            >
+                                <span
+                                    className={`flex size-7 items-center justify-center rounded-full border-2 transition ${past ? 'border-primary' : 'border-primary/30'} ${i === activeIndex ? 'bg-primary/20' : ''}`}
                                 >
                                     <span
-                                        className={`flex size-7 items-center justify-center rounded-full border-2 transition ${past ? 'border-primary' : 'border-primary/30'} ${i === active ? 'bg-primary/20' : ''}`}
-                                    >
-                                        <span
-                                            className={`size-2.5 rounded-full transition ${past ? 'bg-primary' : 'bg-primary/35'}`}
-                                        />
+                                        className={`size-2.5 rounded-full transition ${past ? 'bg-primary' : 'bg-primary/35'}`}
+                                    />
+                                </span>
+                                <span>
+                                    <span className="text-foreground block text-sm font-extrabold">
+                                        {e.railLabel}
                                     </span>
-                                    <span>
-                                        <span className="block text-sm font-extrabold">
-                                            {e.railLabel}
-                                        </span>
-                                        <span className="block text-xs font-semibold text-white/60">
-                                            {t(e.railTitle)}
-                                        </span>
+                                    <span className="block text-xs font-semibold text-white/60">
+                                        {t(e.railTitle)}
                                     </span>
-                                </button>
-                            </li>
+                                </span>
+                            </TabsTrigger>
                         );
                     })}
-                </ol>
+                </TabsList>
             </div>
 
-            <div className="border-primary/20 from-primary/10 mx-auto max-w-7xl rounded-3xl border bg-linear-160 to-transparent p-10">
+            <TabsContent
+                value={activeId}
+                className="border-primary/20 from-primary/10 mx-auto max-w-7xl rounded-3xl border bg-linear-160 to-transparent p-10"
+            >
                 <div className="grid grid-cols-1 gap-13 md:grid-cols-[1fr_260px]">
                     <div>
                         <p className="text-primary mb-2.5 text-[13px] font-bold">
@@ -85,7 +90,7 @@ export const JourneyTimeline = ({
                                             key={String(phase.title)}
                                             className="relative last:pb-0"
                                         >
-                                            <span className="border-primary bg-main-background absolute top-1.5 -left-7.5 size-2.5 rounded-full border-2" />
+                                            <span className="border-primary bg-main-background absolute top-1.5 -left-8 size-2.5 rounded-full border-2" />
                                             <p className="mb-1.5 flex flex-wrap items-baseline gap-x-3.5 gap-y-1.5">
                                                 <span className="text-[15px] font-extrabold wrap-break-word">
                                                     {t(phase.title)}
@@ -131,7 +136,7 @@ export const JourneyTimeline = ({
                         </div>
                     )}
                 </div>
-            </div>
-        </div>
+            </TabsContent>
+        </Tabs>
     );
 };
