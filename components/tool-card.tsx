@@ -2,7 +2,7 @@ import React, { CSSProperties, ReactElement } from 'react';
 import type { Tool } from '@/models/cv';
 
 /**
- * The marquee tile. Icon comes from public/icons/<slug>.svg by convention,
+ * The carousel card. Icon comes from public/icons/<slug>.svg by convention,
  * so adding a tool never touches this file.
  *
  * Icons are tinted to the primary blue via CSS mask rather than shown at
@@ -24,7 +24,10 @@ export const ToolCard = ({ tool }: { tool: Tool }): ReactElement => {
     };
 
     return (
-        <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 py-4 pr-6 pl-4 whitespace-nowrap">
+        <div
+            aria-label={tool.slug}
+            className="flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-white/5 py-4 pr-6 pl-4 whitespace-nowrap select-none"
+        >
             <span className="bg-primary/15 flex size-9 shrink-0 items-center justify-center rounded-xl">
                 <span
                     aria-hidden
