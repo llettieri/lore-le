@@ -69,6 +69,23 @@ was tried and reverted once already; see the "CV PDF" section below.
   literals crept into the CV page before this was enforced; if you spot
   another one, add the token and swap it rather than leaving it inline.
 - Path alias: `@/` maps to the repository root
+- **Hero mode toggle** (`components/hero-mode-toggle.tsx`): the
+  Professional/Personal `Tabs` switch reserves a fixed `min-h-92` around the
+  headline + intro so switching modes causes zero layout shift. That value
+  must stay ≥ the true worst case — a 3-line headline plus the 4-line
+  `line-clamp`ed intro — not just whatever fits today's copy, or a longer
+  edit to either mode's text will silently reintroduce the jump. For the
+  same reason, the CTAs are passed in via a `ctas` prop and rendered
+  *before* the `Highlights` collapsible in each mode: only the collapsible
+  expanding is allowed to push page content down, never the CTAs — and the
+  hero grid uses `items-start`, not `items-center`, so the portrait doesn't
+  reposition either when it expands.
+- **Collapsible expand/collapse animation is free**: `tw-animate-css`
+  (already a dependency, used for `Sheet`'s slide/fade) ships
+  `animate-collapsible-down`/`-up` keyframes keyed to Radix's own
+  `--radix-collapsible-content-height` var — just add the
+  `data-[state=...]:animate-collapsible-*` classes to `CollapsibleContent`,
+  no custom CSS needed.
 
 ### CV PDF
 
@@ -145,6 +162,20 @@ import `content/toolbox.ts` etc. directly from a page or component.
 - **Add a certification or award**: one entry in `content/credentials.ts`.
   Any count or sort order shown on the site must be derived from the array
   (`.length`, `.sort()`), never typed as a literal.
+- **Site copy**: `content/base-values.ts` holds the static UI strings (section
+  titles, descriptions, button labels) as `Localized<string>` — everything
+  `app/page.tsx` renders outside of profile/timeline/credentials data comes
+  from here, not JSX literals. A value may embed `**word**` to render that
+  span emphasized; `components/rich-text.tsx`'s `RichText` component parses
+  it (`variant="primary"` vs `"bold"` picks the color). This is an
+  intentionally tiny markdown-lite convention, not a full markdown parser —
+  don't reach for `*`, links, or nesting, they won't render.
+- **Edit the hero's Professional/Personal toggle**: `profile.personal`
+  (the Personal mode's headline + intro) and
+  `profile.professionalHighlights` / `profile.personal.highlights` (the
+  "show more" disclosure — chips + quick facts, one `HeroHighlights` per
+  mode) in `content/profile.ts`. Chips take a plain emoji `icon`, not a
+  toolbox slug — there's no `public/icons/<slug>.svg` asset to add.
 - **Translations**: the content model already supports per-locale values via
   `Localized<T>` (`content/i18n.ts`'s `t()`/`tAll()`) — a value can be a
   plain string (resolved as-is) or `{ en: '...', de: '...' }`. Adding a
@@ -153,3 +184,13 @@ import `content/toolbox.ts` etc. directly from a page or component.
   start emitting `public/cv-<locale>.pdf` for it automatically — but also
   add its entry to `lib/cv-pdf/labels.ts`, since that file's static labels
   aren't `Localized<T>` content and won't translate on their own.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
