@@ -19,12 +19,16 @@ export interface BaseValues {
     certificationsTitle: Localized<string>;
     downloadButtonLabel: Localized<string>;
     getInTouchButtonLabel: Localized<string>;
+    heroPersonalTabLabel: Localized<string>;
+    heroProfessionalTabLabel: Localized<string>;
     journeyDescription: Localized<string>;
     journeySubtitle: Localized<string>;
     journeyTitle: Localized<string>;
+    rotationsTerm: Localized<string>;
     toolboxDescription: Localized<string>;
     toolboxTitle: Localized<string>;
     welcomeText: Localized<string>;
+    workedWithLabel: Localized<string>;
 }
 
 export interface ProfileLink {
@@ -34,9 +38,31 @@ export interface ProfileLink {
     label: string; // public/icons/<slug>.svg
 }
 
+export interface HeroFact {
+    label: Localized<string>;
+    value: Localized<string>;
+}
+
+export interface HeroChip {
+    icon: string; // single emoji, rendered inline — no icon asset needed
+    label: Localized<string>;
+}
+
+/** The hero's collapsible "show more" content — one set per mode. */
+export interface HeroHighlights {
+    chips: HeroChip[];
+    facts: HeroFact[];
+    moreLabel: Localized<string>; // disclosure trigger, e.g. "Skills & quick facts"
+}
+
+/** The hero's personal-mode headline + intro, mirroring catchPhrase/intro above. */
+export interface PersonalHero {
+    catchPhrase: Localized<string>;
+    highlights: HeroHighlights;
+    intro: Localized<string>;
+}
+
 export interface Profile {
-    available: boolean;
-    availableNote?: Localized<string>;
     catchPhrase: Localized<string>;
     email: string;
 
@@ -45,8 +71,10 @@ export interface Profile {
     links: ProfileLink[]; // hero paragraph
     location: string; // longer paragraph, used in the PDF
     name: string;
+    personal: PersonalHero;
     phone?: string;
     portrait?: string;
+    professionalHighlights: HeroHighlights;
     profile: Localized<string>;
     role: string; // /portrait.jpg — omit and the UI shows a placeholder
 }

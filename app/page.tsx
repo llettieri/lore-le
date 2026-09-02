@@ -13,6 +13,7 @@ import { JourneyTimeline } from '@/components/journey-timeline';
 import { ToolboxCarousel } from '@/components/toolbox-carousel';
 import { ImgixImage } from '@/components/image';
 import { RichText } from '@/components/rich-text';
+import { HeroModeToggle } from '@/components/hero-mode-toggle';
 import { baseValues } from '@/content/base-values';
 
 dayjs.extend(customParseFormat);
@@ -29,7 +30,7 @@ export default function Home(): ReactNode {
         <div className="-m-5 sm:-m-10">
             <section
                 id="about"
-                className="relative overflow-hidden px-13 pt-19 pb-21"
+                className="relative overflow-hidden px-13 py-16"
             >
                 <div
                     className="pointer-events-none absolute -top-45 -left-30 h-160 w-160 rounded-full"
@@ -38,37 +39,28 @@ export default function Home(): ReactNode {
                             'radial-gradient(circle, rgba(23,167,235,0.14), transparent 65%)',
                     }}
                 />
-                <div className="relative grid grid-cols-1 items-center gap-16 md:grid-cols-[1fr_300px]">
+                <div className="relative grid grid-cols-1 items-start gap-16 md:grid-cols-[1fr_300px]">
                     <div>
-                        <div className="mb-7 inline-flex items-center gap-2.25 rounded-[20px] border border-[rgba(23,167,235,0.25)] bg-[rgba(23,167,235,0.12)] py-1.5 pr-3.5 pl-2.5">
-                            <span className="bg-live-dot h-1.75 w-1.75 rounded-full" />
-                            <span className="text-pill-text text-[12.5px] font-bold">
-                                {t(profile.availableNote ?? '')}
-                            </span>
-                        </div>
-                        <h1 className="mb-5 text-[68px] leading-[1.02] tracking-[-0.03em] whitespace-pre-line text-white">
-                            <RichText text={t(baseValues.welcomeText)} />
-                            <br />
-                            <RichText text={t(profile.catchPhrase)} />
-                        </h1>
-                        <p className="text-body-text mb-8 max-w-[44ch] text-[19px] leading-[1.65] text-pretty">
-                            {t(profile.intro)}
-                        </p>
-                        <div className="flex items-center gap-3">
-                            <a
-                                href={`mailto:${profile.email}`}
-                                className="hover:bg-primary-tint bg-primary text-main-background rounded-[30px] px-6.5 py-3.5 text-center text-[15px] font-extrabold transition-colors"
-                            >
-                                {t(baseValues.getInTouchButtonLabel)}
-                            </a>
-                            <a
-                                href="/cv.pdf"
-                                download
-                                className="hover:border-primary hover:text-primary text-pill-outline-text rounded-[30px] border border-white/20 px-6.5 py-3.5 text-center text-[15px] font-bold transition-colors"
-                            >
-                                {t(baseValues.downloadButtonLabel)}
-                            </a>
-                        </div>
+                        <HeroModeToggle
+                            profile={profile}
+                            ctas={
+                                <div className="mt-8 flex items-center gap-3">
+                                    <a
+                                        href={`mailto:${profile.email}`}
+                                        className="hover:bg-primary-tint bg-primary text-main-background rounded-[30px] px-6.5 py-3.5 text-center text-[15px] font-extrabold transition-colors"
+                                    >
+                                        {t(baseValues.getInTouchButtonLabel)}
+                                    </a>
+                                    <a
+                                        href="/cv.pdf"
+                                        download
+                                        className="hover:border-primary hover:text-primary text-pill-outline-text rounded-[30px] border border-white/20 px-6.5 py-3.5 text-center text-[15px] font-bold transition-colors"
+                                    >
+                                        {t(baseValues.downloadButtonLabel)}
+                                    </a>
+                                </div>
+                            }
+                        />
                     </div>
                     <div className="relative aspect-square overflow-hidden rounded-full">
                         {profile.portrait ? (
