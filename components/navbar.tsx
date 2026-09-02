@@ -16,10 +16,12 @@ import {
     SheetTrigger,
 } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+import { Localized } from '@/models/cv';
+import { t } from '@/content';
 
 interface LinkElement {
     href: string;
-    title: string;
+    title: Localized<string>;
     enabled?: boolean;
 }
 
@@ -77,7 +79,7 @@ const socialLinks: SocialLink[] = [
 
 const navLinkClassName = (isActive: boolean): string =>
     cn(
-        'text-sm font-semibold transition-colors hover:text-primary',
+        'hover:text-primary text-sm font-semibold transition-colors',
         isActive ? 'text-white' : 'text-nav-muted',
     );
 
@@ -100,20 +102,26 @@ export const Navbar = (): ReactElement => {
                 </Link>
                 <div className="hidden items-center gap-7.5 md:flex">
                     <nav className="flex items-center gap-7.5">
-                        {enabledLinks.map((link) => (
-                            <Link
-                                key={link.title}
-                                href={link.href}
-                                aria-current={
-                                    pathname === link.href ? 'page' : undefined
-                                }
-                                className={navLinkClassName(
-                                    pathname === link.href,
-                                )}
-                            >
-                                {link.title}
-                            </Link>
-                        ))}
+                        {enabledLinks.map((link) => {
+                            const translatedTitle = t(link.title);
+
+                            return (
+                                <Link
+                                    key={translatedTitle}
+                                    href={link.href}
+                                    aria-current={
+                                        pathname === link.href
+                                            ? 'page'
+                                            : undefined
+                                    }
+                                    className={navLinkClassName(
+                                        pathname === link.href,
+                                    )}
+                                >
+                                    {translatedTitle}
+                                </Link>
+                            );
+                        })}
                     </nav>
                     <div className="flex items-center gap-2.25">
                         {socialLinks.map(({ title, href, Icon }) => (
@@ -146,26 +154,30 @@ export const Navbar = (): ReactElement => {
                             Site navigation
                         </SheetDescription>
                         <nav className="flex flex-col gap-1 p-4">
-                            {enabledLinks.map((link) => (
-                                <SheetClose key={link.title} asChild>
-                                    <Link
-                                        href={link.href}
-                                        aria-current={
-                                            pathname === link.href
-                                                ? 'page'
-                                                : undefined
-                                        }
-                                        className={cn(
-                                            'flex min-h-11 items-center text-base font-semibold',
-                                            navLinkClassName(
-                                                pathname === link.href,
-                                            ),
-                                        )}
-                                    >
-                                        {link.title}
-                                    </Link>
-                                </SheetClose>
-                            ))}
+                            {enabledLinks.map((link) => {
+                                const translatedTitle = t(link.title);
+
+                                return (
+                                    <SheetClose key={translatedTitle} asChild>
+                                        <Link
+                                            href={link.href}
+                                            aria-current={
+                                                pathname === link.href
+                                                    ? 'page'
+                                                    : undefined
+                                            }
+                                            className={cn(
+                                                'flex min-h-11 items-center text-base font-semibold',
+                                                navLinkClassName(
+                                                    pathname === link.href,
+                                                ),
+                                            )}
+                                        >
+                                            {translatedTitle}
+                                        </Link>
+                                    </SheetClose>
+                                );
+                            })}
                         </nav>
                     </SheetContent>
                 </Sheet>

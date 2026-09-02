@@ -4,6 +4,7 @@ import React, { ReactElement, useState } from 'react';
 import type { TimelineEntry } from '@/models/cv';
 import { t } from '@/content/i18n';
 import { toolBySlug } from '@/content/toolbox';
+import { baseValues } from '@/content/base-values';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 /**
@@ -70,9 +71,9 @@ export const JourneyTimeline = ({
                         <p className="text-primary mb-2.5 text-[13px] font-bold">
                             {t(entry.period)}
                         </p>
-                        <h4 className="mb-1 text-3xl wrap-break-word">
+                        <h3 className="mb-1 text-3xl wrap-break-word">
                             {t(entry.title)}
-                        </h4>
+                        </h3>
                         <p className="mb-5 font-semibold text-white/60">
                             {t(entry.org)}
                         </p>
@@ -81,8 +82,9 @@ export const JourneyTimeline = ({
                         </p>
                         {entry.phases && (
                             <div className="mt-7.5">
-                                <p className="mb-4 text-[11px] font-bold tracking-widest text-white/50">
-                                    {entry.phases.length} ROTATIONS
+                                <p className="mb-4 text-[15px] font-bold tracking-widest text-white/50">
+                                    {entry.phases.length}{' '}
+                                    {t(baseValues.rotationsTerm)}
                                 </p>
                                 <ol className="border-primary/30 relative ml-1 border-l pl-6.5">
                                     {entry.phases.map((phase) => (
@@ -121,7 +123,7 @@ export const JourneyTimeline = ({
                     {entry.tools.length > 0 && (
                         <div>
                             <p className="mb-3 text-[11px] font-bold tracking-widest text-white/50">
-                                WORKED WITH
+                                {t(baseValues.workedWithLabel)}
                             </p>
                             <ul className="flex flex-wrap gap-2">
                                 {entry.tools.map((slug) => (

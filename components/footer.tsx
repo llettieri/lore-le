@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import React, { ReactNode } from 'react';
 import { ObfuscateSensibleText } from '@/components/obfuscate-sensible-text';
+import { profile } from '@/content';
 
 const pillClassName =
     'text-pill-outline-text rounded-[26px] border border-white/20 px-[22px] py-3 text-sm font-bold transition-colors hover:border-primary hover:text-primary';
@@ -21,26 +22,21 @@ export const Footer = (): ReactNode => {
                             type="email"
                             content="me@lore-le.ch"
                         />{' '}
-                        · German, Italian, English
+                        · {profile.languages.join(', ')}
                     </div>
                 </div>
                 <div className="flex gap-2.5">
-                    <a
-                        href="https://github.com/llettieri"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={pillClassName}
-                    >
-                        GitHub
-                    </a>
-                    <a
-                        href="https://linkedin.com/in/lore-le"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={pillClassName}
-                    >
-                        LinkedIn
-                    </a>
+                    {profile.links.map((link) => (
+                        <a
+                            key={link.href}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={pillClassName}
+                        >
+                            {link.label}
+                        </a>
+                    ))}
                 </div>
             </div>
             <div className="text-muted-foreground flex flex-wrap items-center justify-between gap-4 border-t border-white/10 px-13 py-4 text-sm">
