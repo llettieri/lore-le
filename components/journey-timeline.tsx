@@ -32,7 +32,7 @@ const RailStop = ({
             <TabsTrigger
                 ref={triggerRef}
                 value={entry.id}
-                className="h-auto w-37.5 flex-none scroll-ml-13 flex-col gap-3.5 rounded-none border-none p-0 text-center after:hidden"
+                className="h-auto w-37.5 flex-none cursor-pointer scroll-ml-13 flex-col gap-3.5 rounded-none border-none p-0 text-center after:hidden"
             >
                 <span className="flex w-full items-center">
                     <span
@@ -112,18 +112,28 @@ export const JourneyTimeline = ({
     const activeIndex = entries.findIndex((e) => e.id === activeId);
     const entry = entries[activeIndex];
 
+    const railRef = useRef<HTMLDivElement>(null);
     const activeTriggerRef = useRef<HTMLButtonElement>(null);
+
     useEffect(() => {
-        activeTriggerRef.current?.scrollIntoView({
-            behavior: 'smooth',
-            inline: 'center',
-            block: 'nearest',
-        });
+        const rail = railRef.current;
+        const trigger = activeTriggerRef.current;
+
+        if (!rail || !trigger) {
+            return;
+        }
+
+        const left =
+            trigger.offsetLeft - rail.clientWidth / 2 + trigger.offsetWidth / 2;
+        rail.scrollTo({ left, behavior: 'smooth' });
     }, [activeId]);
 
     return (
         <Tabs value={activeId} onValueChange={setActiveId} className="gap-0">
-            <div className="no-scrollbar -mx-13 mb-11 overflow-x-auto px-13 pb-1 md:mx-0 md:overflow-visible md:px-0 md:pb-0">
+            <div
+                ref={railRef}
+                className="no-scrollbar -mx-13 mb-11 overflow-x-auto px-13 pb-1 md:mx-0 md:overflow-visible md:px-0 md:pb-0"
+            >
                 <TabsList
                     variant="line"
                     className="w-max min-w-full items-start gap-0 rounded-none p-0 group-data-horizontal/tabs:h-auto md:w-full"

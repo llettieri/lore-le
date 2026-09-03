@@ -20,7 +20,7 @@ interface Props {
 }
 
 const tabTriggerClassName = cn(
-    'text-body-text hover:text-primary hover:border-primary data-[state=active]:bg-primary data-[state=active]:hover:text-main-background data-[state=active]:text-main-background flex-1 cursor-pointer gap-2.5 rounded-full border-transparent px-5 py-3 text-sm font-bold data-[state=active]:border-transparent data-[state=active]:shadow-none',
+    'text-body-text hover:text-primary hover:border-primary data-[state=active]:hover:bg-primary-tint data-[state=active]:bg-primary data-[state=active]:hover:text-main-background data-[state=active]:text-main-background flex-1 cursor-pointer gap-2.5 rounded-full border-transparent px-5 py-3 text-sm font-bold data-[state=active]:border-transparent data-[state=active]:shadow-none',
 );
 
 const Highlights = ({
