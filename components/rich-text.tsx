@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from 'react';
+import React, { Fragment, ReactNode } from 'react';
 
 interface Props {
     text: string;
@@ -15,10 +15,7 @@ const variantClassName: Record<NonNullable<Props['variant']>, string> = {
  * hardcoded as a JSX span around "Lorenzo". Everything else renders as
  * plain text, so newlines still work with a `whitespace-pre-line` ancestor.
  */
-export const RichText = ({
-    text,
-    variant = 'primary',
-}: Props): ReactElement => {
+export const RichText = ({ text, variant = 'primary' }: Props): ReactNode => {
     const parts = text.split(/\*\*(.+?)\*\*/g);
 
     return (

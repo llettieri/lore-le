@@ -1,5 +1,5 @@
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer';
-import type { ReactElement } from 'react';
+import type { ReactNode } from 'react';
 import { styles } from './styles';
 import type { CvPdfProps } from './types';
 
@@ -12,7 +12,7 @@ function SidebarHeader({
 }: Pick<
     CvPdfProps,
     'name' | 'role' | 'portraitUrl' | 'contactRows' | 'labels'
->): ReactElement {
+>): ReactNode {
     return (
         <>
             {portraitUrl ? (
@@ -36,7 +36,7 @@ function SidebarHeader({
     );
 }
 
-export function CvDocument(props: CvPdfProps): ReactElement {
+export function CvDocument(props: CvPdfProps): ReactNode {
     return (
         <Document title={`${props.name} — CV`} author={props.name}>
             <Page size="A4" style={styles.page}>

@@ -3,8 +3,12 @@ import './globals.css';
 import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
 import { SITE_URL } from '@/lib/site';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import React, { ReactNode } from 'react';
+
+export const viewport: Viewport = {
+    colorScheme: 'dark',
+};
 
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),

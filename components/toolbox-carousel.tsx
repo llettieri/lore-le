@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 import AutoScroll from 'embla-carousel-auto-scroll';
 import type { Tool } from '@/models/cv';
 import { ToolCard } from './tool-card';
@@ -20,7 +20,7 @@ const MIN_REPEATS = 4;
 export const ToolboxCarousel = ({
     tools,
     direction = 'left',
-}: Props): ReactElement => {
+}: Props): ReactNode => {
     const repeated = Array.from({ length: MIN_REPEATS }, () => tools).flat();
 
     return (

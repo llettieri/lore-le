@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 import type { Tool } from '@/models/cv';
 
 /**
@@ -10,7 +10,7 @@ import type { Tool } from '@/models/cv';
  * entirely, so it works regardless of how many colors the icon has and
  * doesn't require re-sourcing icons from a currentColor-friendly set.
  */
-export const ToolCard = ({ tool }: { tool: Tool }): ReactElement => {
+export const ToolCard = ({ tool }: { tool: Tool }): ReactNode => {
     const iconUrl = `url(/icons/${tool.slug}.svg)`;
     const maskStyle: CSSProperties = {
         WebkitMaskImage: iconUrl,

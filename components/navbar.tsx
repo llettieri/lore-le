@@ -4,7 +4,7 @@ import { Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 import { GithubIcon, LinkedinIcon } from '@/components/icons';
 import nextLoader from '@/lib/image-loader/nextjs';
 import {
@@ -83,7 +83,7 @@ const navLinkClassName = (isActive: boolean): string =>
         isActive ? 'text-white' : 'text-nav-muted',
     );
 
-export const Navbar = (): ReactElement => {
+export const Navbar = (): ReactNode => {
     const pathname = usePathname();
     const enabledLinks = links.filter((link) => link.enabled);
 
