@@ -1,11 +1,103 @@
 'use client';
 
-import React, { ReactElement, useState } from 'react';
-import type { TimelineEntry } from '@/models/cv';
+import React, { Fragment, ReactNode, useEffect, useRef, useState } from 'react';
+import type { TimelineEntry, TimelinePhase } from '@/models/cv';
 import { t } from '@/content/i18n';
 import { toolBySlug } from '@/content/toolbox';
 import { baseValues } from '@/content/base-values';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+/**
+ * One rail stop: the dot and label, plus the connector reaching to the next
+ * stop. `index`/`count` drive the past/future coloring and the transparent
+ * stub at each end of the rail.
+ */
+const RailStop = ({
+    entry,
+    index,
+    activeIndex,
+    count,
+    triggerRef,
+}: {
+    entry: TimelineEntry;
+    index: number;
+    activeIndex: number;
+    count: number;
+    triggerRef: React.Ref<HTMLButtonElement>;
+}): ReactNode => {
+    const past = index <= activeIndex;
+
+    return (
+        <Fragment>
+            <TabsTrigger
+                ref={triggerRef}
+                value={entry.id}
+                className="h-auto w-37.5 flex-none scroll-ml-13 flex-col gap-3.5 rounded-none border-none p-0 text-center after:hidden"
+            >
+                <span className="flex w-full items-center">
+                    <span
+                        className={`h-0.5 flex-1 transition-colors duration-400 ${index === 0 ? 'bg-transparent' : past ? 'bg-primary' : 'bg-primary/20'}`}
+                    />
+                    <span
+                        className={`flex size-7 shrink-0 items-center justify-center rounded-full border-2 transition ${past ? 'border-primary' : 'border-primary/30'} ${index === activeIndex ? 'bg-primary/20' : ''}`}
+                    >
+                        <span
+                            className={`size-2.5 rounded-full transition ${past ? 'bg-primary' : 'bg-primary/35'}`}
+                        />
+                    </span>
+                    <span
+                        className={`h-0.5 flex-1 transition-colors duration-400 ${index === count - 1 ? 'bg-transparent' : index < activeIndex ? 'bg-primary' : 'bg-primary/20'}`}
+                    />
+                </span>
+                <span>
+                    <span className="text-foreground block text-sm font-extrabold">
+                        {entry.railLabel}
+                    </span>
+                    <span className="block text-xs font-semibold whitespace-break-spaces text-white/60">
+                        {t(entry.railTitle)}
+                    </span>
+                </span>
+            </TabsTrigger>
+            {index < count - 1 && (
+                <div
+                    aria-hidden
+                    className="flex h-7 w-6 shrink-0 items-center md:w-auto md:flex-1"
+                >
+                    <div
+                        className={`h-0.5 w-full transition-colors duration-400 ${index < activeIndex ? 'bg-primary' : 'bg-primary/20'}`}
+                    />
+                </div>
+            )}
+        </Fragment>
+    );
+};
+
+/** The rotation phases nested under a timeline entry, as their own mini sub-timeline. */
+const PhaseTimeline = ({ phases }: { phases: TimelinePhase[] }): ReactNode => (
+    <ol className="border-primary/30 relative ml-1 border-l pl-6.5">
+        {phases.map((phase) => (
+            <li key={String(phase.title)} className="relative mt-4 last:pb-0">
+                <span className="border-primary bg-main-background absolute top-1.5 -left-8 size-2.5 rounded-full border-2" />
+                <p className="mb-1.5 flex flex-wrap items-baseline gap-x-3.5 gap-y-1.5">
+                    <span className="text-[15px] font-extrabold wrap-break-word">
+                        {t(phase.title)}
+                    </span>
+                    <span className="text-[12.5px] font-semibold text-white/50">
+                        {t(phase.period)}
+                    </span>
+                    <span className="text-primary text-[12.5px] font-semibold">
+                        {(phase.tools ?? [])
+                            .map((s) => toolBySlug.get(s)?.name ?? s)
+                            .join(' · ')}
+                    </span>
+                </p>
+                <p className="max-w-[64ch] text-[14.5px]/relaxed text-pretty whitespace-pre-line text-white/70">
+                    {t(phase.summary)}
+                </p>
+            </li>
+        ))}
+    </ol>
+);
 
 /**
  * Horizontal rail + summary panel. Reads the array it is given, so the
@@ -15,50 +107,39 @@ export const JourneyTimeline = ({
     entries,
 }: {
     entries: TimelineEntry[];
-}): ReactElement => {
+}): ReactNode => {
     const [activeId, setActiveId] = useState(entries[entries.length - 1].id);
     const activeIndex = entries.findIndex((e) => e.id === activeId);
     const entry = entries[activeIndex];
-    const progress = (activeIndex / Math.max(entries.length - 1, 1)) * 100;
+
+    const activeTriggerRef = useRef<HTMLButtonElement>(null);
+    useEffect(() => {
+        activeTriggerRef.current?.scrollIntoView({
+            behavior: 'smooth',
+            inline: 'center',
+            block: 'nearest',
+        });
+    }, [activeId]);
 
     return (
         <Tabs value={activeId} onValueChange={setActiveId} className="gap-0">
-            <div className="relative mb-11">
-                <div className="bg-primary/20 absolute inset-x-0 top-3.5 h-0.5" />
-                <div
-                    className="bg-primary absolute top-3.5 left-0 h-0.5 transition-[width] duration-400"
-                    style={{ width: `${progress}%` }}
-                />
+            <div className="no-scrollbar -mx-13 mb-11 overflow-x-auto px-13 pb-1 md:mx-0 md:overflow-visible md:px-0 md:pb-0">
                 <TabsList
                     variant="line"
-                    className="relative h-auto w-full items-start justify-between gap-0 rounded-none p-0 group-data-horizontal/tabs:h-auto"
+                    className="w-max min-w-full items-start gap-0 rounded-none p-0 group-data-horizontal/tabs:h-auto md:w-full"
                 >
-                    {entries.map((e, i) => {
-                        const past = i <= activeIndex;
-                        return (
-                            <TabsTrigger
-                                key={e.id}
-                                value={e.id}
-                                className="h-auto w-37.5 flex-none flex-col gap-3.5 rounded-none border-none p-0 text-center after:hidden"
-                            >
-                                <span
-                                    className={`flex size-7 items-center justify-center rounded-full border-2 transition ${past ? 'border-primary' : 'border-primary/30'} ${i === activeIndex ? 'bg-primary/20' : ''}`}
-                                >
-                                    <span
-                                        className={`size-2.5 rounded-full transition ${past ? 'bg-primary' : 'bg-primary/35'}`}
-                                    />
-                                </span>
-                                <span>
-                                    <span className="text-foreground block text-sm font-extrabold">
-                                        {e.railLabel}
-                                    </span>
-                                    <span className="block text-xs font-semibold text-white/60">
-                                        {t(e.railTitle)}
-                                    </span>
-                                </span>
-                            </TabsTrigger>
-                        );
-                    })}
+                    {entries.map((e, i) => (
+                        <RailStop
+                            key={e.id}
+                            entry={e}
+                            index={i}
+                            activeIndex={activeIndex}
+                            count={entries.length}
+                            triggerRef={
+                                i === activeIndex ? activeTriggerRef : null
+                            }
+                        />
+                    ))}
                 </TabsList>
             </div>
 
@@ -86,37 +167,7 @@ export const JourneyTimeline = ({
                                     {entry.phases.length}{' '}
                                     {t(baseValues.rotationsTerm)}
                                 </p>
-                                <ol className="border-primary/30 relative ml-1 border-l pl-6.5">
-                                    {entry.phases.map((phase) => (
-                                        <li
-                                            key={String(phase.title)}
-                                            className="relative last:pb-0"
-                                        >
-                                            <span className="border-primary bg-main-background absolute top-1.5 -left-8 size-2.5 rounded-full border-2" />
-                                            <p className="mb-1.5 flex flex-wrap items-baseline gap-x-3.5 gap-y-1.5">
-                                                <span className="text-[15px] font-extrabold wrap-break-word">
-                                                    {t(phase.title)}
-                                                </span>
-                                                <span className="text-[12.5px] font-semibold text-white/50">
-                                                    {t(phase.period)}
-                                                </span>
-                                                <span className="text-primary text-[12.5px] font-semibold">
-                                                    {(phase.tools ?? [])
-                                                        .map(
-                                                            (s) =>
-                                                                toolBySlug.get(
-                                                                    s,
-                                                                )?.name ?? s,
-                                                        )
-                                                        .join(' · ')}
-                                                </span>
-                                            </p>
-                                            <p className="max-w-[64ch] text-[14.5px]/relaxed text-pretty whitespace-pre-line text-white/70">
-                                                {t(phase.summary)}
-                                            </p>
-                                        </li>
-                                    ))}
-                                </ol>
+                                <PhaseTimeline phases={entry.phases} />
                             </div>
                         )}
                     </div>

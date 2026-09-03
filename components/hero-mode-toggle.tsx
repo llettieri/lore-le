@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 import { Briefcase, ChevronDown, Sparkles } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
@@ -15,19 +15,19 @@ import type { HeroHighlights, Profile } from '@/models/cv';
 import { cn } from '@/lib/utils';
 
 interface Props {
-    ctas: ReactElement;
+    ctas: ReactNode;
     profile: Profile;
 }
 
 const tabTriggerClassName = cn(
-    'text-body-text hover:text-pill-text data-[state=active]:bg-primary data-[state=active]:text-main-background cursor-pointer gap-2.5 rounded-full border-none px-5 py-2.5 text-sm font-bold data-[state=active]:border-none data-[state=active]:shadow-none',
+    'text-body-text hover:text-primary hover:border-primary data-[state=active]:bg-primary data-[state=active]:hover:text-main-background data-[state=active]:text-main-background flex-1 cursor-pointer gap-2.5 rounded-full border-transparent px-5 py-3 text-sm font-bold data-[state=active]:border-transparent data-[state=active]:shadow-none',
 );
 
 const Highlights = ({
     highlights,
 }: {
     highlights: HeroHighlights;
-}): ReactElement => (
+}): ReactNode => (
     <Collapsible className="mt-8">
         <CollapsibleTrigger className="group/more text-meta hover:text-pill-text mt-4.5 inline-flex items-center gap-1.5 text-[11.5px] font-bold tracking-[0.03em] uppercase transition-colors">
             {t(highlights.moreLabel)}
@@ -64,9 +64,9 @@ const Highlights = ({
     </Collapsible>
 );
 
-export const HeroModeToggle = ({ ctas, profile }: Props): ReactElement => (
+export const HeroModeToggle = ({ ctas, profile }: Props): ReactNode => (
     <Tabs defaultValue="professional" className="gap-0">
-        <TabsList className="h-auto gap-2 rounded-full border border-white/10 bg-white/6 p-2">
+        <TabsList className="gap-2 rounded-full border border-white/10 bg-white/6 p-2 group-data-horizontal/tabs:h-12">
             <TabsTrigger value="professional" className={tabTriggerClassName}>
                 <Briefcase className="h-5.5 w-5.5" aria-hidden="true" />
                 {t(baseValues.heroProfessionalTabLabel)}
