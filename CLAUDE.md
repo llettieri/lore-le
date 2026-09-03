@@ -14,13 +14,14 @@ pnpm prettier-write   # Format all files
 `pnpm build` fails loudly — before `next build` even runs — if a timeline
 entry references a tool slug that doesn't exist in `content/toolbox.ts`, or
 a tool has no matching `public/icons/<slug>.svg`. Run
-`pnpm exec tsx scripts/validate-content.ts` on its own to check content
-without doing a full build.
+`pnpm validate-content` on its own to check content without doing a full
+build.
 
-Both `dev` and `build` also run `scripts/generate-cv-pdf.tsx` **before** the
-Next command, not chained after — `next dev` blocks indefinitely, so
-anything chained after it with `&&` would never run in a live session. This
-was tried and reverted once already; see the "CV PDF" section below.
+Both `dev` and `build` also run `pnpm generate-cv` (which wraps
+`scripts/generate-cv-pdf.tsx`) **before** the Next command, not chained
+after — `next dev` blocks indefinitely, so anything chained after it with
+`&&` would never run in a live session. This was tried and reverted once
+already; see the "CV PDF" section below.
 
 ## Architecture
 
@@ -86,6 +87,16 @@ was tried and reverted once already; see the "CV PDF" section below.
   `--radix-collapsible-content-height` var — just add the
   `data-[state=...]:animate-collapsible-*` classes to `CollapsibleContent`,
   no custom CSS needed.
+- **JourneyTimeline's horizontal rail** (`components/journey-timeline.tsx`):
+  scrolling the active `TabsTrigger` into view must not use
+  `element.scrollIntoView()` — it walks every scrollable ancestor including
+  the document, so it can still scroll the whole page vertically even with
+  `block: 'nearest'` (an off-screen element — e.g. right after mount, before
+  the visitor has scrolled down to the timeline — still gets scrolled to,
+  "nearest" only stops it from forcing to *center*). Scroll only the rail's
+  own `overflow-x-auto` container directly instead, via
+  `rail.scrollTo({ left, behavior: 'smooth' })` computed from the trigger's
+  `offsetLeft`.
 
 ### CV PDF
 
@@ -131,6 +142,28 @@ same `content/index.ts` the site itself reads.
   has no CSS, no pseudo-elements, and no `object-fit`. The timeline's dot
   markers (`.job::before` in spirit) are real, absolutely-positioned `View`s
   layered on the job's left border, not a pseudo-element.
+
+### Error Pages
+
+`app/not-found.tsx` and `app/error.tsx` share one signature —
+`components/broken-rail.tsx` — instead of each inventing its own error
+graphic. It extends `JourneyTimeline`'s own dot/connector vocabulary (solid
+= real, faded = unreached) via a `variant` prop: `"missing"` (404) is a
+dashed connector to a faded blue dot labeled with the actual requested URL
+(`usePathname()`); `"broken"` (runtime error) is a solid connector into a
+pulsing dashed dot in `--destructive` red instead, since that route *was*
+reachable and then failed — the two failure modes get distinct shapes, not
+just different copy. Both pages' text goes through `content/base-values.ts`
++ `t()` like the rest of the site, not JSX literals.
+
+- **`error.tsx`'s recovery prop is `retry`, not `reset`, in this Next
+  version** — confirmed in
+  `node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/error.md`'s
+  version history (`retry` stable as of v16.3.0). `reset` still exists per
+  that same doc, but it's now the exception case ("if you have a specific
+  reason to clear the error state... without re-fetching"), not the
+  default — using it for the usual "Try again" button silently no-ops,
+  since Next never passes a `reset` prop at all.
 
 ### Content Layer
 

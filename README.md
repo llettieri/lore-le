@@ -12,7 +12,7 @@ Lorenzo Lettieri's personal site — a single-page, typed-content-driven CV at
 - 📇 **Typed content layer**: adding a tool, a job or a certification is a one-entry change in `content/`, never a
   component edit
 - ✅ **Build-time content validation**: a bad tool slug or a missing icon fails `pnpm build`, not the page
-- 📱 **Responsive, dark-only design**: no light theme, no toggle — built to one look
+- 📱 **Responsive, dark-only design**: no light theme, no toggle — built to from a developer for a developer
 - 🖼 **Legacy routes**: NYC photo carousel/gallery and a drone video page are still live at their URLs, just unlinked
   from the main nav
 
@@ -106,3 +106,15 @@ The most important directories:
 ├── scripts/        # Build-time scripts (content validation, CV PDF generation)
 └── services/       # Data-fetching utilities (image services)
 ```
+
+## 📜 License
+
+The application code (`app/`, `components/`, `lib/`, `models/`, `scripts/`,
+`services/`, config files) is [MIT licensed](./LICENSE) — reuse it as a base
+for your own site.
+
+The personal content is not: everything in `content/*.ts` (profile,
+timeline, credentials, copy), the photos/video under `public/` (including
+the legacy `/nyc-images` and `/drone-video` galleries), and the generated
+`public/cv*.pdf` are © Lorenzo Lettieri, all rights reserved. See the
+[LICENSE](./LICENSE) file's "Scope" section for the exact split.
