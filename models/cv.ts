@@ -14,16 +14,22 @@ export type Locale = 'en' | 'de' | 'it';
 export type Localized<T> = T | Partial<Record<Locale, T>>;
 
 export interface BaseValues {
+    backToHomeButtonLabel: Localized<string>;
     certificationsDescription: Localized<string>;
     certificationsTerm: Localized<string>;
     certificationsTitle: Localized<string>;
     downloadButtonLabel: Localized<string>;
+    errorDescription: Localized<string>;
+    errorHeadline: Localized<string>;
+    errorTryAgainButtonLabel: Localized<string>;
     getInTouchButtonLabel: Localized<string>;
     heroPersonalTabLabel: Localized<string>;
     heroProfessionalTabLabel: Localized<string>;
     journeyDescription: Localized<string>;
     journeySubtitle: Localized<string>;
     journeyTitle: Localized<string>;
+    notFoundDescription: Localized<string>;
+    notFoundHeadline: Localized<string>;
     rotationsTerm: Localized<string>;
     toolboxDescription: Localized<string>;
     toolboxTitle: Localized<string>;
