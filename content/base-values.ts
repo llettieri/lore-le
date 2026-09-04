@@ -16,7 +16,7 @@ export const baseValues: BaseValues = {
     journeySubtitle: 'Six years, one company, **three teams**.',
     journeyTitle: 'Journey',
     notFoundDescription:
-        'Nothing lives at this address — it never did, or it moved.',
+        "This page had one Gin Tonic in each of the nine countries. Now it can't remember where it lives...",
     notFoundHeadline: "This route doesn't **exist**.",
     rotationsTerm: 'Rotations',
     toolboxDescription: "Languages, frameworks and platforms I've worked with.",
