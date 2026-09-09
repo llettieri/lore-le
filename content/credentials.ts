@@ -7,6 +7,7 @@ export const credentials: Credential[] = [
         title: 'ICT Berufsabschluss im Rang 2024',
         issuer: 'ICT-Berufsbildung Schweiz',
         date: '2024-07',
+        artifactUrl: 'https://lore-le.ch/media/cert/Auszeichnung-ZLI.pdf',
         featured: true,
     },
     {
@@ -15,6 +16,8 @@ export const credentials: Credential[] = [
         title: 'SwissSkills – ICT Championship 2023',
         issuer: 'ICT-Berufsbildung Schweiz',
         date: '2023-09',
+        artifactUrl:
+            'https://lore-le.ch/media/cert/swissskills2023%20participation%20confirmation.pdf',
         featured: true,
     },
     {
@@ -40,6 +43,8 @@ export const credentials: Credential[] = [
         title: 'Cloud Architecture: Design, Implement, and Manage',
         issuer: 'Google',
         date: '2025-07',
+        artifactUrl:
+            'https://www.credly.com/badges/876a918d-c341-45e3-bdad-85d3565c428b',
     },
     {
         id: 'gc-app-dev-env',
@@ -47,6 +52,8 @@ export const credentials: Credential[] = [
         title: 'Set Up an App Dev Environment on Google Cloud',
         issuer: 'Google',
         date: '2025-07',
+        artifactUrl:
+            'https://www.credly.com/badges/d2a5f2c0-f885-456c-857d-9a1d4eecce00',
     },
     {
         id: 'gc-gke-costs',
@@ -54,6 +61,8 @@ export const credentials: Credential[] = [
         title: 'Optimize Costs for Google Kubernetes Engine',
         issuer: 'Google',
         date: '2025-07',
+        artifactUrl:
+            'https://www.credly.com/badges/f9a29d33-6779-4012-949a-38a7da5f8a32',
     },
     {
         id: 'gc-cloud-security',
@@ -61,6 +70,8 @@ export const credentials: Credential[] = [
         title: 'Implement Cloud Security Fundamentals',
         issuer: 'Google',
         date: '2025-06',
+        artifactUrl:
+            'https://www.credly.com/badges/975a2da2-a4af-421f-89ef-1a857c9094f2',
     },
     {
         id: 'gc-aws-pros',
@@ -68,6 +79,8 @@ export const credentials: Credential[] = [
         title: 'Build Google Cloud Infrastructure for AWS Professionals',
         issuer: 'Google',
         date: '2025-06',
+        artifactUrl:
+            'https://www.credly.com/badges/914c3fa7-cf03-4cd2-b25f-4bab66ffc830',
     },
     {
         id: 'rh-do180',
@@ -75,6 +88,7 @@ export const credentials: Credential[] = [
         title: 'DO180 — Red Hat OpenShift Administration I',
         issuer: 'Red Hat',
         date: '2023-05',
+        artifactUrl: 'https://lore-le.ch/media/cert/do180-certificate.pdf',
     },
 ];
 

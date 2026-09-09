@@ -15,6 +15,7 @@ import { ImgixImage } from '@/components/image';
 import { RichText } from '@/components/rich-text';
 import { HeroModeToggle } from '@/components/hero-mode-toggle';
 import { baseValues } from '@/content/base-values';
+import Link from 'next/link';
 
 dayjs.extend(customParseFormat);
 
@@ -132,7 +133,17 @@ export default function Home(): ReactNode {
                                     className="border-primary/20 bg-primary/8 rounded-[14px] border p-5"
                                 >
                                     <p className="text-[15px] font-extrabold">
-                                        {t(c.title)}
+                                        {c.artifactUrl ? (
+                                            <Link
+                                                className="hover:underline"
+                                                href={c.artifactUrl}
+                                                target="_blank"
+                                            >
+                                                {t(c.title)}
+                                            </Link>
+                                        ) : (
+                                            t(c.title)
+                                        )}
                                     </p>
                                     <p className="text-muted-foreground mt-1 text-[13px] font-semibold">
                                         {c.issuer}
@@ -153,7 +164,17 @@ export default function Home(): ReactNode {
                                     className="flex items-center justify-between py-3.5"
                                 >
                                     <span className="text-sm font-bold">
-                                        {t(c.title)}
+                                        {c.artifactUrl ? (
+                                            <Link
+                                                className="hover:underline"
+                                                href={c.artifactUrl}
+                                                target="_blank"
+                                            >
+                                                {t(c.title)}
+                                            </Link>
+                                        ) : (
+                                            t(c.title)
+                                        )}
                                     </span>
                                     <span className="text-meta text-[12.5px] font-semibold whitespace-nowrap">
                                         {c.issuer} ·{' '}

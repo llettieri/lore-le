@@ -165,6 +165,7 @@ export interface Credential {
     issuer: string;
     kind: CredentialKind;
     title: Localized<string>;
+    artifactUrl?: string;
 }
 
 export interface CvContent {
