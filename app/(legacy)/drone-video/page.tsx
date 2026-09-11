@@ -1,4 +1,6 @@
 import React, { ReactNode } from 'react';
+import Player from 'next-video/player';
+import MediaThemeYt from '@player.style/yt/react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,14 +10,27 @@ export const metadata: Metadata = {
 };
 
 export default function DroneVideo(): ReactNode {
+    const manifestUrl =
+        'https://lore-le.ch/media/streams/drone-video/manifest.mpd';
+
     return (
         <div className="flex items-center sm:h-full sm:justify-center">
-            <video
-                src="https://lore-le.ch/media/Video-M152.mp4"
-                className="w-full max-w-7xl sm:w-4/5 sm:rounded-3xl md:mx-20 md:my-16"
-                controls
-                autoPlay
-            />
+            <div
+                id="player-wrapper"
+                className="aspect-video min-h-7 w-full max-w-7xl overflow-hidden sm:w-4/5 sm:rounded-3xl md:mx-20 md:my-16"
+            >
+                <Player
+                    src={manifestUrl}
+                    theme={MediaThemeYt}
+                    style={{
+                        '--media-primary-color': 'white',
+                        '--media-secondary-color': 'var(--color-primary)',
+                        '--media-accent-color': 'var(--color-secondary)',
+                        height: '100%',
+                    }}
+                    controls
+                />
+            </div>
         </div>
     );
 }
