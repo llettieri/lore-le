@@ -49,6 +49,7 @@ export const ToolboxCarousel = ({
                         <CarouselItem
                             key={`${tool.slug}-${i}`}
                             className="basis-auto pl-3.5"
+                            aria-hidden={i >= tools.length || undefined}
                         >
                             <ToolCard tool={tool} />
                         </CarouselItem>

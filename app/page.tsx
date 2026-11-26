@@ -80,9 +80,9 @@ export default function Home(): ReactNode {
 
             <section id="toolbox" className="pb-13">
                 <div className="px-13 pb-6.5">
-                    <p className="text-primary text-[15px] font-black tracking-[0.02em]">
+                    <h2 className="text-primary text-[15px] font-black tracking-[0.02em]">
                         {t(baseValues.toolboxTitle)}
-                    </p>
+                    </h2>
                     <p className="text-muted-foreground mt-1.25 text-[15px]">
                         {t(baseValues.toolboxDescription)}
                     </p>

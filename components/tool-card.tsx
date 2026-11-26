@@ -24,10 +24,7 @@ export const ToolCard = ({ tool }: { tool: Tool }): ReactNode => {
     };
 
     return (
-        <div
-            aria-label={tool.slug}
-            className="flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-white/5 py-4 pr-6 pl-4 whitespace-nowrap select-none"
-        >
+        <div className="flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-white/5 py-4 pr-6 pl-4 whitespace-nowrap select-none">
             <span className="bg-primary/15 flex size-9 shrink-0 items-center justify-center rounded-xl">
                 <span
                     aria-hidden
