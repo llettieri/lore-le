@@ -9,7 +9,7 @@ interface LegalLayoutProps {
 export default function LegalLayout({ children }: LegalLayoutProps): ReactNode {
     return (
         <div className="flex flex-col items-center">
-            <div className={`${styles.legal} prose-cv`}>{children}</div>
+            <section className={`${styles.legal} prose-cv`}>{children}</section>
         </div>
     );
 }
